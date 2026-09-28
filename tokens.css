@@ -1,0 +1,52 @@
+/* NOURA — The Quiet Invitation / proposed v1.0 tokens */
+:root {
+  --color-canvas: #FFFFFF;
+  --color-background: #FBF9F4;
+  --color-surface: #F1EDE4;
+  --color-sand: #EAE2D4;
+  --color-gold: #C9A962;
+  --color-gold-hover: #B9974D;
+  --color-bronze: #765626;
+  --color-sage: #95A187;
+  --color-forest: #31473C;
+  --color-ink: #27352D;
+  --color-muted: #586259;
+  --color-border: #DDD9CF;
+  --color-input-border: #7D877D;
+  --color-success: #285B40;
+  --color-success-bg: #EDF5EE;
+  --color-error: #A22D2D;
+  --color-error-bg: #FFF1EF;
+  --color-focus: #765626;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --content-max: 1240px;
+  --gutter: clamp(24px, 5vw, 72px);
+  --section-gap: clamp(64px, 8vw, 128px);
+  --radius-card: 12px;
+  --radius-field: 8px;
+  --radius-pill: 999px;
+  --control-height: 52px;
+  --icon-size: 24px;
+  --duration-micro: 180ms;
+  --duration-reveal: 600ms;
+  --ease-out: cubic-bezier(.22,1,.36,1);
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-128: 128px;
+  --space-160: 160px;
+}
+:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
