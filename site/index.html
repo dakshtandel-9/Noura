@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en" data-mode="preview">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOURA — A quieter moment. A deeper connection.</title>
+  <meta name="description" content="A private space for yoga, meditation, sound and meaningful connection. Thoughtful experiences, shared at an unhurried pace. By invitation.">
+  <!-- Preview build: keep out of search until content, legal copy and assets are approved. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap">
+
+  <!-- Shared design tokens (single source of truth, repository root). -->
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+
+  <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Preview-only notice. Remove by dropping data-mode="preview" on <html> once real assets, copy and backend are approved. -->
+  <div class="preview-bar preview-only" role="note">
+    <p><strong>Design preview.</strong> Draft copy and concept assets. Forms validate on this device only and do not send, store or approve anything.</p>
+  </div>
+
+  <!-- 00. Orientation -->
+  <header class="site-header" id="header" data-header>
+    <div class="site-header__inner">
+      <a class="brand" href="#arrive" aria-label="NOURA — back to the beginning">
+        <span class="asset-slot asset-slot--logo" data-asset-slot data-missing-text="Logo pending">
+          <img class="brand__logo" src="assets/noura-wordmark.webp" alt="NOURA" width="148" height="32" data-asset="noura-wordmark.webp">
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <ul class="site-nav__list">
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#experiences">Experiences</a></li>
+          <li><a href="#journey">Your invitation</a></li>
+        </ul>
+      </nav>
+
+      <a class="button button--primary button--compact site-header__cta" href="#invitation">Request an invitation</a>
+
+      <button class="icon-button menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <svg class="icon menu-toggle__open" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon menu-toggle__close" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></svg>
+        <span class="visually-hidden" data-menu-label>Open menu</span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" hidden data-menu>
+      <nav aria-label="Mobile">
+        <ul class="mobile-menu__list">
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#experiences">Experiences</a></li>
+          <li><a href="#journey">Your invitation</a></li>
+          <li><a href="#private-session">Private sessions</a></li>
+          <li><a href="#questions">Questions</a></li>
+        </ul>
+        <a class="button button--primary button--block" href="#invitation">Request an invitation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- 01. Arrival / video hero -->
+    <section class="hero" id="arrive" aria-labelledby="hero-title" data-hero>
+      <div class="hero__media" aria-hidden="true">
+        <img class="hero__poster" src="assets/hero-poster.jpg" alt="" width="1920" height="1080" fetchpriority="high" decoding="async" data-asset="hero-poster.jpg" data-decorative>
+        <!-- src is assigned by JS only when motion is allowed and data-saver is off. -->
+        <video class="hero__video" muted loop playsinline preload="none" disablepictureinpicture
+               data-src="assets/hero-motion-study.mp4" data-film></video>
+        <div class="hero__scrim"></div>
+      </div>
+
+      <div class="hero__content">
+        <p class="eyebrow eyebrow--light">NOURA <span aria-hidden="true">/</span> By invitation</p>
+        <h1 class="hero__title" id="hero-title">A quieter moment. A&nbsp;deeper connection.</h1>
+        <p class="hero__intro">A private space for yoga, meditation, sound and meaningful connection. Thoughtful experiences, shared at an unhurried pace.</p>
+        <div class="button-row">
+          <a class="button button--primary" href="#invitation">Request an invitation</a>
+          <a class="button button--ghost-light" href="#pause">
+            Explore the experience
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__controls">
+        <p class="hero__media-note preview-only">Motion study from concept artwork. Final footage pending.</p>
+        <label class="hero__picker preview-only">
+          <input type="file" accept="video/mp4,video/webm" class="visually-hidden" data-film-picker>
+          <span>Test a local film <span class="hero__picker-hint">(stays on this device)</span></span>
+        </label>
+        <button class="film-toggle" type="button" hidden data-film-toggle data-state="playing">
+          <svg class="icon icon--sm film-toggle__pause" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M8 4v16M16 4v16"/></svg>
+          <svg class="icon icon--sm film-toggle__play" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></svg>
+          <span data-film-label>Pause film</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 02. A pause in the story -->
+    <section class="section pause" id="pause" aria-labelledby="pause-title">
+      <div class="container container--narrow pause__inner">
+        <span class="hairline" aria-hidden="true"></span>
+        <h2 class="h2" id="pause-title">You do not have to fill every moment.</h2>
+        <p class="lead">Some moments are simply yours to notice. A change in the light. A gentler rhythm. A little space to be here.</p>
+      </div>
+    </section>
+
+    <!-- 03. The NOURA intention -->
+    <section class="section philosophy" id="philosophy" aria-labelledby="philosophy-title">
+      <div class="container split split--5-7">
+        <figure class="media media--arch media--portrait" data-asset-slot>
+          <img src="assets/botanical.webp" alt="Soft botanical detail in natural light" width="960" height="1200" loading="lazy" decoding="async" data-asset="botanical.webp">
+        </figure>
+        <div class="split__copy">
+          <p class="eyebrow">The NOURA intention</p>
+          <h2 class="h2" id="philosophy-title">A little less noise. A&nbsp;little more presence.</h2>
+          <p class="body-lg">NOURA is imagined as a considered space for movement, stillness, sound and connection. Not another thing to rush through. An invitation to meet the moment with attention.</p>
+          <p class="signature"><span class="hairline hairline--inline" aria-hidden="true"></span>Illuminate your wellbeing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. Experience index -->
+    <section class="section section--surface experiences" id="experiences" aria-labelledby="experiences-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">The experiences</p>
+          <h2 class="h2" id="experiences-title">Four ways to come back to the moment.</h2>
+        </div>
+        <ul class="experience-grid">
+          <li>
+            <a class="experience-card" href="#yoga">
+              <svg class="icon icon--lg experience-card__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 4C11 2 3 6 4 14s13 8 16-10Z"/><path d="M4 21 16 9"/></svg>
+              <span class="experience-card__verb">Move</span>
+              <span class="experience-card__title">Yoga</span>
+              <span class="round-arrow" aria-hidden="true"><svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="experience-card" href="#meditation">
+              <svg class="icon icon--lg experience-card__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 20C4 16 5 9 12 3c7 6 8 13 0 17ZM12 20C3 22 1 13 2 9c5 0 8 4 10 11ZM12 20c9 2 11-7 10-11-5 0-8 4-10 11Z"/></svg>
+              <span class="experience-card__verb">Be still</span>
+              <span class="experience-card__title">Meditation</span>
+              <span class="round-arrow" aria-hidden="true"><svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="experience-card" href="#sound">
+              <svg class="icon icon--lg experience-card__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M2 7c4-5 8 5 12 0s7 0 8 0M2 12c4-5 8 5 12 0s7 0 8 0M2 17c4-5 8 5 12 0s7 0 8 0"/></svg>
+              <span class="experience-card__verb">Listen</span>
+              <span class="experience-card__title">Music &amp; Sound</span>
+              <span class="round-arrow" aria-hidden="true"><svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="experience-card" href="#connection">
+              <svg class="icon icon--lg experience-card__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M3 21v-4a6 6 0 0 1 12 0v4M17 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v2"/></svg>
+              <span class="experience-card__verb">Connect</span>
+              <span class="experience-card__title">Private Group Sessions</span>
+              <span class="round-arrow" aria-hidden="true"><svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 05. Chapter 01 / Move -->
+    <section class="section chapter" id="yoga" aria-labelledby="yoga-title">
+      <div class="container split split--7-5">
+        <figure class="media media--landscape" data-asset-slot>
+          <img src="assets/yoga.webp" alt="A slow, grounded yoga posture in soft daylight" width="1200" height="800" loading="lazy" decoding="async" data-asset="yoga.webp">
+        </figure>
+        <div class="split__copy">
+          <p class="eyebrow">Chapter 01 <span aria-hidden="true">/</span> Move</p>
+          <h2 class="h2" id="yoga-title">Movement, without the rush.</h2>
+          <p class="body-lg">An invitation to explore movement with attention. A thoughtful pace, space to pause, and a session shaped around the experience you discuss with the team.</p>
+          <a class="text-action" href="#private-session" data-session="Yoga">
+            Request a yoga session
+            <span class="round-arrow" aria-hidden="true"><svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. Chapter 02 / Be still -->
+    <section class="section chapter chapter--reverse" id="meditation" aria-labelledby="meditation-title">
+      <div class="container split split--7-5 split--reverse">
+        <figure class="media media--arch media--portrait" data-asset-slot>
+          <img src="assets/meditation.webp" alt="A seated figure resting in quiet stillness" width="960" height="1200" loading="lazy" decoding="async" data-asset="meditation.webp">
+        </figure>
+        <div class="split__copy">
+          <p class="eyebrow">Chapter 02 <span aria-hidden="true">/</span> Be still</p>
+          <h2 class="h2" id="meditation-title">Make room for stillness.</h2>
+          <p class="body-lg">Step away from the need to do more. Discover a quiet moment of attention, with space to settle and simply be present.</p>
+          <a class="text-action" href="#private-session" data-session="Meditation">
+            Request a meditation session
+            <span class="round-arrow" aria-hidden="true"><svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07. Chapter 03 / Listen — the one deep forest interlude -->
+    <section class="section section--forest chapter" id="sound" aria-labelledby="sound-title">
+      <div class="container split split--7-5">
+        <figure class="media media--landscape media--on-dark" data-asset-slot>
+          <img src="assets/sound.webp" alt="A sound bowl resting on a natural surface" width="1200" height="800" loading="lazy" decoding="async" data-asset="sound.webp">
+        </figure>
+        <div class="split__copy">
+          <p class="eyebrow eyebrow--light">Chapter 03 <span aria-hidden="true">/</span> Listen</p>
+          <h2 class="h2" id="sound-title">Let the moment unfold in sound.</h2>
+          <p class="body-lg">A quieter kind of listening. Explore music and sound as part of a considered wellness experience, with room for silence between the notes.</p>
+          <a class="button button--ghost-light" href="#private-session" data-session="Music &amp; Sound">
+            Explore a sound session
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08. Chapter 04 / Connect -->
+    <section class="section chapter" id="connection" aria-labelledby="connection-title">
+      <div class="container split split--7-5">
+        <figure class="media media--landscape" data-asset-slot>
+          <img src="assets/community.webp" alt="A small group gathered calmly together" width="1200" height="800" loading="lazy" decoding="async" data-asset="community.webp">
+        </figure>
+        <div class="split__copy">
+          <p class="eyebrow">Chapter 04 <span aria-hidden="true">/</span> Connect</p>
+          <h2 class="h2" id="connection-title">A shared moment. A&nbsp;smaller circle.</h2>
+          <p class="body-lg">Some experiences become meaningful through the people we share them with. Private group sessions make room for presence, conversation and connection within an invitation-led setting.</p>
+          <a class="button button--primary" href="#invitation">Request an invitation</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09. Session rhythm -->
+    <section class="section section--surface rhythm" id="rhythm" aria-labelledby="rhythm-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">A session, gently paced</p>
+          <h2 class="h2" id="rhythm-title">Unhurried, from beginning to end.</h2>
+          <p class="note preview-only">
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v7m0-11v1"/></svg>
+            Illustrative sequence, pending operational approval. Not a fixed itinerary.
+          </p>
+        </div>
+        <ol class="rhythm-list">
+          <li class="rhythm-step">
+            <span class="rhythm-step__index" aria-hidden="true">01</span>
+            <h3 class="h3">Arrive</h3>
+            <p>Leave space to settle.</p>
+          </li>
+          <li class="rhythm-step">
+            <span class="rhythm-step__index" aria-hidden="true">02</span>
+            <h3 class="h3">Settle</h3>
+            <p>Meet the moment.</p>
+          </li>
+          <li class="rhythm-step">
+            <span class="rhythm-step__index" aria-hidden="true">03</span>
+            <h3 class="h3">Explore</h3>
+            <p>Take part in the agreed experience.</p>
+          </li>
+          <li class="rhythm-step">
+            <span class="rhythm-step__index" aria-hidden="true">04</span>
+            <h3 class="h3">Close</h3>
+            <p>Bring the session to a thoughtful end.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 10. Sensory pause -->
+    <section class="section space" id="space" aria-labelledby="space-title">
+      <div class="container">
+        <figure class="media media--wide" data-asset-slot>
+          <img src="assets/stillness.webp" alt="A calm, light-filled setting with natural textures" width="1920" height="820" loading="lazy" decoding="async" data-asset="stillness.webp">
+          <figcaption class="media__caption preview-only">Conceptual setting. Not a confirmed NOURA venue.</figcaption>
+        </figure>
+        <div class="space__copy">
+          <h2 class="h2" id="space-title">Room to slow down.</h2>
+          <p class="body-lg">Light. Texture. Quiet. The setting should support the experience, not compete with it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. How access works -->
+    <section class="section section--surface journey" id="journey" aria-labelledby="journey-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Your invitation</p>
+          <h2 class="h2" id="journey-title">A thoughtful welcome, not an instant booking.</h2>
+        </div>
+        <ol class="journey-list">
+          <li class="journey-step">
+            <span class="journey-step__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></span>
+            <span class="journey-step__index">Step 1</span>
+            <h3 class="h3">Share your interest</h3>
+            <p>Tell the team what brings you here.</p>
+          </li>
+          <li class="journey-step">
+            <span class="journey-step__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m12 2 9 4v6c0 5-4 8-9 10-5-2-9-5-9-10V6Z"/><path d="m8 12 3 3 5-6"/></svg></span>
+            <span class="journey-step__index">Step 2</span>
+            <h3 class="h3">A personal review</h3>
+            <p>Your request is reviewed privately.</p>
+          </li>
+          <li class="journey-step">
+            <span class="journey-step__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+            <span class="journey-step__index">Step 3</span>
+            <h3 class="h3">Receive next steps</h3>
+            <p>Approved requests are followed up by the team.</p>
+          </li>
+        </ol>
+        <div class="callout">
+          <svg class="icon callout__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v7m0-11v1"/></svg>
+          <p>A request does not automatically approve membership or reserve a session. Preferred dates are preferences until the team confirms them.</p>
+        </div>
+        <div class="button-row button-row--center">
+          <a class="button button--primary" href="#invitation">Request an invitation</a>
+          <a class="button button--secondary" href="#private-session">Request a private session</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Member identity -->
+    <section class="section member" id="member" aria-labelledby="member-title">
+      <div class="container split split--5-7">
+        <div class="split__copy">
+          <p class="eyebrow">Member identity</p>
+          <h2 class="h2" id="member-title">A personal detail. A&nbsp;sense of belonging.</h2>
+          <p class="body-lg">Approved members can receive a personalized digital card with their unique member number. A small, considered part of the experience.</p>
+        </div>
+        <div class="member-card-wrap">
+          <figure class="member-card" aria-label="Example member card, demonstration only">
+            <div class="member-card__top">
+              <span class="asset-slot asset-slot--emblem" data-asset-slot data-missing-text="Logo">
+                <img class="member-card__logo" src="assets/noura-logo.webp" alt="" width="96" height="96" data-asset="noura-logo.webp" data-decorative>
+              </span>
+              <span class="member-card__label">Member</span>
+            </div>
+            <div class="member-card__body">
+              <p class="member-card__name">Sample member</p>
+              <p class="member-card__code"><span class="visually-hidden">Member number </span>NRA-DEMO-001</p>
+            </div>
+            <figcaption class="member-card__foot">Demonstration only</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Privacy / reassurance -->
+    <section class="section care" id="care" aria-labelledby="care-title">
+      <div class="container">
+        <div class="care__panel">
+          <span class="care__icon" aria-hidden="true"><svg class="icon icon--lg" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg></span>
+          <div>
+            <h2 class="h2 h2--sm" id="care-title">Care includes how we handle your details.</h2>
+            <p class="body-lg">Requests are intended for review by authorized team members. We ask for the information needed for that conversation, and explain the next step clearly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. Questions before you begin -->
+    <section class="section section--surface questions" id="questions" aria-labelledby="questions-title">
+      <div class="container split split--5-7 split--top">
+        <div class="split__copy">
+          <p class="eyebrow">Questions before you begin</p>
+          <h2 class="h2" id="questions-title">A few things, gently clarified.</h2>
+        </div>
+        <div class="faq">
+          <details class="faq__item">
+            <summary>Is this an instant booking website?<svg class="icon icon--sm faq__chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p>No. Session and invitation requests are reviewed by the team. A preferred date is not a confirmed booking.</p>
+          </details>
+          <details class="faq__item">
+            <summary>How do I request an invitation?<svg class="icon icon--sm faq__chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p>Complete the <a href="#invitation">invitation form</a> with your details and interests. The team will review your request and share next steps where appropriate.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Can I request a private session instead?<svg class="icon icon--sm faq__chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p>Yes. Use the separate <a href="#private-session">private-session form</a> and choose the experience that interests you.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Do I pay on the website?<svg class="icon icon--sm faq__chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p>There is no online payment step in this request flow.</p>
+          </details>
+          <details class="faq__item">
+            <summary>When will I hear back?<svg class="icon icon--sm faq__chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p>The team will contact you after reviewing the request.<span class="preview-only"> A specific response time will be published only once it is confirmed.</span></p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. Invitation form -->
+    <section class="section request" id="invitation" aria-labelledby="invitation-title">
+      <div class="container split split--5-7 split--top">
+        <div class="split__copy request__intro">
+          <p class="eyebrow">Request an invitation</p>
+          <h2 class="h2" id="invitation-title">Your next chapter starts with a conversation.</h2>
+          <p class="body-lg">Share a little about yourself and what draws you to NOURA. Every request is read and reviewed by the team.</p>
+          <ul class="check-list">
+            <li><svg class="icon icon--sm" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>Reviewed personally, never auto-approved</li>
+            <li><svg class="icon icon--sm" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>No payment step in this request</li>
+            <li><svg class="icon icon--sm" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>Only the details needed for the conversation</li>
+          </ul>
+        </div>
+
+        <!-- Production: POST /api/requests/invitation (server validation, rate limit, idempotency). This preview never sends. -->
+        <form class="request-form" id="invitation-form" action="/api/requests/invitation" method="post" novalidate data-request-form="invitation">
+          <div class="form-summary" tabindex="-1" hidden data-error-summary>
+            <h3 class="form-summary__title">
+              <svg class="icon icon--sm" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v7m0-11v1"/></svg>
+              Please check the highlighted fields
+            </h3>
+            <ul data-error-list></ul>
+          </div>
+
+          <input type="hidden" name="idempotency_key" data-idempotency>
+          <div class="hp-field" aria-hidden="true">
+            <label for="inv-website">Leave this field empty</label>
+            <input type="text" id="inv-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="inv-name">Full name <span class="field__req">Required</span></label>
+            <input class="field__control" id="inv-name" name="full_name" type="text" autocomplete="name" required minlength="2" maxlength="100" aria-describedby="inv-name-error">
+            <p class="field__error" id="inv-name-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="inv-email">Email <span class="field__req">Required</span></label>
+            <input class="field__control" id="inv-email" name="email" type="email" autocomplete="email" required maxlength="254" spellcheck="false" aria-describedby="inv-email-error">
+            <p class="field__error" id="inv-email-error" hidden></p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="inv-phone">Phone <span class="field__opt">Optional</span></label>
+              <input class="field__control" id="inv-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" aria-describedby="inv-phone-error">
+              <p class="field__error" id="inv-phone-error" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="inv-referral">How did you hear of NOURA? <span class="field__opt">Optional</span></label>
+              <div class="select-wrap">
+                <select class="field__control" id="inv-referral" name="referral_source" data-other-toggle="inv-referral-other-field">
+                  <option value="">Choose an option</option>
+                  <option>A friend or member</option>
+                  <option>Social media</option>
+                  <option>An event</option>
+                  <option>Search</option>
+                  <option value="other">Other</option>
+                </select>
+                <svg class="icon icon--sm select-wrap__chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" id="inv-referral-other-field" hidden>
+            <label class="field__label" for="inv-referral-other">Please tell us where <span class="field__opt">Optional</span></label>
+            <input class="field__control" id="inv-referral-other" name="referral_other" type="text" maxlength="100" aria-describedby="inv-referral-other-error">
+            <p class="field__error" id="inv-referral-other-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="inv-interests">What draws you to the experience? <span class="field__req">Required</span></label>
+            <p class="field__help" id="inv-interests-help">A few sentences is plenty. Please don’t include medical details.</p>
+            <textarea class="field__control field__control--area" id="inv-interests" name="interests" rows="5" required minlength="10" maxlength="1000" aria-describedby="inv-interests-help inv-interests-count inv-interests-error" data-counter="inv-interests-count"></textarea>
+            <p class="field__count" id="inv-interests-count" aria-live="polite">0 / 1000</p>
+            <p class="field__error" id="inv-interests-error" hidden></p>
+          </div>
+
+          <div class="field field--check">
+            <input class="check" id="inv-privacy" name="privacy_acknowledged" type="checkbox" required aria-describedby="inv-privacy-help inv-privacy-error">
+            <label for="inv-privacy">I understand my details will be used by the NOURA team to review this request.</label>
+            <p class="field__help" id="inv-privacy-help"><a href="#care">How we handle your details</a><span class="preview-only"> · Final privacy notice wording pending client approval.</span></p>
+            <p class="field__error" id="inv-privacy-error" hidden></p>
+          </div>
+
+          <div class="form-actions">
+            <button class="button button--primary button--submit" type="submit" data-submit>
+              <span data-submit-label>Request an invitation</span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+            <p class="form-actions__note">Your request is reviewed by the team. It is not an instant approval.</p>
+          </div>
+
+          <div class="form-status" role="status" aria-live="polite" data-status></div>
+          <noscript><p class="form-noscript">This preview needs JavaScript to demonstrate submission. Nothing is sent.</p></noscript>
+        </form>
+      </div>
+    </section>
+
+    <!-- 16. Private-session form -->
+    <section class="section section--surface request" id="private-session" aria-labelledby="session-title">
+      <div class="container split split--5-7 split--top">
+        <div class="split__copy request__intro">
+          <p class="eyebrow">Private sessions</p>
+          <h2 class="h2" id="session-title">Prefer a private session?</h2>
+          <p class="body-lg">Choose the experience that interests you and, if you like, a date that suits. The team will review your request and follow up with next steps.</p>
+          <div class="callout callout--quiet">
+            <svg class="icon callout__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6m10-6v6M3 11h18M7 15h3m4 0h3"/></svg>
+            <p>A preferred date is a preference, not a confirmed booking. Session requests are separate from membership.</p>
+          </div>
+        </div>
+
+        <!-- Production: POST /api/requests/session. This preview never sends. -->
+        <form class="request-form" id="session-form" action="/api/requests/session" method="post" novalidate data-request-form="session">
+          <div class="form-summary" tabindex="-1" hidden data-error-summary>
+            <h3 class="form-summary__title">
+              <svg class="icon icon--sm" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10v7m0-11v1"/></svg>
+              Please check the highlighted fields
+            </h3>
+            <ul data-error-list></ul>
+          </div>
+
+          <input type="hidden" name="idempotency_key" data-idempotency>
+          <div class="hp-field" aria-hidden="true">
+            <label for="ses-website">Leave this field empty</label>
+            <input type="text" id="ses-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="ses-name">Full name <span class="field__req">Required</span></label>
+              <input class="field__control" id="ses-name" name="full_name" type="text" autocomplete="name" required minlength="2" maxlength="100" aria-describedby="ses-name-error">
+              <p class="field__error" id="ses-name-error" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="ses-email">Email <span class="field__req">Required</span></label>
+              <input class="field__control" id="ses-email" name="email" type="email" autocomplete="email" required maxlength="254" spellcheck="false" aria-describedby="ses-email-error">
+              <p class="field__error" id="ses-email-error" hidden></p>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="ses-type">Session type <span class="field__req">Required</span></label>
+              <div class="select-wrap">
+                <select class="field__control" id="ses-type" name="session_type" required aria-describedby="ses-type-error" data-session-select>
+                  <option value="">Choose an experience</option>
+                  <option>Yoga</option>
+                  <option>Meditation</option>
+                  <option>Music &amp; Sound</option>
+                  <option>Private Group Sessions</option>
+                  <option>Not sure yet</option>
+                </select>
+                <svg class="icon icon--sm select-wrap__chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <p class="field__error" id="ses-type-error" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="ses-date">Preferred date <span class="field__opt">Optional</span></label>
+              <input class="field__control" id="ses-date" name="preferred_date" type="date" aria-describedby="ses-date-help ses-date-error" data-future-date>
+              <p class="field__help" id="ses-date-help">A preference only, until the team confirms.</p>
+              <p class="field__error" id="ses-date-error" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="ses-phone">Phone <span class="field__opt">Optional</span></label>
+            <input class="field__control" id="ses-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" aria-describedby="ses-phone-error">
+            <p class="field__error" id="ses-phone-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="ses-message">Anything you would like the team to know? <span class="field__opt">Optional</span></label>
+            <p class="field__help" id="ses-message-help">Please don’t include medical details.</p>
+            <textarea class="field__control field__control--area" id="ses-message" name="message" rows="4" maxlength="1000" aria-describedby="ses-message-help ses-message-count ses-message-error" data-counter="ses-message-count"></textarea>
+            <p class="field__count" id="ses-message-count" aria-live="polite">0 / 1000</p>
+            <p class="field__error" id="ses-message-error" hidden></p>
+          </div>
+
+          <div class="field field--check">
+            <input class="check" id="ses-privacy" name="privacy_acknowledged" type="checkbox" required aria-describedby="ses-privacy-help ses-privacy-error">
+            <label for="ses-privacy">I understand my details will be used by the NOURA team to review this request.</label>
+            <p class="field__help" id="ses-privacy-help"><a href="#care">How we handle your details</a><span class="preview-only"> · Final privacy notice wording pending client approval.</span></p>
+            <p class="field__error" id="ses-privacy-error" hidden></p>
+          </div>
+
+          <div class="form-actions">
+            <button class="button button--secondary button--submit" type="submit" data-submit>
+              <span data-submit-label>Request a private session</span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+            <p class="form-actions__note">This is a request, not a confirmed booking.</p>
+          </div>
+
+          <div class="form-status" role="status" aria-live="polite" data-status></div>
+          <noscript><p class="form-noscript">This preview needs JavaScript to demonstrate submission. Nothing is sent.</p></noscript>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- 17. Closing / footer -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="site-footer__close">
+        <span class="asset-slot asset-slot--footer-logo" data-asset-slot>
+          <img class="site-footer__logo" src="assets/noura-logo.webp" alt="NOURA" width="120" height="120" loading="lazy" data-asset="noura-logo.webp">
+        </span>
+        <p class="site-footer__line">Come as you are. Take your time.</p>
+        <a class="button button--primary" href="#invitation">Request an invitation</a>
+      </div>
+
+      <div class="site-footer__bar">
+        <nav aria-label="Footer">
+          <ul class="site-footer__nav">
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#experiences">Experiences</a></li>
+            <li><a href="#journey">Your invitation</a></li>
+            <li><a href="#private-session">Private sessions</a></li>
+            <li><a href="#questions">Questions</a></li>
+          </ul>
+        </nav>
+        <!-- Public contact, social profiles, privacy notice and terms are shown only once the client supplies approved content. -->
+        <p class="site-footer__pending preview-only">Public contact, social links, privacy notice and terms appear here once approved.</p>
+        <a class="site-footer__top" href="#header">
+          Back to top
+          <svg class="icon icon--sm icon--flip" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
