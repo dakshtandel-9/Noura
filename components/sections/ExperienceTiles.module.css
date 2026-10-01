@@ -158,8 +158,18 @@
     line-height: 1.45;
   }
 
+  /* Title, one short line, Discover: the second tagline line is left to larger screens. */
+  .lineBreak,
+  .lineTwo {
+    display: none;
+  }
+
+  .lines {
+    font-size: clamp(14px, 3.9vw, 16px);
+  }
+
   .cta {
-    margin-top: 4px;
+    margin-top: 6px;
     font-size: 12px;
     letter-spacing: 0.14em;
   }

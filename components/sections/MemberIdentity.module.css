@@ -204,8 +204,9 @@
     background: linear-gradient(180deg, rgb(20 28 22 / 0.62) 0%, rgb(20 28 22 / 0.5) 60%, rgb(20 28 22 / 0.36) 100%);
   }
 
+  /* Fills the row, so the card's percentage width has something to resolve against. */
   .cardFigure {
-    justify-self: start;
+    justify-self: stretch;
   }
 
   .card {
@@ -216,6 +217,6 @@
 @media (max-width: 640px) {
   .card {
     width: 100%;
-    padding: 24px 22px 20px;
+    padding: 28px 24px 24px;
   }
 }

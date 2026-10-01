@@ -32,8 +32,8 @@ export function ExperienceTiles() {
                   {tile.lines[0]}
                   {tile.lines[1] && (
                     <>
-                      <br />
-                      {tile.lines[1]}
+                      <br className={styles.lineBreak} />
+                      <span className={styles.lineTwo}>{tile.lines[1]}</span>
                     </>
                   )}
                 </span>

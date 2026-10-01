@@ -206,8 +206,39 @@
     border-bottom: 0;
   }
 
+  /* A shorter ridge, so the grid isn't followed by a band of empty space. */
+  .strip {
+    --landscape-height: 72px;
+  }
+
   .way {
-    padding: 28px 12px;
+    padding: 28px 12px 26px;
+  }
+
+  .wayIcon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .verb {
+    margin-top: 14px;
+    font-size: 15px;
+  }
+
+  .strapline {
+    font-size: 18px;
+    text-wrap: balance;
+  }
+}
+
+/* The narrowest phones: a little less side padding keeps each strapline to two lines. */
+@media (max-width: 359px) {
+  .way {
+    padding-inline: 6px;
+  }
+
+  .strapline {
+    font-size: 17px;
   }
 }
 
