@@ -88,6 +88,8 @@ export function IntroLoader() {
         : [{ opacity: 1 }, { opacity: 0 }];
 
     root.dataset.introFlight = "";
+    // Cues the hero copy to rise in behind the parting doors; left set so it never replays.
+    root.dataset.introReveal = "";
     const flight = flyer.animate(keyframes, {
       duration: FLIGHT_MS,
       easing: "cubic-bezier(.65, 0, .35, 1)",

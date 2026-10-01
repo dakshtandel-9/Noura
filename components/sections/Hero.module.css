@@ -182,6 +182,52 @@
   transform: translateY(2px);
 }
 
+/*
+ * Arrival: once the intro doors start to part, the copy rises in line by line — opacity, a
+ * 12px lift and a soft focus, once (docs/design.md §9). Only the intro sets the cue, so without
+ * it (no script, reduced motion, a late load) the copy is simply there.
+ */
+:global(html[data-intro-reveal]) .titleLine,
+:global(html[data-intro-reveal]) .subtitle,
+:global(html[data-intro-reveal]) .meta,
+:global(html[data-intro-reveal]) .actions {
+  animation: hero-rise 650ms var(--ease-out) both;
+}
+
+:global(html[data-intro-reveal]) .titleLine:first-child {
+  animation-delay: 350ms;
+}
+
+:global(html[data-intro-reveal]) .titleLine:last-child {
+  animation-delay: 500ms;
+}
+
+:global(html[data-intro-reveal]) .subtitle {
+  animation-delay: 700ms;
+}
+
+:global(html[data-intro-reveal]) .meta {
+  animation-delay: 850ms;
+}
+
+:global(html[data-intro-reveal]) .actions {
+  animation-delay: 1000ms;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
 .hero :focus-visible {
   outline-color: #fff;
 }
@@ -258,7 +304,7 @@
   }
 
   .title {
-    font-size: clamp(34px, 9.2vw, 44px);
+    font-size: clamp(34px, 10.4vw, 48px);
     line-height: 1.06;
   }
 

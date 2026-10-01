@@ -32,7 +32,7 @@ export function Experts() {
                     width={profile.portrait.width}
                     height={profile.portrait.height}
                     alt={profile.portrait.alt}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1023px) 33vw, 400px"
+                    sizes="(max-width: 767px) 80vw, (max-width: 1023px) 33vw, 400px"
                     quality={80}
                     style={profile.portrait.position ? { objectPosition: profile.portrait.position } : undefined}
                   />

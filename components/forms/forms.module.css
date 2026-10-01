@@ -83,7 +83,8 @@
   background: transparent;
   color: var(--field-ink);
   font-family: var(--font-body);
-  font-size: clamp(15px, 1.1vw, 18px);
+  /* Never under 16px, or iOS zooms the page when a field is tapped. */
+  font-size: clamp(16px, 1.1vw, 18px);
   line-height: 1.4;
   transition: border-color var(--duration-micro) ease-out;
 }
@@ -226,7 +227,16 @@
   .submit {
     gap: 12px;
     padding-inline: 16px;
-    font-size: 11px;
-    letter-spacing: 0.12em;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* The smallest phones: keep the label on one line. */
+@media (max-width: 359px) {
+  .submit {
+    gap: 10px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
   }
 }

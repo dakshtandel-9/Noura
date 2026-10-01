@@ -1,6 +1,7 @@
 /*
  * Three equal portraits on white, after the 2026-10-01 design review: no carousel, no clipped
- * card. Portrait above, name, role and a quiet "View profile" disclosure beneath.
+ * card. Portrait above, name, role and a quiet "View profile" disclosure beneath. On phones
+ * only, the owner approved (2026-10-01) a manual swipe row in place of three stacked profiles.
  */
 .section {
   padding-block: clamp(72px, 7vw, 112px);
@@ -159,13 +160,43 @@
   }
 }
 
-/* One portrait per row on phones, held to a comfortable width. */
-@media (max-width: 640px) {
+/*
+ * Phones: a swipe row edge to edge, one guide at a time with the next peeking in. Manual
+ * only, never auto-advancing (docs/design.md §9).
+ */
+@media (max-width: 767px) {
   .grid {
-    grid-template-columns: minmax(0, 1fr);
-    max-width: 440px;
-    margin-inline: auto;
-    row-gap: 56px;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 80vw;
+    gap: 16px;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Holds the visually hidden name in each toggle inside the row, so off-screen cards
+     can't widen the page. */
+  .item {
+    position: relative;
+    scroll-snap-align: start;
+  }
+
+  .name {
+    font-size: 28px;
+  }
+
+  .role,
+  .toggle {
+    font-size: 13px;
   }
 }
 

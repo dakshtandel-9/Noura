@@ -7,6 +7,12 @@
   --header-height: 96px;
 }
 
+@media (max-width: 767px) {
+  :root {
+    --header-height: 64px;
+  }
+}
+
 /* ---------- base ---------- */
 
 *,
