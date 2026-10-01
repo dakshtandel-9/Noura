@@ -1,0 +1,299 @@
+/*
+ * Full-bleed arrival. The header is fixed and transparent above it, so the hero fills the
+ * viewport. Copy aligns to the same left edge as the header wordmark (the .wrap column).
+ */
+.hero {
+  --edge: max(var(--gutter), calc((100% - var(--content-max)) / 2));
+  --dusk: 14 24 38;
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 680px;
+  height: 100vh;
+  height: 100svh;
+  max-height: 1080px;
+  overflow: hidden;
+  color: #fff;
+  /* Shown only until the poster paints. */
+  background: #1d2a38;
+}
+
+/* ---------- media ---------- */
+
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/*
+ * Dusk-blue scrim: deepens the sky behind the copy into a natural blue hour and fades out
+ * before the sun, so the sunset, figure and rock keep their full brightness. Stops were
+ * checked against the 95th-percentile brightest poster pixels under each text block at
+ * 1280×720, 1440×900 and 1837×1000 (headline ≥3:1, small text ≥4.5:1).
+ */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(var(--dusk) / 0.56) 0%,
+      rgb(var(--dusk) / 0.5) 30%,
+      rgb(var(--dusk) / 0.4) 50%,
+      rgb(var(--dusk) / 0.2) 62%,
+      rgb(var(--dusk) / 0) 74%
+    ),
+    linear-gradient(180deg, rgb(var(--dusk) / 0.42) 0%, rgb(var(--dusk) / 0.26) 10%, rgb(var(--dusk) / 0) 20%),
+    linear-gradient(0deg, rgb(var(--dusk) / 0.32) 0%, rgb(var(--dusk) / 0) 16%);
+}
+
+/* ---------- copy ---------- */
+
+.copy {
+  width: 100%;
+  padding-top: calc(var(--header-height) + 16px);
+  padding-bottom: 72px;
+}
+
+/* Tracked serif capitals as in the approved reference; the source text stays sentence case. */
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 6.1vw, 92px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.titleLine {
+  display: block;
+}
+
+.subtitle {
+  max-width: none;
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 1.9vw, 27px);
+  font-style: italic;
+  line-height: 1.35;
+  /* Champagne tint of the brand gold: reads as gold on dusk blue and keeps ≥3:1. */
+  color: #efe1bd;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 8px;
+  max-width: none;
+  margin-top: 28px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+}
+
+.metaDot {
+  width: 4px;
+  height: 4px;
+  margin-inline: 16px;
+  border-radius: 50%;
+  background: var(--color-gold);
+}
+
+/* ---------- actions ---------- */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 36px;
+  margin-top: 40px;
+}
+
+.primary {
+  min-height: 54px;
+  padding-inline: 36px;
+  border-radius: 2px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: 0 14px 30px rgb(var(--dusk) / 0.28);
+}
+
+.explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-shadow: 0 1px 8px rgb(var(--dusk) / 0.75);
+}
+
+.exploreRing {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  transition:
+    border-color var(--duration-micro) ease-out,
+    background var(--duration-micro) ease-out;
+}
+
+.exploreRing .icon {
+  transition: transform var(--duration-micro) ease-out;
+}
+
+.explore:hover .exploreRing {
+  border-color: var(--color-gold);
+  background: rgb(255 255 255 / 0.08);
+}
+
+.explore:hover .exploreRing .icon {
+  transform: translateY(2px);
+}
+
+.hero :focus-visible {
+  outline-color: #fff;
+}
+
+/* Narrower landscape screens: the copy covers more of the frame, so the scrim reaches further. */
+@media (max-width: 1199px) {
+  .scrim {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(var(--dusk) / 0.6) 0%,
+        rgb(var(--dusk) / 0.56) 35%,
+        rgb(var(--dusk) / 0.46) 55%,
+        rgb(var(--dusk) / 0.22) 68%,
+        rgb(var(--dusk) / 0) 80%
+      ),
+      linear-gradient(180deg, rgb(var(--dusk) / 0.42) 0%, rgb(var(--dusk) / 0.26) 10%, rgb(var(--dusk) / 0) 20%),
+      linear-gradient(0deg, rgb(var(--dusk) / 0.32) 0%, rgb(var(--dusk) / 0) 16%);
+  }
+}
+
+/* ---------- portrait screens: phones and upright tablets ---------- */
+
+/*
+ * The portrait poster keeps calm sky in the top ~60% and the figure below, so the copy
+ * sits in the sky under the header. The px floors keep the scrim under the copy on short
+ * screens, where the copy reaches further down the picture. Checked at 320–430px wide.
+ * Keep the query in sync with PORTRAIT_QUERY in Hero.tsx.
+ */
+@media (max-aspect-ratio: 4/5) {
+  .hero {
+    height: auto;
+    min-height: 720px;
+    min-height: max(720px, 100svh);
+    max-height: none;
+    justify-content: flex-start;
+  }
+
+  .scrim {
+    background: linear-gradient(
+      180deg,
+      rgb(var(--dusk) / 0.52) 0%,
+      rgb(var(--dusk) / 0.52) 25%,
+      rgb(var(--dusk) / 0.6) max(46%, 400px),
+      rgb(var(--dusk) / 0.34) max(53%, 450px),
+      rgb(var(--dusk) / 0.08) max(59%, 490px),
+      rgb(var(--dusk) / 0) max(65%, 530px)
+    );
+  }
+
+}
+
+/* Upright tablets: more air under the header and type scaled to the wider sky. */
+@media (max-aspect-ratio: 4/5) and (min-width: 768px) {
+  .copy {
+    padding-top: calc(var(--header-height) + clamp(24px, 6vh, 72px));
+  }
+
+  .title {
+    font-size: clamp(44px, 6.4vw, 64px);
+  }
+
+  .subtitle {
+    font-size: clamp(22px, 2.8vw, 27px);
+  }
+}
+
+/* ---------- phones ---------- */
+
+@media (max-width: 767px) {
+  .copy {
+    padding-top: calc(var(--header-height) + 16px);
+    padding-bottom: 48px;
+  }
+
+  .title {
+    font-size: clamp(34px, 9.2vw, 44px);
+    line-height: 1.06;
+  }
+
+  .subtitle {
+    margin-top: 16px;
+    font-size: 21px;
+  }
+
+  /* Stacked, so the gold dot never starts a wrapped line. */
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 6px;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  .metaDot {
+    display: none;
+  }
+
+  .actions {
+    margin-top: 26px;
+  }
+
+  /* One clear action on a phone; the menu reaches every section. */
+  .explore {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exploreRing,
+  .exploreRing .icon {
+    transition: none;
+  }
+}

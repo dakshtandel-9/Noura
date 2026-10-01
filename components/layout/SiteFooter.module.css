@@ -1,0 +1,146 @@
+/*
+ * Brand and closing line on the left, link columns on the right, all top-aligned on one row;
+ * a gold hairline opens the footer and a plain rule sits above the copyright line.
+ */
+.footer {
+  position: relative;
+  background: var(--color-background);
+}
+
+/* One understated divider: a gold hairline that fades out at both ends. */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(520px, 70%);
+  height: 1px;
+  translate: -50% 0;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.inner {
+  padding-block: clamp(56px, 6vw, 88px) 16px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(48px, 7vw, 128px);
+  align-items: start;
+  padding-bottom: clamp(36px, 3.6vw, 52px);
+}
+
+.brand {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.logo {
+  width: clamp(132px, 12vw, 160px);
+  height: auto;
+  object-fit: contain;
+}
+
+.closing {
+  max-width: 16ch;
+  text-wrap: balance;
+  margin-top: 24px;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.directory {
+  display: flex;
+  gap: clamp(40px, 5vw, 96px);
+  /* Headings line up with the top of the wordmark. */
+  padding-top: 4px;
+}
+
+.columnHeading {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--color-bronze);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.17em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.columnList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.columnWide .columnList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 2px clamp(32px, 3.5vw, 56px);
+}
+
+.link {
+  display: inline-block;
+  padding-block: 6px;
+  color: var(--color-ink);
+  font-size: clamp(14px, 1vw, 17px);
+  line-height: 1.5;
+  text-decoration: none;
+  transition: color var(--duration-micro) ease-out;
+}
+
+.link:hover,
+.bottom a:hover {
+  color: var(--color-bronze);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.5;
+}
+
+.bottom a {
+  text-decoration: none;
+}
+
+.bottom span {
+  margin-left: 6px;
+  color: var(--color-bronze);
+}
+
+@media (max-width: 1023px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  .directory {
+    flex-wrap: wrap;
+    gap: 36px 48px;
+  }
+
+  .columnWide .columnList {
+    grid-template-columns: 1fr;
+  }
+
+  .bottom {
+    flex-direction: column;
+  }
+}

@@ -1,34 +1,56 @@
-# NOURA / The Quiet Invitation
-Design & build handoff · v1.0 · 24 September 2026 · Prepared by ZockTech for Sidhart
+# NOURA — The Quiet Invitation
 
-## What this package is
-A final proposed visual direction, an interactive long-page presentation, and a complete specification set for the website and its private operations. It is not a deployed Next.js application or a connected membership platform.
+A calm, long-form landing page for NOURA, a private wellness community: yoga, meditation, Music & Sound and private group sessions, with a silent background film in the hero and two manually reviewed request flows.
 
-The selected direction is **Option 3’s storytelling structure with restrained Option 4 gold detail**. The primary brand is NOURA, not SEREN. It is a private wellness community, not a beauty salon, spa-treatment catalogue or public booking marketplace.
+Built with Next.js 16 (App Router) and TypeScript. The approved specification lives in [`docs/`](docs/README.md); read [`AGENTS.md`](AGENTS.md) before changing anything.
 
-## Start in this order
-1. Open `NOURA_Storytelling_Design_and_Project.html` in a browser. Start with Experience, then Design system and Build blueprint.
-2. Review the entire narrative, both request forms and the sample member card. Use the mobile preview.
-3. Read `client-inputs.md`. Resolve the footage, public-contact, programme, consent and scope decisions.
-4. Approve `design.md`, `site-structure.md`, `requirements.md` and `media-motion.md` together.
-5. Build in small reviewed slices using `implementation-plan.md`, `architecture.md` and `AGENTS.md`.
-6. Use `acceptance-tests.md` as the evidence-based release gate.
+## Getting started
 
-## Included files
-`design.md` · `requirements.md` · `site-structure.md` · `components.md` · `content.md` · `media-motion.md` · `architecture.md` · `data-model.md` · `security-privacy.md` · `implementation-plan.md` · `acceptance-tests.md` · `client-inputs.md` · `research.md` · `asset-manifest.md` · `AGENTS.md` · `tokens.css` · `tokens.json`.
+```bash
+npm install
+cp .env.example .env.local   # optional; defaults are safe for local work
+npm run dev                  # http://localhost:3000
+```
 
-## Prototype behaviour
-The 18-section preview contains a real video element playing an **animated-still motion study**, generated from earlier supplied concept artwork. It is not filmed client footage. A visible media tool accepts a local MP4/WebM for an on-device test; the file is not uploaded or saved. The default loop, posters, logos and icons are embedded so the experience works without image hosting. Online Google Fonts may load; offline the specified system fallbacks are used. No font binaries are distributed.
+| Script | What it does |
+|---|---|
+| `npm run dev` | Development server |
+| `npm run build` / `npm start` | Production build / serve |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run lint` | ESLint (Next.js core-web-vitals + TypeScript rules) |
+| `npm test` | Unit tests (Node's built-in runner) for the request validation rules |
+| `npm run check` | All three checks above |
 
-Yoga, meditation and sound links select the matching experience in the private-session form. The private-group chapter directs visitors to the invitation form. Navigation, menu, video controls and questions are interactive. Demo form submissions validate and show an explicitly simulated result; they do not send, store or approve a request. The admin system is specified, not connected. Public contact, social profiles, actual venue, production film and legal copy are not invented.
+Requires Node.js ≥ 20.9 (tests use Node's type stripping, available in Node 22.6+).
 
-## Download behaviour
-The presentation has an individual file viewer, a `design.md` download, a specification ZIP download and a stand-alone landing-preview download. The supplied project ZIP also contains the presentation, stand-alone preview and reusable visual assets. A ZIP of specifications is not a runnable backend.
+## Repository layout
 
-## Commercial baseline, not a new quotation
-The documented project value is ₹27,000; timeline is 6–8 weeks after agreed start conditions; maintenance is 12 months. The documents show ₹8,100 / ₹10,800 / ₹8,100 milestones. Confirm receipts and any later signed amendment before using these amounts operationally. Filming, stock licensing, copywriting beyond the agreement, extra pages, hosting and usage charges are not silently included. [S1 pp13–16]
+```
+app/
+  layout.tsx              local fonts (next/font), metadata, skip link
+  globals.css             base styles, typography, buttons, reveal
+  (public)/page.tsx       the landing page, sections in the approved narrative order
+components/
+  layout/                 SiteHeader, RevealObserver (page chrome and behaviour)
+  sections/               one component + CSS module per landing-page section
+  ui/                     shared primitives: Button, Icon, Lines
+content/                  all public copy, navigation and media references (typed, reviewable)
+styles/tokens.css         design tokens — the single source for colour, type, space, motion
+public/media/
+  brand/                  supplied NOURA logo and wordmark (use unchanged)
+  hero/                   hero stills (desktop, portrait) and the social share image
+docs/                     specification set, icon sources, and the reference presentation HTML
+archive/                  compressed backups of removed code and unused media (see archive/README.md)
+```
 
-## Source basis and document status
-S1: `Sidhart_Luxury_Wellness_Proposal_Updated.pdf`, pp4–16. S2: `Sidhart_Website_Build_Roadmap_Step_0_to_100.pdf`, pp6–12. S3: `NOURA_All_Options_design.md`, Options 3 and 4. S4: the supplied two-logo image; only the right-hand gold version is selected. S5: latest instruction for calm, mindful, peaceful storytelling, a background-video hero and one long landing page.
+Adding a section: create `components/sections/<Name>.tsx` + `<Name>.module.css`, put its copy in `content/home.ts`, and place it in `app/(public)/page.tsx` at its position from `docs/site-structure.md`.
 
-S1 is the documented scope, not proof that the agreement is signed or an advance was paid. S2 and S3 are earlier proposals, not independently approved requirements. This release is a proposed consolidated design and implementation specification. It does not silently revise the agreement. Any new module or production cost needs approval. Research sources and the decisions drawn from them are listed in `research.md`.
+## Status
+
+**Built:** header (transparent over the hero, solid on scroll, mobile menu), arrival hero (static art-directed still), the overview strip under it (the four experiences as anchors), the experience tiles, the shared-experience (Connect) section, the invitation journey, the member-identity sample card, the invitation and private-session request sections, the questions + closing section (UI only: native validation, then a "nothing has been sent" preview notice), and the redesigned footer. Shared experience, invitation journey and invitation request use conceptual artwork; the private-session image is still a grey placeholder.
+
+**Legal/newsletter review:** `/terms`, `/privacy` and `/cookies` show review outlines in development; production returns 404 and omits those links until owner-approved wording is supplied. The footer introduces the newsletter, but collects no addresses until a mailing service and separate marketing consent/notice are approved.
+
+**Removed for now** (restorable from `archive/`): every other section, the privacy notice dialog, the request validation/submission layer and its unit tests, and the unused hero variants and programme stills. Header and strip links point to sections that are not rebuilt yet.
+
+**Client inputs still pending** (`docs/client-inputs.md`): approved hero and programme photography, the original vector / transparent logo, brand positioning copy, public contact and social links, approved privacy, terms and cookie wording, newsletter provider and consent wording, favicon.

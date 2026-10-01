@@ -70,7 +70,7 @@ Hero minimum height: about 680px desktop and 680–760px mobile, allowed to grow
 ## 6. Narrative and navigation
 The 18 blocks in `site-structure.md` form one landing page. Header links are anchors: Philosophy, Experiences, Your invitation. Primary action is **Request an invitation**. Secondary conversion is **Request a private session**. Experience arrows either move to a chapter or preselect a session in the private-session form. No new About, Journal, Membership checkout or programme-detail routes are implied.
 
-Story order: arrival → pause → intention → four ways → yoga → meditation → sound → private groups → sample session rhythm → sensory pause → invitation process → member identity → privacy → questions → invitation form → private-session form → close. Do not put two large forms before the visitor understands the experience.
+Story order: arrival → pause → intention → four ways → yoga → meditation → sound → private groups → optional verified guide → sample session rhythm → sensory pause → invitation process → member identity → privacy → questions → invitation form → private-session form → close. Do not put two large forms before the visitor understands the experience.
 
 ## 7. Video hero
 The video is atmosphere; the headline, explanation and CTAs remain real selectable HTML. There is no text burned into footage. Muted, audio-free, looping, inline video; 12–20 second final edit proposed. A poster is shown immediately and whenever playback is unavailable. Never wait for the film to reveal the headline. Show a persistent ≥44px pause/play control, handle blocked autoplay, and stop autoplay for reduced motion or a supported data-saver preference [T1–T3]. No sound plays automatically. A visitor can still request access without video or JavaScript.

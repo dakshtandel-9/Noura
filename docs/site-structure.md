@@ -71,6 +71,13 @@ Status: proposed expansion of the documented landing-page sections; section spli
 
 **Basis:** S1 p6.
 
+### 08a. Meet your guide — `#guide` (optional, pending verified content)
+**Story beat:** Who holds the practice.
+
+**Build:** One 45/55 editorial portrait-and-copy section after the shared experience. Publish only after the client supplies and approves the real practitioner's name, exact role, short biography, portrait and image rights. Omit unverified credentials and practice labels; hide the whole section while these inputs are absent.
+
+**Basis:** Owner request, 1 October 2026.
+
 ### 09. Session rhythm — `#rhythm`
 **Story beat:** Unhurried, from beginning to end.
 

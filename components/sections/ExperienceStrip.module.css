@@ -1,0 +1,220 @@
+/*
+ * Ivory band under the hero, after the approved journey reference: intro column and the four
+ * experiences split by hairlines, fading at the foot into a drawn misty landscape.
+ */
+.strip {
+  --landscape-height: clamp(120px, 10.5vw, 154px);
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-bottom: calc(var(--landscape-height) * 0.62 + clamp(20px, 2.4vw, 36px));
+  background: var(--color-surface);
+}
+
+/* Anchored to the bottom edge; the top of the band dissolves into the ivory ground. */
+.landscape {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  width: 100%;
+  height: var(--landscape-height);
+  /* Kept faint so the ridge sits behind the copy rather than competing with it. */
+  opacity: 0.45;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 52%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 52%);
+}
+
+.inner {
+  display: grid;
+  max-width: calc(1160px + 2 * var(--gutter));
+  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  column-gap: clamp(32px, 4vw, 64px);
+  align-items: start;
+  padding-top: clamp(48px, 4vw, 56px);
+}
+
+/* ---------- intro ---------- */
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: clamp(36px, 3vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.rule {
+  width: 144px;
+  height: 2px;
+  margin: 18px 0 16px;
+  background: var(--color-gold);
+}
+
+.text {
+  max-width: 40ch;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.45vw, 21px);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 44px;
+  margin-top: 6px;
+  color: var(--color-ink);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link span {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-gold);
+}
+
+.link :global(.icon) {
+  margin-bottom: 8px;
+  color: var(--color-ink);
+  transition: transform var(--duration-micro) ease-out;
+}
+
+.link:hover :global(.icon) {
+  transform: translateX(3px);
+}
+
+/* ---------- the four ways ---------- */
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  border-left: 1px solid rgb(118 86 38 / 0.28);
+}
+
+.way {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-height: 0;
+  padding: 24px clamp(12px, 1.4vw, 22px) 22px;
+  text-align: center;
+  text-decoration: none;
+  transition: background var(--duration-micro) ease-out;
+}
+
+.way:hover {
+  background: rgb(255 255 255 / 0.35);
+}
+
+.wayIcon {
+  color: var(--color-gold-hover);
+  stroke-width: 1;
+  transition: transform 420ms var(--ease-out);
+}
+
+.way:hover .wayIcon {
+  transform: translateY(-3px);
+}
+
+.verb {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.strapline {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+/* ---------- tablets: intro above the four ways ---------- */
+
+@media (max-width: 1099px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+
+  .list {
+    margin-top: 48px;
+  }
+
+  .item:first-child {
+    border-left: 0;
+  }
+
+  .way {
+    min-height: 0;
+    padding-block: 32px;
+  }
+}
+
+/* ---------- phones ---------- */
+
+@media (max-width: 767px) {
+  .inner {
+    padding-top: 72px;
+  }
+
+  .title {
+    font-size: 38px;
+  }
+
+  .rule {
+    width: 96px;
+    margin-block: 24px 22px;
+  }
+
+  .list {
+    grid-template-columns: 1fr 1fr;
+    margin-top: 40px;
+  }
+
+  .item {
+    border-left: 0;
+    border-bottom: 1px solid rgb(118 86 38 / 0.28);
+  }
+
+  .item:nth-child(odd) {
+    border-right: 1px solid rgb(118 86 38 / 0.28);
+  }
+
+  .item:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .way {
+    padding: 28px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .way,
+  .wayIcon,
+  .link :global(.icon) {
+    transition: none;
+  }
+}

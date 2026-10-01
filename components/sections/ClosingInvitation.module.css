@@ -1,0 +1,126 @@
+/*
+ * Full-width dark ending: centred headline with generous air, one gold invitation button and a
+ * quiet underlined appointment link. The drawn landscape sits at the foot as a faint texture.
+ */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: clamp(420px, 38vw, 550px);
+  background: var(--color-ink);
+  color: #fff;
+}
+
+.landscape {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  width: 100%;
+  height: clamp(140px, 16vw, 230px);
+  opacity: 0.1;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-block: clamp(80px, 8vw, 120px);
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: 24px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+}
+
+.title {
+  font-size: clamp(40px, 4.4vw, 68px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  margin-top: clamp(36px, 3.4vw, 52px);
+}
+
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: var(--control-height);
+  padding: 14px clamp(32px, 3vw, 48px);
+  border-radius: 2px;
+  background: var(--color-gold);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background var(--duration-micro) ease-out,
+    box-shadow var(--duration-micro) ease-out;
+}
+
+.primary:hover {
+  background: var(--color-gold-hover);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.25);
+}
+
+.primary :global(.icon) {
+  transition: transform var(--duration-micro) ease-out;
+}
+
+.primary:hover :global(.icon) {
+  transform: translateX(3px);
+}
+
+/* Deliberately quieter than the button: a thin rule, no fill, but clearly legible. */
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: rgb(255 255 255 / 0.92);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color var(--duration-micro) ease-out;
+}
+
+.secondary span {
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgb(201 169 98 / 0.85);
+}
+
+.secondary:hover {
+  color: #fff;
+}
+
+.primary:focus-visible,
+.secondary:focus-visible {
+  outline-color: var(--color-gold);
+}
+
+@media (max-width: 640px) {
+  .primary {
+    width: 100%;
+  }
+}

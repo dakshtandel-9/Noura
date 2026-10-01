@@ -1,0 +1,146 @@
+.section {
+  background: var(--color-canvas);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tile {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  /* Placeholder grey, shown until an image is set in content/home.ts. */
+  background: #a9a9a5;
+  color: #fff;
+  text-decoration: none;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms var(--ease-out);
+}
+
+/* Small crop shifts keep each panel's subject in view without changing the source images. */
+.item:nth-child(1) .image { object-position: 54% 50%; }
+.item:nth-child(2) .image { object-position: 46% 50%; }
+.item:nth-child(3) .image { object-position: 49% 52%; }
+.item:nth-child(4) .image { object-position: 55% 50%; }
+.item:nth-child(5) .image { object-position: 53% 50%; }
+.item:nth-child(6) .image { object-position: 48% 50%; }
+
+/*
+ * One identical lower gradient on every panel, deep enough behind the text that legibility no
+ * longer depends on each photograph; the upper half keeps its full brightness.
+ */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, rgb(20 26 22 / 0.72) 0%, rgb(20 26 22 / 0.5) 24%, rgb(20 26 22 / 0.2) 46%, rgb(20 26 22 / 0) 64%);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0 clamp(14px, 1.4vw, 24px) clamp(22px, 2.2vw, 32px);
+  text-shadow: 0 1px 12px rgb(16 22 18 / 0.36);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.55vw, 26px);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.lines {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.5;
+  color: #f4efe4;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cta :global(.icon) {
+  transition: transform var(--duration-micro) ease-out;
+}
+
+.tile:hover .cta :global(.icon),
+.tile:focus-visible .cta :global(.icon) {
+  transform: translateX(3px);
+}
+
+.tile:focus-visible {
+  outline-color: #fff;
+  outline-offset: -6px;
+}
+
+@media (hover: hover) {
+  .tile:hover .image {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 1199px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .title {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .copy {
+    padding-inline: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image,
+  .cta :global(.icon) {
+    transition: none;
+  }
+
+  .tile:hover .image,
+  .tile:hover .cta :global(.icon),
+  .tile:focus-visible .cta :global(.icon) {
+    transform: none;
+  }
+}

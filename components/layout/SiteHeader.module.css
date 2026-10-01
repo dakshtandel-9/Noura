@@ -1,0 +1,309 @@
+.header {
+  /* Same left/right edge as the page's .wrap column, so the wordmark lines up with the hero copy. */
+  --edge: max(var(--gutter), calc((100% - var(--content-max)) / 2));
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 26px var(--edge) 22px;
+  border-bottom: 1px solid transparent;
+  transition:
+    background 300ms ease-out,
+    color 300ms ease-out,
+    border-color 300ms ease-out,
+    box-shadow 300ms ease-out,
+    padding 300ms ease-out;
+}
+
+/* Over the hero: no ground of its own, but a soft veil of its own so the links stay legible
+   whatever the hero picture is doing behind them. */
+.overlay {
+  color: #fff;
+  background: transparent;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -28px;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(14 24 38 / 0.26), rgb(14 24 38 / 0));
+  pointer-events: none;
+  transition: opacity 300ms ease-out;
+}
+
+.overlay .navLink {
+  text-shadow: 0 1px 12px rgb(14 24 38 / 0.35);
+}
+
+/* Once the page moves: warm ivory, lightly frosted where the browser supports it. */
+.solid {
+  padding-block: 16px;
+  color: var(--color-ink);
+  background: var(--color-background);
+  border-bottom-color: #ece6da;
+  box-shadow: 0 6px 20px rgb(39 53 45 / 0.035);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .solid {
+    background: rgb(251 249 244 / 0.86);
+    -webkit-backdrop-filter: blur(14px) saturate(1.1);
+    backdrop-filter: blur(14px) saturate(1.1);
+  }
+}
+
+.solid::before {
+  opacity: 0;
+}
+
+/* A gold hairline that settles beneath the header once the page moves. */
+.header::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: min(240px, 40%);
+  height: 1px;
+  translate: -50% 0;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+}
+
+.solid::after {
+  opacity: 1;
+}
+
+/* ---------- brand ---------- */
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.wordmark {
+  width: 176px;
+  height: auto;
+}
+
+/* ---------- inline bar ---------- */
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(32px, 3.4vw, 52px);
+  min-height: 46px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(34px, 3.8vw, 60px);
+}
+
+.navLink {
+  position: relative;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 9px;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease-out);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+.solid .navLink:hover {
+  color: var(--color-bronze);
+}
+
+/* Square-cornered, tracked capitals to match the approved hero reference. */
+.cta,
+.menuCta {
+  min-height: 46px;
+  padding: 12px 22px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.overlay .cta {
+  border-color: rgb(255 255 255 / 0.85);
+  background: rgb(14 24 38 / 0.18);
+}
+
+.overlay .cta:hover {
+  border-color: var(--color-gold);
+  background: rgb(14 24 38 / 0.34);
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+/* ---------- full-story menu ---------- */
+
+.menu {
+  position: absolute;
+  top: calc(100% + 1px);
+  right: var(--edge);
+  width: min(360px, calc(100vw - 2 * var(--gutter)));
+  padding: 18px 28px 28px;
+  background: var(--color-background);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-top: 0;
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
+  box-shadow: 0 24px 40px rgb(23 45 30 / 0.08);
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menuList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-display);
+  font-size: 19px;
+  text-decoration: none;
+  transition: color var(--duration-micro) ease-out;
+}
+
+.menuLink:hover {
+  color: var(--color-bronze);
+}
+
+.menuCta {
+  width: 100%;
+  margin-top: 22px;
+}
+
+.header :focus-visible {
+  outline-offset: 4px;
+}
+
+.overlay :focus-visible {
+  outline-color: #fff;
+}
+
+/* ---------- responsive ---------- */
+
+/* Links, CTA and labels never break onto two lines; the inline links fold into the menu first. */
+.navLink,
+.cta {
+  white-space: nowrap;
+}
+
+@media (max-width: 1199px) {
+  .nav {
+    display: none;
+  }
+}
+
+/* Wide screens show every header link inline, so the menu button (and its panel) is a
+   tablet/phone affordance only. */
+@media (min-width: 1200px) {
+  .menuButton,
+  .menu {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    padding: 18px var(--edge) 16px;
+  }
+
+  .solid {
+    padding-block: 12px;
+  }
+
+  .wordmark {
+    width: 132px;
+  }
+
+  .bar {
+    min-height: 34px;
+  }
+
+  .menu {
+    left: 0;
+    right: 0;
+    width: auto;
+    border-inline: 0;
+    border-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .header::before,
+  .header::after,
+  .navLink::after {
+    transition: none;
+  }
+}
+
+@media print {
+  .header {
+    position: static;
+  }
+
+  .menuButton,
+  .menu {
+    display: none;
+  }
+}

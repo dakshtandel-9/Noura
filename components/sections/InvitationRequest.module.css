@@ -1,0 +1,122 @@
+/* Photo-led invitation section from the supplied reference. */
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+  background: var(--color-ink);
+  color: #fff;
+}
+
+/* ---------- media ---------- */
+
+.media {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 520px;
+  background: var(--color-ink);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 54% center;
+}
+
+/* Darkens the left edge so the white title stays readable on a bright image. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgb(24 30 26 / 0.7) 0%, rgb(24 30 26 / 0.4) 38%, rgb(24 30 26 / 0) 73%);
+}
+
+.mediaCopy {
+  padding: clamp(48px, 5vw, 96px) clamp(24px, 4.6vw, 86px);
+}
+
+.eyebrow {
+  margin-bottom: 18px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+}
+
+.title {
+  font-size: clamp(44px, 3.8vw, 60px);
+  line-height: 1.12;
+  color: #fff;
+}
+
+/* ---------- form panel ---------- */
+
+.panel {
+  padding: clamp(32px, 2.2vw, 44px) var(--gutter) clamp(36px, 2.6vw, 48px) clamp(32px, 3.5vw, 64px);
+  background: linear-gradient(112deg, var(--color-ink), color-mix(in srgb, var(--color-ink) 86%, #000));
+}
+
+.panelInner {
+  max-width: 880px;
+}
+
+.formTitle {
+  font-size: clamp(44px, 3.6vw, 56px);
+  line-height: 1.12;
+  color: #fff;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 2.5vw, 40px) clamp(32px, 3.4vw, 56px);
+  margin-top: clamp(32px, 2.7vw, 44px);
+}
+
+.interestsField {
+  grid-column: 1 / -1;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  grid-column: 1 / -1;
+  margin-top: 6px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1023px) {
+  .section {
+    grid-template-columns: 1fr;
+  }
+
+  .media {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .panel {
+    padding: 56px var(--gutter) 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .actions,
+  .actions button {
+    width: 100%;
+  }
+}

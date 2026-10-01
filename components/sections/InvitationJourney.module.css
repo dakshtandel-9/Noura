@@ -1,0 +1,207 @@
+/*
+ * Ivory band after the 2026-10-01 reference board: heading, four numbered steps joined by
+ * hairlines and a text link on the left; a decorative image fades in from the right edge.
+ */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+/* ---------- media ---------- */
+
+.media {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: -1;
+  width: 40%;
+  background: var(--color-surface);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% center;
+}
+
+/* ---------- content ---------- */
+
+.inner {
+  width: 66%;
+  padding: clamp(36px, 2.6vw, 52px) 0 clamp(40px, 3vw, 56px) clamp(24px, 6.2vw, 144px);
+}
+
+.eyebrow {
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--color-ink);
+}
+
+.title {
+  font-size: clamp(44px, 3.2vw, 60px);
+  line-height: 1.12;
+}
+
+/* ---------- steps ---------- */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: clamp(28px, 2.4vw, 44px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.3vw, 22px);
+  padding-right: clamp(14px, 1.3vw, 22px);
+}
+
+.number {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 2.3vw, 42px);
+  font-variant-numeric: lining-nums;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.rule {
+  flex: 1;
+  height: 1px;
+  background: rgb(201 169 98 / 0.65);
+}
+
+/* The last rule fades out rather than stopping, so the sequence reads as one line. */
+.step:last-child .rule {
+  background: linear-gradient(90deg, rgb(201 169 98 / 0.65), transparent);
+}
+
+.stepTitle {
+  margin-top: 20px;
+  font-size: clamp(21px, 1.45vw, 26px);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.stepText {
+  max-width: 30ch;
+  margin-top: 10px;
+  padding-right: clamp(20px, 2vw, 40px);
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+/* ---------- link ---------- */
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 44px;
+  margin-top: clamp(20px, 1.8vw, 28px);
+  color: var(--color-ink);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.link span {
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid var(--color-gold);
+}
+
+.link:hover span {
+  border-bottom-color: var(--color-bronze);
+}
+
+.link :global(.icon) {
+  margin-top: -8px;
+  color: var(--color-bronze);
+  transition: transform var(--duration-micro) ease-out;
+}
+
+.link:hover :global(.icon) {
+  transform: translateX(3px);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1439px) {
+  .inner {
+    width: 72%;
+  }
+
+  .media {
+    width: 34%;
+  }
+}
+
+/* The image becomes a soft band under the steps. */
+@media (max-width: 1023px) {
+  .inner {
+    width: 100%;
+    padding: 56px var(--gutter) 40px;
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 36px;
+  }
+
+  .step:nth-child(2n) .rule {
+    visibility: hidden;
+  }
+
+  .stepText {
+    padding-right: 0;
+  }
+
+  .media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(200px, 32vw, 300px);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 50%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 50%);
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 640px) {
+  .steps {
+    grid-template-columns: 1fr;
+    row-gap: 28px;
+  }
+
+  .step .rule,
+  .step:nth-child(2n) .rule {
+    visibility: visible;
+  }
+
+  .step:last-child .rule {
+    visibility: hidden;
+  }
+}

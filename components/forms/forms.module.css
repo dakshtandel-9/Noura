@@ -1,0 +1,232 @@
+/*
+ * Underlined request-form controls after the 2026-10-01 reference board. Colours come from
+ * the variables on `.form`; `.dark` swaps them for the forest panel.
+ */
+.form {
+  --field-label: var(--color-ink);
+  --field-ink: var(--color-ink);
+  --field-placeholder: #6f776f;
+  --field-line: var(--color-input-border);
+  --field-line-focus: var(--color-bronze);
+  --field-required: var(--color-bronze);
+  --field-focus: var(--color-focus);
+  --field-fill: var(--color-background);
+  --field-note: var(--color-muted);
+}
+
+.dark {
+  --field-label: #fff;
+  --field-ink: #fff;
+  --field-placeholder: rgb(255 255 255 / 0.66);
+  --field-line: rgb(255 255 255 / 0.8);
+  --field-line-focus: var(--color-gold);
+  --field-required: var(--color-gold);
+  --field-focus: var(--color-gold);
+  --field-fill: var(--color-ink);
+  --field-note: rgb(255 255 255 / 0.78);
+}
+
+.dark .field {
+  gap: 8px;
+}
+
+.dark .label {
+  font-size: 16px;
+}
+
+.dark .control {
+  min-height: 54px;
+  border-bottom-width: 1.5px;
+  font-size: 18px;
+}
+
+.dark .control:focus-visible {
+  outline: 3px solid var(--field-focus);
+  outline-offset: 3px;
+}
+
+.dark .textarea {
+  min-height: 104px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: var(--field-label);
+  transition: color var(--duration-micro) ease-out;
+}
+
+/* The active field is named in the accent colour as well as outlined. */
+.field:focus-within .label {
+  color: var(--field-line-focus);
+}
+
+.required {
+  color: var(--field-required);
+}
+
+.control {
+  width: 100%;
+  min-height: var(--control-height);
+  padding: 12px 0 10px;
+  border: 0;
+  border-bottom: 1px solid var(--field-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--field-ink);
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.4;
+  transition: border-color var(--duration-micro) ease-out;
+}
+
+.control::placeholder {
+  color: var(--field-placeholder);
+  opacity: 1;
+}
+
+.control:hover {
+  border-bottom-color: var(--field-ink);
+}
+
+.control:focus {
+  border-bottom-color: var(--field-line-focus);
+  box-shadow: 0 1px 0 0 var(--field-line-focus);
+}
+
+.control:focus-visible {
+  outline: 2px solid var(--field-focus);
+  outline-offset: 4px;
+}
+
+/* Keep browser autofill from painting a pale box over the underlined style. */
+.control:-webkit-autofill {
+  -webkit-text-fill-color: var(--field-ink);
+  box-shadow: 0 0 0 100px var(--field-fill) inset;
+}
+
+.control[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.dark .control[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* ---------- select ---------- */
+
+.selectWrap {
+  position: relative;
+  display: block;
+}
+
+.select {
+  padding-right: 32px;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* The empty first option reads as a placeholder. */
+.select:has(option[value=""]:checked) {
+  color: var(--field-placeholder);
+}
+
+.select option {
+  color: var(--color-ink);
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  color: var(--field-ink);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* ---------- textarea ---------- */
+
+.textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+/* ---------- submit ---------- */
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: var(--control-height);
+  padding: 14px clamp(28px, 3.4vw, 60px);
+  border: 0;
+  border-radius: 2px;
+  background: var(--color-gold);
+  color: var(--color-ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+  transition:
+    background var(--duration-micro) ease-out,
+    box-shadow var(--duration-micro) ease-out;
+}
+
+.submit:hover {
+  background: var(--color-gold-hover);
+  box-shadow: 0 10px 24px rgb(118 86 38 / 0.18);
+}
+
+.submit:focus-visible {
+  outline-color: var(--field-focus);
+}
+
+.submit :global(.icon) {
+  transition: transform var(--duration-micro) ease-out;
+}
+
+.submit:hover :global(.icon) {
+  transform: translateX(3px);
+}
+
+/* ---------- notes ---------- */
+
+.note {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--field-note);
+}
+
+.status {
+  grid-column: 1 / -1;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--field-note);
+}
+
+.status:empty {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .submit {
+    gap: 12px;
+    padding-inline: 16px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+}

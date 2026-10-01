@@ -93,3 +93,6 @@ Footer: approved brand logo, navigation, actual public business contact, actual 
 
 ## Unapproved or absent content
 Founder story, team profiles, qualifications, venues, schedule, prices, public contact, response time, testimonials, press mentions and legal notices must come from the client. Hide optional empty sections. Earlier generated concept boards included example claims and treatment categories that are not approved NOURA content; do not publish them.
+
+## Optional guide profile
+Section label: **The Guide**. Heading: **Practice, held with intention.** The name, role, 60–90 word introduction, actual portrait and its publication rights must be provided and approved by the client before the section is shown. Include practice labels or a link only when confirmed. An AI-generated portrait cannot represent the actual practitioner.
