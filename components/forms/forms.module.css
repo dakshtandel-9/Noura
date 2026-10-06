@@ -41,8 +41,7 @@
 }
 
 .dark .control:focus-visible {
-  outline: 3px solid var(--field-focus);
-  outline-offset: 3px;
+  outline: none;
 }
 
 .dark .textarea {
@@ -103,9 +102,9 @@
   box-shadow: 0 1px 0 0 var(--field-line-focus);
 }
 
+/* No outline box on fields: the bronze underline (or border) above is the focus cue. */
 .control:focus-visible {
-  outline: 2px solid var(--field-focus);
-  outline-offset: 4px;
+  outline: none;
 }
 
 /* Keep browser autofill from painting a pale box over the underlined style. */
@@ -222,6 +221,13 @@
 .status:empty {
   margin: 0;
 }
+
+.contents { display: contents; border: 0; padding: 0; margin: 0; min-width: 0; }
+.contents:disabled button { opacity: .55; cursor: not-allowed; }
+.privacy { display: flex; align-items: flex-start; gap: 10px; grid-column: 1 / -1; font-size: 13px; line-height: 1.6; color: var(--field-note); margin-top: 16px; }
+.privacy input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 3px; accent-color: var(--color-bronze); }
+.privacy a { text-decoration: underline; }
+.honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 @media (max-width: 640px) {
   .submit {

@@ -122,66 +122,6 @@
   background: var(--color-gold);
 }
 
-/* ---------- actions ---------- */
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 20px 36px;
-  margin-top: 40px;
-}
-
-.primary {
-  min-height: 54px;
-  padding-inline: 36px;
-  border-radius: 2px;
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  box-shadow: 0 14px 30px rgb(var(--dusk) / 0.28);
-}
-
-.explore {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  min-height: 48px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  text-decoration: none;
-  text-shadow: 0 1px 8px rgb(var(--dusk) / 0.75);
-}
-
-.exploreRing {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid #fff;
-  border-radius: 50%;
-  transition:
-    border-color var(--duration-micro) ease-out,
-    background var(--duration-micro) ease-out;
-}
-
-.exploreRing .icon {
-  transition: transform var(--duration-micro) ease-out;
-}
-
-.explore:hover .exploreRing {
-  border-color: var(--color-gold);
-  background: rgb(255 255 255 / 0.08);
-}
-
-.explore:hover .exploreRing .icon {
-  transform: translateY(2px);
-}
-
 /*
  * Arrival: once the intro doors start to part, the copy rises in line by line — opacity, a
  * 12px lift and a soft focus, once (docs/design.md §9). Only the intro sets the cue, so without
@@ -189,8 +129,7 @@
  */
 :global(html[data-intro-reveal]) .titleLine,
 :global(html[data-intro-reveal]) .subtitle,
-:global(html[data-intro-reveal]) .meta,
-:global(html[data-intro-reveal]) .actions {
+:global(html[data-intro-reveal]) .meta {
   animation: hero-rise 650ms var(--ease-out) both;
 }
 
@@ -208,10 +147,6 @@
 
 :global(html[data-intro-reveal]) .meta {
   animation-delay: 850ms;
-}
-
-:global(html[data-intro-reveal]) .actions {
-  animation-delay: 1000ms;
 }
 
 @keyframes hero-rise {
@@ -277,7 +212,6 @@
       rgb(var(--dusk) / 0) max(65%, 530px)
     );
   }
-
 }
 
 /* Upright tablets: more air under the header and type scaled to the wider sky. */
@@ -325,21 +259,5 @@
 
   .metaDot {
     display: none;
-  }
-
-  .actions {
-    margin-top: 26px;
-  }
-
-  /* One clear action on a phone; the menu reaches every section. */
-  .explore {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .exploreRing,
-  .exploreRing .icon {
-    transition: none;
   }
 }

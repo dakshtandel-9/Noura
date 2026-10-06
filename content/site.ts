@@ -10,26 +10,33 @@ export const site = {
     "A private space for yoga, meditation, sound and meaningful connection. Thoughtful experiences, shared at an unhurried pace.",
 } as const;
 
+/**
+ * Inline header links (1200px and up). Labels are set in capitals by CSS, so keep them in
+ * sentence case here for assistive technology. The header is shared by every page, so section
+ * anchors are written from the root ("/#place") and work from /about, /FAQ and /invitation
+ * too. "Story" opens the About page.
+ */
 export const nav = [
-  { label: "Our philosophy", href: "#philosophy" },
-  { label: "The experiences", href: "#experiences" },
-  { label: "Your invitation", href: "#journey" },
+  { label: "Story", href: "/about" },
+  { label: "Journey", href: "/#experiences" },
+  { label: "Place", href: "/#place" },
+  { label: "Experts", href: "/#experts" },
+  { label: "Enquire", href: "/#enquire" },
 ] as const;
 
+/** The header's outlined button, on every page: the invitation request page. */
+export const headerCta = { label: "Request an invitation", href: "/invitation" } as const;
+
 /**
- * The full-story menu behind the header's menu button. Anchors follow the planned order in
- * docs/site-structure.md; most sections are not rebuilt yet.
+ * The full-story menu behind the header's menu button (below 1200px). Like `nav`, anchors are
+ * written from the root so the menu works on every page; "Our story" opens the About page.
  */
 export const menu = [
-  { label: "A pause", href: "#pause" },
-  { label: "Our philosophy", href: "#philosophy" },
-  { label: "The experiences", href: "#experiences" },
-  { label: "Session rhythm", href: "#rhythm" },
-  { label: "Your invitation", href: "#journey" },
-  { label: "Member card", href: "#member" },
-  { label: "Care & privacy", href: "#care" },
-  { label: "Questions", href: "#questions" },
-  { label: "Private session", href: "#private-session" },
+  { label: "Our story", href: "/about" },
+  { label: "The experiences", href: "/#experiences" },
+  { label: "The place", href: "/#place" },
+  { label: "The practitioners", href: "/#experts" },
+  { label: "Enquire", href: "/#enquire" },
 ] as const;
 
 export const media = {
@@ -47,38 +54,34 @@ export const media = {
      * premises (docs/asset-manifest.md). `posterMobile` is the portrait recomposition used on
      * portrait screens. Media is cached as immutable: swap an image under a new file name.
      */
-    poster: { src: "/media/hero/hero-desktop.jpg", width: 1920, height: 1080 },
-    posterMobile: { src: "/media/hero/hero-mobile.jpg", width: 1080, height: 1920 },
+    poster: { src: "/media/hero/herosectionbg.png", width: 1672, height: 941 },
+    posterMobile: { src: "/media/hero/herosection-mobile.png", width: 941, height: 1672 },
+    /**
+     * Short film behind the hero's "Play film" button. PLACEHOLDER: an 8-second silent push-in
+     * on the hero still, not filmed footage. Replace with the approved film under a new file name;
+     * a film with speech or meaningful audio also needs captions (docs/media-motion.md).
+     */
+    film: { src: "/media/hero/film-placeholder.mp4", poster: "/media/hero/herosectionbg.png" },
   },
 } as const;
 
-/** Footer navigation. Public contact and profiles remain pending client approval. */
+/**
+ * Footer strip under the closing banner (2026-10-03 reference): wordmark, place and month,
+ * a short link row and a back-to-top control. Page anchors only, so no link dead-ends.
+ */
 export const footer = {
-  closing: "Come as you are. Take your time.",
-  exploreHeading: "Explore",
-  connectHeading: "Connect",
-  legalHeading: "Legal",
-  /**
-   * "Explore" column. Page anchors only: every entry points at a section that is already
-   * built, so no footer link dead-ends (docs/site-structure.md → definition of done). Add
-   * "#philosophy", "#rhythm" and "#care" here as those chapters are implemented.
-   */
+  place: "Goa - Feb 2027",
+  backToTop: "Back to top",
+  /** Always shown: the enquiry section and the FAQ page (FAQ is linked only from here). */
   nav: [
-    { label: "The experiences", href: "#experiences" },
-    { label: "Shared experience", href: "#connection" },
-    { label: "Your invitation", href: "#journey" },
-    { label: "Member card", href: "#member" },
-    { label: "Questions", href: "#questions" },
-    { label: "Private session", href: "#private-session" },
+    { label: "Contact", href: "#enquire" },
+    { label: "FAQ", href: "/FAQ" },
   ],
   /**
-   * "Connect" column: contact then social. Both stay empty until the client supplies a real
-   * public business address and profiles — the column heading hides with them, so the footer
-   * never shows a link that leads nowhere (docs/content.md → footer).
-   *
-   * e.g. { label: "Contact the team", href: "mailto:…" } once item 17 is answered.
+   * Instagram stays out until the client supplies the real profile address (docs/client-inputs.md
+   * item 17); the link row then picks it up with no other change, e.g.
+   * { label: "Instagram", href: "https://www.instagram.com/…" }. A public email or phone for
+   * "Contact" would be added the same way and replaces the on-page enquiry link.
    */
-  contact: [] as ReadonlyArray<{ label: string; href: string }>,
-  /** e.g. { label: "Instagram", href: "https://…" } once item 17 is answered. */
   social: [] as ReadonlyArray<{ label: string; href: string }>,
 } as const;

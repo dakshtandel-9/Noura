@@ -1,0 +1,311 @@
+/*
+ * /invitation (2026-10-06 reference): full-height picture on the left, warm ivory form panel on
+ * the right with tracked capital labels over underlined fields, outlined pills and a dark olive
+ * pill button. Stacks picture-first below 1024px.
+ */
+/* Top padding clears the fixed site header. */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 43fr) minmax(0, 57fr);
+  min-height: 100vh;
+  padding-top: var(--header-offset, 79px);
+  background: #efe8dc;
+}
+
+.media {
+  position: relative;
+  min-height: 640px;
+  overflow: hidden;
+  background: #8d8880;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 60%;
+}
+
+.caption {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-shadow: 0 0 18px rgb(251 238 214 / 0.8);
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: clamp(40px, 5vw, 72px) clamp(24px, 6vw, 110px);
+}
+
+/* The thin vertical rule near the top right of the reference. */
+.panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: clamp(16px, 2.5vw, 40px);
+  width: 1px;
+  height: 37%;
+  background: rgb(39 53 45 / 0.25);
+}
+
+.inner {
+  width: 100%;
+  max-width: 700px;
+}
+
+
+.eyebrow {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.title {
+  margin: 14px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4vw, 62px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: var(--color-ink);
+}
+
+.intro {
+  max-width: 580px;
+  margin: 22px 0 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.intro strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 36px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 44px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.label {
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.req {
+  color: var(--color-error);
+}
+
+.control {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid #b9b1a2;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 16px;
+  transition: border-color var(--duration-micro) ease-out;
+}
+
+.control::placeholder {
+  color: #8f958f;
+  opacity: 1;
+}
+
+.control:focus {
+  border-bottom-color: var(--color-bronze);
+  outline: none;
+  box-shadow: 0 1px 0 0 var(--color-bronze);
+}
+
+/* No outline box on fields: the bronze underline (or border) above is the focus cue. */
+.control:focus-visible {
+  outline: none;
+}
+
+.textarea {
+  min-height: 110px;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border: 1px solid #b9b1a2;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.textarea:focus {
+  border-color: var(--color-bronze);
+  box-shadow: 0 0 0 1px var(--color-bronze);
+}
+
+.interests {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Pills size to their text with a common minimum width, as in the reference. */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  margin-top: 14px;
+}
+
+.pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  min-height: 40px;
+  padding: 8px 22px;
+  border: 1px solid #a69d8d;
+  border-radius: var(--radius-pill);
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.25;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background var(--duration-micro) ease-out,
+    border-color var(--duration-micro) ease-out,
+    color var(--duration-micro) ease-out;
+}
+
+.pillInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pill:hover {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.pill:has(.pillInput:checked) {
+  border-color: #3b3a26;
+  background: #3b3a26;
+  color: #fff;
+}
+
+.pill:has(.pillInput:focus-visible) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  align-self: flex-start;
+  min-height: 52px;
+  padding: 14px 38px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: #3b3a26;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--duration-micro) ease-out;
+}
+
+.submit:hover {
+  background: var(--color-ink);
+}
+
+.submit:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1023px) {
+  .page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .media {
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    max-height: 80vh;
+  }
+
+  .panel::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .panel {
+    padding: 36px 16px 48px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pills {
+    gap: 10px;
+  }
+
+  .pill {
+    min-width: 0;
+    padding-inline: 16px;
+  }
+
+  .submit {
+    align-self: stretch;
+    padding-inline: 20px;
+    letter-spacing: 0.16em;
+  }
+}

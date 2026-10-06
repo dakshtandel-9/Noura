@@ -45,7 +45,7 @@
 .title {
   font-size: clamp(36px, 3vw, 44px);
   line-height: 1.12;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.005em;
 }
 
 .rule {

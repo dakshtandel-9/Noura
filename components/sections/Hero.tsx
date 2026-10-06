@@ -1,8 +1,7 @@
 import { getImageProps } from "next/image";
-import { ButtonLink } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
 import { hero } from "@/content/home";
 import { media } from "@/content/site";
+import { HeroFilm } from "./HeroFilm";
 import styles from "./Hero.module.css";
 
 /** Keep in sync with the portrait layout query in Hero.module.css. */
@@ -55,18 +54,9 @@ export function Hero() {
             </span>
           ))}
         </p>
-        <div className={styles.actions}>
-          <ButtonLink href="#invitation" icon={null} className={styles.primary}>
-            {hero.primary}
-          </ButtonLink>
-          <a className={styles.explore} href="#experiences">
-            <span className={styles.exploreRing} aria-hidden="true">
-              <Icon name="arrow-down" size={18} />
-            </span>
-            <span>{hero.secondary}</span>
-          </a>
-        </div>
       </div>
+
+      <HeroFilm src={media.hero.film.src} poster={media.hero.film.poster} labels={hero.film} />
     </section>
   );
 }

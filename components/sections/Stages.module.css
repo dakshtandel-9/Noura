@@ -1,0 +1,134 @@
+/*
+ * An editorial heading over three equal cards (2026-10-03 reference): a picture above a
+ * white text area. Three across from 1024px; between 600px and 1023px each card turns sideways
+ * (picture left, text right) so the lines never squeeze; phones stack picture over text.
+ */
+.section {
+  padding-block: var(--section-gap);
+  background: var(--color-background);
+}
+
+.heading {
+  max-width: 22ch;
+  margin-inline: auto;
+  text-align: center;
+  font-size: var(--section-heading-size);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-32);
+  margin: var(--heading-gap) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  background: var(--color-canvas);
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #cfcfcf;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  flex: 1;
+  padding: var(--space-32);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.6vw, 24px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.number {
+  margin-right: 8px;
+  font-variant-numeric: lining-nums;
+  color: var(--color-bronze);
+}
+
+/* A short gold rule between the title and the lines, as on the practitioner cards. */
+.title::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 1px;
+  margin-top: 18px;
+  background: var(--color-gold);
+}
+
+.lead {
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--color-ink);
+}
+
+.line {
+  display: block;
+}
+
+.themes {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
+@media (max-width: 1023px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 760px;
+    margin-inline: auto;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  }
+
+  .media {
+    aspect-ratio: auto;
+    min-height: 240px;
+  }
+
+  .body {
+    align-self: center;
+    padding: 28px clamp(24px, 4vw, 40px);
+  }
+}
+
+@media (max-width: 599px) {
+  .card {
+    display: flex;
+  }
+
+  .media {
+    aspect-ratio: 3 / 2;
+    min-height: 0;
+  }
+
+  .body {
+    padding: 24px 22px 28px;
+  }
+}

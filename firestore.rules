@@ -1,0 +1,8 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Browser and mobile access is always denied, including authenticated admins.
+    // The server SDK uses IAM; every staff server operation checks live authorization.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

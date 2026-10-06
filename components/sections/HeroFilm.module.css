@@ -1,0 +1,133 @@
+/* Bottom-right of the hero, on the same right edge as the header's invitation button. */
+.trigger {
+  position: absolute;
+  right: var(--edge);
+  bottom: 40px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px rgb(14 24 38 / 0.75);
+  cursor: pointer;
+}
+
+.ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: rgb(14 24 38 / 0.28);
+  transition:
+    border-color var(--duration-micro) ease-out,
+    background var(--duration-micro) ease-out;
+}
+
+/* Optical centre of the triangle sits left of its box. */
+.ring :global(.icon) {
+  margin-left: 2px;
+}
+
+.trigger:hover .ring {
+  border-color: var(--color-gold);
+  background: rgb(255 255 255 / 0.12);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 6px;
+}
+
+/* ---------- film dialog ---------- */
+
+.dialog {
+  width: min(1100px, 92vw);
+  max-width: none;
+  max-height: 92vh;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: #000;
+  color: #fff;
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background: rgb(10 16 24 / 0.86);
+}
+
+.frame {
+  position: relative;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  max-height: 86vh;
+  background: #000;
+}
+
+.close {
+  position: absolute;
+  top: -52px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.close:hover {
+  border-color: var(--color-gold);
+}
+
+.close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .trigger {
+    bottom: 28px;
+  }
+
+  .dialog {
+    width: 100vw;
+  }
+
+  /* Sits inside the frame on a phone, where there is no room above the video. */
+  .close {
+    top: 8px;
+    right: 8px;
+    background: rgb(14 24 38 / 0.6);
+  }
+
+  .frame:has(.video) .close {
+    z-index: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    transition: none;
+  }
+}

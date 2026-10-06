@@ -101,24 +101,25 @@
 .bar {
   display: flex;
   align-items: center;
-  gap: clamp(32px, 3.4vw, 52px);
+  gap: clamp(20px, 2vw, 28px);
   min-height: 46px;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: clamp(34px, 3.8vw, 60px);
+  gap: clamp(28px, 2.8vw, 44px);
 }
 
+/* Small, widely tracked capitals, the same voice as the CTA beside them. */
 .navLink {
   position: relative;
   min-height: 44px;
   display: flex;
   align-items: center;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -144,26 +145,42 @@
   color: var(--color-bronze);
 }
 
-/* Square-cornered, tracked capitals to match the approved hero reference. */
-.cta,
-.menuCta {
-  min-height: 46px;
-  padding: 12px 22px;
-  border-radius: 2px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+/* A thin square rule around the same capitals as the links: no fill, and it takes the
+   header's own colour (white over the hero, ink once the header turns solid or in the menu). */
+.header .cta,
+.header .menuCta {
+  min-height: 44px;
+  padding: 8px 20px;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  transition:
+    color var(--duration-micro) ease-out,
+    border-color var(--duration-micro) ease-out,
+    background var(--duration-micro) ease-out;
 }
 
 .overlay .cta {
   border-color: rgb(255 255 255 / 0.85);
-  background: rgb(14 24 38 / 0.18);
+  text-shadow: 0 1px 12px rgb(14 24 38 / 0.35);
 }
 
 .overlay .cta:hover {
   border-color: var(--color-gold);
-  background: rgb(14 24 38 / 0.34);
+  background: rgb(14 24 38 / 0.18);
+}
+
+.solid .cta:hover,
+.header .menuCta:hover {
+  border-color: var(--color-gold);
+  background: transparent;
+  color: var(--color-bronze);
 }
 
 .menuButton {

@@ -1,0 +1,272 @@
+/* About-style invitation page: founder, board, philosophy, home (reference, 2026-10-06). */
+.founder {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+  padding: clamp(48px, 6vw, 88px) 0 clamp(48px, 6vw, 88px) max(var(--gutter), calc((100% - var(--content-max)) / 2));
+}
+
+.portrait {
+  aspect-ratio: 4 / 5;
+}
+
+.caption {
+  margin: 14px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.founderCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 520px;
+}
+
+.name {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.role {
+  margin: -8px 0 4px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+.quote {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  border-left: 1px solid var(--color-gold);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.founderSide {
+  align-self: stretch;
+  min-height: 280px;
+}
+
+.board {
+  padding: clamp(48px, 6vw, 88px) max(var(--gutter), calc((100% - var(--content-max)) / 2));
+  background: var(--color-surface);
+}
+
+.boardIntro {
+  max-width: 560px;
+  margin-top: 16px;
+}
+
+.members {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.memberPhoto {
+  aspect-ratio: 1 / 1;
+}
+
+.memberMeta {
+  margin: 18px 0 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.memberField {
+  margin: 0 0 14px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.memberBio {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+/* Plaster-and-palm-shadow picture behind ink copy; the inset clears the leaves on the left. */
+.philosophy {
+  padding: clamp(48px, 6vw, 88px) max(var(--gutter), calc((100% - var(--content-max)) / 2));
+  padding-left: max(clamp(140px, 24vw, 360px), calc((100% - var(--content-max)) / 2));
+  color: var(--color-ink);
+}
+
+.philosophyLabel {
+  color: var(--color-ink);
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pillar {
+  padding: 8px clamp(20px, 3vw, 48px);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.pillar + .pillar {
+  border-left: 1px solid rgb(39 53 45 / 0.25);
+}
+
+.pillar p {
+  color: var(--color-muted);
+}
+
+.pillar p {
+  margin: 0;
+}
+
+.pillarTitle {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.homePhoto {
+  min-height: 420px;
+}
+
+.homeCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 80px) max(var(--gutter), calc((100% - var(--content-max)) / 2)) clamp(40px, 5vw, 80px) clamp(32px, 5vw, 72px);
+}
+
+.connect {
+  margin: 20px 0 0;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.details li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.details :global(.icon) {
+  flex: none;
+  margin-top: 2px;
+  color: var(--color-muted);
+}
+
+@media (max-width: 1023px) {
+  .founder {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    padding-right: var(--gutter);
+  }
+
+  .founderSide {
+    grid-column: 1 / -1;
+    min-height: 0;
+    aspect-ratio: 16 / 7;
+  }
+
+  .members {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .founder {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: var(--gutter);
+  }
+
+  .portrait {
+    max-width: 360px;
+  }
+
+  .members {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The leaves reach under the copy on phones; a light wash keeps it readable. */
+  .philosophy {
+    padding-left: var(--gutter);
+  }
+
+  .philosophy::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgb(251 249 244 / 0.6);
+  }
+
+  .pillars {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .pillar {
+    padding-inline: 0;
+  }
+
+  .pillar + .pillar {
+    padding-top: 24px;
+    border-top: 1px solid rgb(39 53 45 / 0.2);
+    border-left: 0;
+  }
+
+  .home {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .homePhoto {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .homeCopy {
+    padding: 40px var(--gutter);
+  }
+}

@@ -1,0 +1,250 @@
+/* A spacious editorial opening followed by one uninterrupted landscape. */
+.section {
+  padding-block: var(--section-gap);
+  background: var(--color-background);
+}
+
+.introduction {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  align-items: end;
+  gap: var(--editorial-gap);
+  margin-bottom: var(--space-48);
+}
+
+.heading {
+  min-width: 0;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+}
+
+.eyebrow::before {
+  content: "";
+  flex: 0 0 var(--space-40);
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.title {
+  font-size: clamp(38px, 4.4vw, 64px);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+}
+
+.titleLine {
+  display: block;
+}
+
+.titleLine:last-child {
+  margin-top: var(--space-4);
+  font-size: 1.4em;
+  font-style: italic;
+  line-height: 1.12;
+  color: var(--color-bronze);
+}
+
+.reflection {
+  padding: var(--space-8) 0 var(--space-8) var(--space-32);
+  border-left: 1px solid var(--color-border);
+}
+
+.body {
+  max-width: 36ch;
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+
+.line {
+  display: block;
+}
+
+.line:first-child {
+  margin-bottom: var(--space-16);
+}
+
+.line:nth-child(2) {
+  margin-bottom: var(--space-8);
+  font-family: var(--font-display);
+  font-size: 1.4em;
+  color: var(--color-ink);
+}
+
+/* The original photograph, now given the width of the content column. */
+.media {
+  position: relative;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 2.8 / 1;
+  min-height: 320px;
+  overflow: hidden;
+  background: var(--color-forest);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+/* Local contrast for the existing media label; leave the sky and landscape clear. */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(180deg, transparent, rgb(20 30 24 / 0.72));
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  z-index: 1;
+  right: var(--space-32);
+  bottom: var(--space-32);
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  color: var(--color-canvas);
+}
+
+.playButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.85);
+  border-radius: 50%;
+  background: rgb(20 30 24 / 0.35);
+  cursor: pointer;
+  transition: background var(--duration-micro) ease-out, border-color var(--duration-micro) ease-out;
+}
+
+.playButton:hover {
+  background: var(--color-forest);
+  border-color: var(--color-gold);
+}
+
+.playButton:focus-visible {
+  outline-color: var(--color-canvas);
+}
+
+.playButton::before {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-left: 9px solid var(--color-canvas);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.captionText {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.closing {
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  max-width: 60%;
+  padding: var(--space-24) var(--space-40) var(--space-4) 1px;
+  background: var(--color-background);
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.4vw, 36px);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+.closing::before {
+  content: "";
+  flex: 0 0 var(--space-40);
+  height: 1px;
+  background: var(--color-gold);
+}
+
+@media (max-width: 1023px) {
+  .introduction {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: var(--space-32);
+  }
+
+  .reflection {
+    padding-left: var(--space-24);
+  }
+
+  .frame {
+    aspect-ratio: 2 / 1;
+    min-height: 0;
+  }
+
+  .closing {
+    position: static;
+    max-width: none;
+    padding: var(--space-24) 0 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .introduction {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-32);
+    margin-bottom: var(--space-32);
+  }
+
+  .title {
+    font-size: clamp(34px, 6.8vw, 48px);
+  }
+
+  .eyebrow {
+    margin-bottom: var(--space-24);
+    font-size: 11px;
+  }
+
+  .reflection {
+    padding-block: 0;
+  }
+
+  .frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .caption {
+    right: var(--space-16);
+    bottom: var(--space-16);
+    gap: var(--space-12);
+  }
+
+  .playButton {
+    width: 48px;
+    height: 48px;
+  }
+
+  .closing {
+    gap: var(--space-16);
+    font-size: clamp(23px, 5vw, 28px);
+  }
+
+  .closing::before {
+    flex-basis: var(--space-24);
+  }
+}

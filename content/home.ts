@@ -4,14 +4,117 @@ import type { IconName } from "@/components/ui/Icon";
 // business claims: no founder story, venue, capacity, response time or outcome is asserted.
 
 export const hero = {
-  titleLines: ["A quieter moment.", "A deeper connection."],
-  /** Second sentence of the approved hero intro, set as the italic line. */
-  subtitle: "Thoughtful experiences, shared at an unhurried pace.",
-  /** First sentence of the intro, condensed into the small meta line. No venue or dates are asserted. */
-  meta: ["By invitation", "Yoga / Meditation / Sound / Connection"],
+  titleLines: ["Three days.", "One pause"],
+  /** Italic line under the headline. */
+  subtitle: "A private gathering for conscious living.",
+  /** Small meta line: location and month, supplied by the owner. */
+  meta: ["Goa - Feb 2027"],
+  /** Bottom-right control that opens the short film; the film never plays on its own. */
+  film: { open: "Play film", close: "Close film", label: "NOURA film" },
   primary: "Request an invitation",
   /** Secondary action beside the invitation CTA; links to the experience index. */
   secondary: "Explore the experience",
+};
+
+/**
+ * 01a — Story (`#story`), straight after the arrival: a short provocation beside a picture.
+ * Copy follows the 2026-10-03 reference. The picture is an existing illustrative still, not
+ * NOURA's premises; swap it (and add a film behind "Our story") once approved media exists.
+ */
+export const story = {
+  eyebrow: "Why we created this",
+  titleLines: ["When did you last", "do nothing?"],
+  lines: [
+    "Not escape. Not switch off. Not take a holiday.",
+    "But truly pause.",
+    "Step away from the noise.",
+    "Listen. Breathe. Feel.",
+    "And remember what matters.",
+  ],
+  closing: "Perhaps it is time.",
+  caption: "Our story",
+  image: { src: "/media/story-landscape.png", width: 1443, height: 1090 },
+  imageAlt: "Misty mountain landscape at dusk",
+};
+
+/**
+ * 01a2 — Founder note (`#founder`), after the story: picture left, text right. Placeholder
+ * copy from the 2026-10-03 reference: the name stays "Founder" and the picture is an existing
+ * illustrative still until the client supplies a real name, portrait and approved wording
+ * (docs/client-inputs.md item 5). Never stand in a generated person for the founder.
+ */
+export const founderNote = {
+  eyebrow: "Why we created this",
+  paragraphs: [
+    ["We live in a world that rewards speed.", "More meetings. More decisions. More screens. More expectations."],
+    ["And somewhere between everything we need to do and everyone we need to be, we often forget to simply be."],
+    ["This experience began with a question:"],
+  ],
+  question: "What happens when extraordinary people are given permission to pause?",
+  closing: "This is our invitation to pause.",
+  signature: "— Founder",
+  image: { src: "/media/experiences/seated-outdoors-4k.webp", width: 3840, height: 2560 },
+  imageAlt: "Person seated outdoors in natural light",
+};
+
+/**
+ * 01a3 — Three stages (`#stages`), fourth on the page: Reset, Reconnect, Reimagine as three
+ * cards. Copy follows the 2026-10-03 reference and is proposed wording, not approved claims.
+ * Images are illustrative stills; an entry set to null shows a grey block instead.
+ */
+export const stages = {
+  heading: "Reset. Reconnect. Reimagine.",
+  items: [
+    {
+      id: "reset",
+      title: "Reset",
+      lead: ["Step away from the noise."],
+      themes: "Movement. Breath. Sleep. Stillness.",
+      image: { src: "/media/story-moments/sunset-ridge.webp", width: 1536, height: 1024 } as MediaImage | null,
+    },
+    {
+      id: "reconnect",
+      title: "Reconnect",
+      lead: ["Come back to yourself \u2014", "and meet others more deeply."],
+      themes: "Conversation. Nature. Food. Music.",
+      image: { src: "/media/story-moments/woodland-gathering.webp", width: 1536, height: 1024 } as MediaImage | null,
+    },
+    {
+      id: "reimagine",
+      title: "Reimagine",
+      lead: ["Return with a clearer sense", "of what comes next."],
+      themes: "Purpose. Energy. Relationships. Possibility.",
+      image: { src: "/media/story-moments/mountain-valley.webp", width: 1536, height: 1024 } as MediaImage | null,
+    },
+  ],
+};
+
+/**
+ * 02b — The place (`#place`), after the experience cards: a short text block beside a mosaic of
+ * four destination pictures. Copy and place names follow the 2026-10-03 reference and are
+ * placeholders: the docs assert no venue, and the text says the destination is revealed to
+ * invited guests, so confirm with the client before any real place is named publicly. Every
+ * `image` is null, so a grey block shows until approved, rights-cleared files exist.
+ */
+export const place = {
+  heading: "The place matters.",
+  lead: ["Because the environment", "changes the way we feel."],
+  lines: [
+    "A place where mornings begin slowly.",
+    "Where nature is never far away.",
+    "Where the air feels different.",
+    "Where dinner can move outdoors.",
+    "Where a conversation can continue long after sunset.",
+  ],
+  note: ["The destination will be revealed", "to invited guests."],
+  cta: "Explore Destinations",
+  ctaHref: "#enquire",
+  tiles: [
+    { id: "goa", label: "Goa, India", image: { src: "/media/destinations/goa.webp", width: 1254, height: 1254 } as MediaImage | null },
+    { id: "bali", label: "Bali, Indonesia", image: { src: "/media/destinations/bali.webp", width: 1024, height: 1536 } as MediaImage | null },
+    { id: "coorg", label: "Coorg, India", image: { src: "/media/destinations/coorg.webp", width: 1774, height: 887 } as MediaImage | null },
+    { id: "udaipur", label: "Udaipur, India", image: { src: "/media/destinations/udaipur.webp", width: 1672, height: 941 } as MediaImage | null },
+  ],
 };
 
 /** 01b — Overview strip under the arrival: the four experiences at a glance. */
@@ -24,27 +127,36 @@ export const ways = {
 };
 
 /**
- * 02 — Image tiles under the overview strip. Set `image` once the file exists in
- * public/media/experiences/; until then each tile shows a neutral grey placeholder.
+ * 02 — Experience cards under the story chapters (`#experiences`). Copy follows the
+ * 2026-10-03 reference and is proposed wording, not approved claims. Every `image` is null, so
+ * a grey block shows until approved files exist in public/media/experiences/. `href` is
+ * optional: a card without one is plain text rather than a link to nowhere.
  */
 export interface ExperienceTile {
   id: string;
   title: string;
   lines: [string] | [string, string];
-  href: string;
+  href?: string;
   image: { src: string; width: number; height: number } | null;
 }
 
 export const experienceTiles: ExperienceTile[] = [
-  { id: "movement", title: "Movement", lines: ["Yoga. Mobility.", "Slow, mindful flow."], href: "#yoga", image: { src: "/media/experiences/movement.jpg", width: 1600, height: 2000 } },
-  { id: "breath", title: "Breath", lines: ["Gentle breathing.", "A slower rhythm."], href: "#breath", image: { src: "/media/experiences/breath.jpg", width: 1600, height: 2000 } },
-  { id: "meditation", title: "Meditation", lines: ["Silence. Reflection.", "Room to settle."], href: "#meditation", image: { src: "/media/experiences/meditation.jpg", width: 1600, height: 2000 } },
-  { id: "sound", title: "Sound", lines: ["Music. Resonance.", "Room for silence."], href: "#sound", image: { src: "/media/experiences/sound.jpg", width: 1600, height: 2000 } },
-  { id: "setting", title: "Setting", lines: ["Light. Texture.", "Quiet."], href: "#setting", image: { src: "/media/experiences/setting.jpg", width: 1600, height: 2000 } },
-  { id: "conversations", title: "Conversations", lines: ["A smaller circle.", "Unhurried talk."], href: "#connection", image: { src: "/media/experiences/conversations.jpg", width: 1600, height: 2000 } },
+  { id: "movement", title: "Movement", lines: ["Move with intention.", "Feel alive."], image: { src: "/media/seven-panel-scenes/01-coastal-yoga.webp", width: 1086, height: 1448 } },
+  { id: "meditation", title: "Meditation & Breathwork", lines: ["Calm your mind.", "Open your breath."], image: { src: "/media/seven-panel-scenes/02-meditation-bowl.webp", width: 1086, height: 1448 } },
+  { id: "music", title: "Music", lines: ["Surrender to", "the sound within."], image: { src: "/media/seven-panel-scenes/03-handpan-sunset.webp", width: 1086, height: 1448 } },
+  { id: "nutrition", title: "Nutrition", lines: ["Nourish your body.", "Fuel your journey."], image: { src: "/media/seven-panel-scenes/04-coastal-salad.webp", width: 1086, height: 1448 } },
+  { id: "stays", title: "Luxury Stays", lines: ["Extraordinary places.", "Deeper rest."], image: { src: "/media/seven-panel-scenes/05-pool-terrace.webp", width: 1086, height: 1448 } },
+  { id: "longevity", title: "Longevity & Conversations", lines: ["Live well. Share deeper."], image: { src: "/media/seven-panel-scenes/06-coastal-conversation.webp", width: 1086, height: 1448 } },
+  { id: "destinations", title: "Destinations", lines: ["New places.", "Deeper perspectives."], image: { src: "/media/seven-panel-scenes/07-cliffside-retreat.webp", width: 1086, height: 1448 } },
 ];
 
-export const experienceTilesCopy = { heading: "The experiences", cta: "Discover" };
+/** Visible heading over the cards and the single action under them (2026-10-03 reference). */
+export const experienceTilesCopy = {
+  heading: "Experiences that stay with you",
+  cta: "View the full experience",
+  /** The overview strip that follows: the four experiences at a glance. */
+  ctaHref: "#place",
+};
 
 export interface MediaImage {
   src: string;
@@ -79,8 +191,8 @@ export interface ApprovedGuideProfile {
   portrait: MediaImage & { alt: string };
   /** Include only the practices this person actually offers. */
   practices?: readonly string[];
-  /** Optional; limit links to sections present in the current landing page. */
-  link?: { label: string; href: "#experiences" | "#private-session" | "#invitation" };
+  /** Optional; link to the experience section or the invitation request page. */
+  link?: { label: string; href: "#experiences" | "/invitation" };
 }
 
 export const guide = {
@@ -131,6 +243,156 @@ export const experts = {
     { id: "expert-2", name: "Sample Guide Two", role: "Meditation guide", bio: SAMPLE_EXPERT_BIO, portrait: samplePortrait(5, "center 10%") },
     { id: "expert-3", name: "Sample Guide Three", role: "Sound practitioner", bio: SAMPLE_EXPERT_BIO, portrait: samplePortrait(4, "center 25%") },
   ] as readonly ExpertProfile[],
+};
+
+/**
+ * 02c — The practitioners (`#experts`), straight after the place section: five portrait
+ * disclosures, each opening its image and biography below the row. Everything here is SAMPLE
+ * text from the 2026-10-03 reference: invented names, histories and credentials. The page
+ * says so under the cards, and docs/content.md forbids publishing unconfirmed practitioner
+ * claims, so replace each entry with client-approved facts (or set `profiles` to [] to hide
+ * the section) before launch. Current portraits are illustrative placeholders; replace them
+ * with approved portraits with publication rights before launch.
+ */
+export interface Practitioner {
+  id: string;
+  area: string;
+  name: string;
+  role: string;
+  bio: string;
+  leads: string;
+  image: MediaImage | null;
+}
+
+export const practitioners = {
+  eyebrow: "The practitioners",
+  title: "Guides who live what they teach.",
+  leadsLabel: "Leads",
+  disclaimer: "Sample profiles: placeholder portraits and bios, to be replaced with our practitioners.",
+  profiles: [
+    {
+      id: "ishaan-rao",
+      area: "Body",
+      name: "Ishaan Rao",
+      role: "Yoga & Kriya Master",
+      bio: "Fourteen years in the Himalayan kriya lineage. Ishaan teaches the body to move like breath: slow, precise, alive. Thousands of practitioners, from founders to athletes, have rediscovered their strength under his guidance.",
+      leads: "Sunrise Kriya & Breathwork",
+      image: { src: "/media/portrait-series/01-sunset.png", width: 1122, height: 1402 },
+    },
+    {
+      id: "meera-kulkarni",
+      area: "Mind",
+      name: "Meera Kulkarni",
+      role: "Meditation & Stillness Guide",
+      bio: "A former neuroscientist who traded the lab for silence. After a decade of retreats from Ladakh to Kyoto, Meera guides sessions that people describe as the quietest they have felt in years.",
+      leads: "Silent Dawn Meditation",
+      image: { src: "/media/portrait-series/02-moon.png", width: 1122, height: 1402 },
+    },
+    {
+      id: "rohan-nair",
+      area: "Science",
+      name: "Dr. Rohan Nair",
+      role: "Longevity Physician",
+      bio: "A preventive-medicine physician who turns frontier research into rituals you can actually keep: sleep, glucose, cold and heat. He designs every biohacking and nutrition protocol at the gathering.",
+      leads: "The Longevity Lab & Chef\u2019s Table",
+      image: { src: "/media/portrait-series/03-dna.png", width: 1122, height: 1402 },
+    },
+    {
+      id: "anaya-desai",
+      area: "Soul",
+      name: "Anaya Desai",
+      role: "Vocalist & Sound Artist",
+      bio: "Trained in Hindustani classical voice, Anaya performs at dusk with handpan and tanpura. Her live sound journeys are remembered for one thing: a room of strangers breathing as one.",
+      leads: "Sunset Sound Journey",
+      image: { src: "/media/portrait-series/04-music.png", width: 1122, height: 1402 },
+    },
+    {
+      id: "kabir-sethi",
+      area: "Conversation",
+      name: "Kabir Sethi",
+      role: "Dialogue Facilitator",
+      bio: "A storyteller and former broadcaster who hosts fireside salons where strangers become confidants. His questions are the kind you are still thinking about a year later.",
+      leads: "Fireside Salons",
+      image: { src: "/media/portrait-series/05-elder.png", width: 1122, height: 1402 },
+    },
+  ] as readonly Practitioner[],
+};
+
+/**
+ * 02c+ — Begin your experience (`#begin`), straight after the practitioners: a picture on the
+ * left (grey when `image` is null) and an enquiry card on the right, after the 2026-10-03
+ * reference. The picture is a generated illustrative still (an empty coastal veranda with an
+ * open journal), not NOURA's premises. `position` keeps the journal in frame on narrow crops.
+ * Interest options are the client's list. No backend is connected, so the form only validates
+ * and shows the preview notice; nothing is sent or stored.
+ */
+export const beginExperience = {
+  title: "Begin Your Experience",
+  image: {
+    src: "/media/experiences/begin-experience.webp",
+    width: 1120,
+    height: 1504,
+    position: "center 80%",
+  } as (MediaImage & { position?: string }) | null,
+  fields: {
+    fullName: { label: "Full name", placeholder: "Priya Sharma" },
+    phone: { label: "Phone", placeholder: "+91 98765 43210" },
+    email: { label: "Email address", placeholder: "priya@example.com" },
+    organization: { label: "Organization", optional: "(optional)", placeholder: "Acme Solutions India" },
+    message: { label: "Message", placeholder: "Tell us a little about what you\u2019re looking for\u2026" },
+  },
+  interestsLabel: "I\u2019m interested in",
+  interests: [
+    "Holistic wellbeing",
+    "Biohacking",
+    "Sound & Meditation",
+    "Learning from experts",
+    "All the above",
+    "Other",
+  ],
+  submit: "Let\u2019s begin your journey",
+};
+
+/**
+ * Closing banner, the last section before the footer: a wide picture (grey until an image is
+ * supplied) with the closing line and the invitation action on the right, after the 2026-10-03
+ * reference. The reference's own dates and cities are not used: the place and month follow the
+ * hero ("Goa - Feb 2027"), so confirm them before launch.
+ */
+export const closingBanner = {
+  title: "Perhaps it is time to pause.",
+  meta: ["Goa - Feb 2027", "By invitation"],
+  cta: "Request an invitation",
+  ctaHref: "/invitation",
+  image: { src: "/media/beach-sunset-gathering.png", width: 2243, height: 701 } as MediaImage | null,
+};
+
+/**
+ * 02e — Enquire (`#enquire`), after the practitioners: a short enquiry form on the left and contact
+ * details on the right, after the "MVP - Enquire - page 10" reference (2026-10-03). The
+ * contact details, location and response time were supplied with that reference; confirm
+ * them with the client before launch (docs/client-inputs.md item 17, docs/content.md). The
+ * form is a preview until the backend slice connects it: nothing is sent.
+ */
+export const enquire = {
+  formTitle: "Tell us what you want to know.",
+  fields: {
+    fullName: { label: "Full name", placeholder: "Your name" },
+    message: { label: "Message", placeholder: "What would you like to know?" },
+    email: { label: "Email", placeholder: "you@example.com" },
+    phone: { label: "Phone", placeholder: "Optional" },
+  },
+  submit: "Send enquiry",
+  eyebrow: "Get in touch",
+  titleLines: ["Tell us what you\u2019re", "looking for."],
+  intro:
+    "Whether you\u2019re drawn to 1:1 coaching, a retreat, or bringing this work to your team \u2014 start by saying hello. Every journey begins with one honest conversation.",
+  details: [
+    { id: "email", icon: "mail", label: "Email", value: "care@healwithshashank.com", href: "mailto:care@healwithshashank.com" },
+    { id: "phone", icon: "phone", label: "Phone / WhatsApp", value: "+91 91096 94003", href: "tel:+919109694003" },
+    { id: "based", icon: "map-pin", label: "Based in", value: "Pune, India \u00b7 Working Globally" },
+    { id: "response", icon: "clock", label: "Response time", value: "Within 24 hours" },
+  ] satisfies { id: string; icon: IconName; label: string; value: string; href?: string }[],
 };
 
 /** Programme options shared by both request forms (docs/requirements.md → session_type). */

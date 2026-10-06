@@ -1,0 +1,316 @@
+/*
+ * Full-bleed split (2026-10-03 reference): the picture runs from the left edge of the screen to
+ * the middle, and a white enquiry card sits on ivory, its right edge on the content line. Inside:
+ * tracked capital labels over underlined fields, interest pills, a boxed message and a forest
+ * submit bar. Below 1024px the picture runs edge to edge above the form.
+ */
+.section {
+  display: grid;
+  grid-template-columns: var(--split-columns);
+  background: var(--color-background);
+}
+
+.media {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  /* Placeholder grey, shown until an image is set in content/home.ts. */
+  background: #bdb9b0;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.side {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  padding: var(--section-gap) 0 var(--section-gap) clamp(32px, 5vw, 96px);
+}
+
+.card {
+  width: 100%;
+  padding: clamp(32px, 3.6vw, 56px);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: var(--color-canvas);
+  box-shadow: 0 24px 60px rgb(39 53 45 / 0.08);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 32px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  transition: color var(--duration-micro) ease-out;
+}
+
+.field:focus-within .label {
+  color: var(--color-bronze);
+}
+
+.optional {
+  color: #8a918a;
+}
+
+.control {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+  transition: border-color var(--duration-micro) ease-out;
+}
+
+.control::placeholder {
+  color: #8f958f;
+  opacity: 1;
+}
+
+.control:hover {
+  border-bottom-color: var(--color-input-border);
+}
+
+.control:focus {
+  border-bottom-color: var(--color-bronze);
+  outline: none;
+  box-shadow: 0 1px 0 0 var(--color-bronze);
+}
+
+/* No outline box on fields: the bronze underline (or border) above is the focus cue. */
+.control:focus-visible {
+  outline: none;
+}
+
+.textarea {
+  min-height: 120px;
+  margin-top: 6px;
+  padding: 14px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.textarea:hover {
+  border-color: var(--color-input-border);
+}
+
+.textarea:focus {
+  border-color: var(--color-bronze);
+  box-shadow: 0 0 0 1px var(--color-bronze);
+}
+
+/* ---------- interest pills ---------- */
+
+.interests {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.interests legend {
+  padding: 0;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.3;
+  cursor: pointer;
+  transition:
+    background var(--duration-micro) ease-out,
+    border-color var(--duration-micro) ease-out,
+    color var(--duration-micro) ease-out;
+}
+
+/* The real checkbox stays in the pill, invisible but focusable and clickable. */
+.pillInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pill:hover {
+  border-color: var(--color-input-border);
+  color: var(--color-ink);
+}
+
+.pill:has(.pillInput:checked) {
+  border-color: var(--color-forest);
+  background: var(--color-forest);
+  color: #fff;
+}
+
+.pill:has(.pillInput:focus-visible) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* ---------- submit ---------- */
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 60px;
+  margin-top: 8px;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--color-forest);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--duration-micro) ease-out;
+}
+
+.submit:hover {
+  background: var(--color-ink);
+}
+
+.submit :global(.icon) {
+  transition: transform var(--duration-micro) ease-out;
+}
+
+.submit:hover :global(.icon) {
+  transform: translateX(3px);
+}
+
+.submit:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* ---------- tablets and phones ---------- */
+
+@media (max-width: 1023px) {
+  .section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .media {
+    grid-column: 1;
+    grid-row: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .side {
+    grid-column: 1;
+    grid-row: auto;
+    justify-content: center;
+    padding: clamp(48px, 8vw, 72px) var(--gutter) var(--section-gap);
+  }
+
+  .card {
+    max-width: 680px;
+  }
+}
+
+/* Phones: the form sits straight on the page instead of in a floating card. */
+@media (max-width: 599px) {
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .side {
+    padding-top: 40px;
+  }
+
+  .card {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form {
+    gap: 24px;
+  }
+
+  .pills {
+    gap: 10px;
+  }
+
+  .pill {
+    padding-inline: 18px;
+  }
+
+  .textarea {
+    background: var(--color-canvas);
+  }
+}

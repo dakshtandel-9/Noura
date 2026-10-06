@@ -1,18 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { media, menu, nav } from "@/content/site";
+import { headerCta, media, menu, nav } from "@/content/site";
 import styles from "./SiteHeader.module.css";
 
 /**
- * Transparent over the hero; frosted warm ivory once the page moves or the menu is open.
+ * The one header for every page. On the home page it is transparent over the hero and turns
+ * frosted warm ivory once the page moves or the menu is open; `solid` keeps it ivory from the
+ * start, for pages whose top is too light for white text (/about, /FAQ, /invitation).
  * Inline links show from 1200px. Below that, the menu button opens the full-story menu
- * (every section anchor plus the invitation CTA); on wide screens it is hidden.
+ * (every section link plus the invitation CTA); on wide screens it is hidden.
  */
-export function SiteHeader() {
+export function SiteHeader({ solid: alwaysSolid = false }: { solid?: boolean } = {}) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -50,7 +53,7 @@ export function SiteHeader() {
   }, [open]);
 
   const close = () => setOpen(false);
-  const solid = scrolled || open;
+  const solid = alwaysSolid || scrolled || open;
 
   return (
     <header
@@ -58,7 +61,7 @@ export function SiteHeader() {
       className={`${styles.header} ${solid ? styles.solid : styles.overlay}`}
       id="header"
     >
-      <a href="#arrive" className={styles.brand} aria-label="NOURA home" onClick={close}>
+      <Link href="/#arrive" className={styles.brand} aria-label="NOURA home" onClick={close}>
         <Image
           className={styles.wordmark}
           data-brand-mark=""
@@ -69,24 +72,19 @@ export function SiteHeader() {
           priority
           sizes="176px"
         />
-      </a>
+      </Link>
 
       <div className={styles.bar}>
         <nav className={styles.nav} aria-label="Main navigation">
           {nav.map((item) => (
-            <a key={item.href} href={item.href} className={styles.navLink}>
+            <Link key={item.href} href={item.href} className={styles.navLink}>
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <ButtonLink
-          href="#invitation"
-          variant={solid ? "primary" : "light"}
-          icon={null}
-          className={styles.cta}
-        >
-          Request an invitation
+        <ButtonLink href={headerCta.href} variant="secondary" icon={null} className={styles.cta}>
+          {headerCta.label}
         </ButtonLink>
 
         <button
@@ -106,14 +104,20 @@ export function SiteHeader() {
         <ul className={styles.menuList}>
           {menu.map((item) => (
             <li key={item.href}>
-              <a href={item.href} className={styles.menuLink} onClick={close}>
+              <Link href={item.href} className={styles.menuLink} onClick={close}>
                 {item.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
-        <ButtonLink href="#invitation" icon={null} className={styles.menuCta} onClick={close}>
-          Request an invitation
+        <ButtonLink
+          href={headerCta.href}
+          variant="secondary"
+          icon={null}
+          className={styles.menuCta}
+          onClick={close}
+        >
+          {headerCta.label}
         </ButtonLink>
       </nav>
     </header>

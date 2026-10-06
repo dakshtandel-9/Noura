@@ -1,0 +1,6 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    { "collectionGroup": "rate_limits", "fieldPath": "expires_at", "ttl": true, "indexes": [] }
+  ]
+}

@@ -2,7 +2,7 @@
   "name": "noura-website",
   "version": "0.1.0",
   "private": true,
-  "description": "NOURA / The Quiet Invitation \u2014 long-form landing page (public slice).",
+  "description": "NOURA / The Quiet Invitation — long-form landing page (public slice).",
   "engines": {
     "node": ">=20.9.0"
   },
@@ -12,13 +12,15 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --no-warnings=ExperimentalWarning --test \"tests/unit/**/*.test.ts\"",
+    "test": "node --conditions=react-server --experimental-strip-types --no-warnings=ExperimentalWarning --test \"tests/unit/**/*.test.ts\"",
     "check": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
+    "firebase-admin": "^14.5.0",
     "next": "16.3.6",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "22.20.4",

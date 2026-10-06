@@ -1,0 +1,141 @@
+/* An inset portrait and a personal letter break the opening's full-bleed rhythm. */
+.section {
+  display: grid;
+  grid-template-columns: var(--split-columns);
+  padding-block: var(--section-gap);
+  background: var(--color-canvas);
+}
+
+.panel {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  padding: var(--space-32) 0 var(--space-32) var(--editorial-gap);
+}
+
+.inner {
+  max-width: 520px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+  font-family: var(--font-body);
+}
+
+.eyebrow::before {
+  content: "";
+  flex: 0 0 var(--space-32);
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.text {
+  margin-top: var(--space-24);
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+
+.eyebrow + .text {
+  margin-top: 0;
+}
+
+.line {
+  display: block;
+}
+
+.question {
+  margin-block: var(--space-32);
+  padding-left: var(--space-24);
+  border-left: 1px solid var(--color-gold);
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.3vw, 36px);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--color-ink);
+  text-wrap: pretty;
+}
+
+.signature {
+  margin-top: var(--space-32);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--color-bronze);
+}
+
+.media {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  align-self: stretch;
+  min-height: 560px;
+  margin-right: var(--space-24);
+  background: var(--color-sand);
+}
+
+/* A small offset backplate adds depth without covering or filtering the photograph. */
+.media::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-24) calc(-1 * var(--space-24)) calc(-1 * var(--space-24)) var(--space-24);
+  border: 1px solid var(--color-border);
+  pointer-events: none;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+@media (max-width: 1023px) {
+  .section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-48);
+    padding-inline: var(--gutter);
+  }
+
+  .panel {
+    grid-column: 1;
+    grid-row: auto;
+    padding: 0;
+  }
+
+  .inner {
+    width: 100%;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  .media {
+    grid-column: 1;
+    grid-row: auto;
+    width: min(calc(100% - var(--space-16)), 640px);
+    min-height: 0;
+    margin: 0 auto var(--space-16);
+    aspect-ratio: 16 / 9;
+  }
+
+  .media::before {
+    inset: var(--space-16) calc(-1 * var(--space-16)) calc(-1 * var(--space-16)) var(--space-16);
+  }
+}
+
+@media (max-width: 599px) {
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .question {
+    padding-left: var(--space-16);
+  }
+}

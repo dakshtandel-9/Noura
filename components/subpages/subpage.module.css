@@ -1,0 +1,223 @@
+/*
+ * Shared pieces of the FAQ and invitation pages. A picture is a flat grey block (.photo)
+ * until an image is supplied; then a decorative <Image className={fill}> sits inside it.
+ */
+.page {
+  background: var(--color-background);
+}
+
+.photo {
+  position: relative;
+  overflow: hidden;
+  background: #8d8880;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo {
+  isolation: isolate;
+}
+
+/* Forest button with square corners for the light, photographic sections (reference). */
+.darkButton:global(.btn) {
+  border-color: var(--color-forest);
+  border-radius: 2px;
+  background: var(--color-forest);
+  color: #fff;
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.darkButton:global(.btn):hover {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+}
+
+
+/* Hero: full-bleed grey with a left-weighted scrim so white copy holds contrast. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: clamp(460px, 42vw, 640px);
+  padding: 140px max(var(--gutter), calc((100% - var(--content-max)) / 2)) 80px;
+  color: #fff;
+  background: #6b665e;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgb(20 24 22 / 0.5), rgb(20 24 22 / 0.1));
+}
+
+/* Light photograph behind the hero: ink copy over a soft ivory wash on the left. */
+.heroLight {
+  color: var(--color-ink);
+}
+
+.heroLight::before {
+  background: linear-gradient(90deg, rgb(251 249 244 / 0.62), rgb(251 249 244 / 0.25) 45%, rgb(251 249 244 / 0) 70%);
+}
+
+.heroLight :global(.btn--secondary) {
+  border-radius: 2px;
+  border-color: var(--color-ink);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heroCopy {
+  max-width: 620px;
+}
+
+.eyebrow {
+  margin: 0 0 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4.4vw, 62px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+/* Supporting description: smaller and softer than the headline, as in the references. */
+.heroLead {
+  max-width: 440px;
+  margin: 20px 0 0;
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.86;
+}
+
+/* A first line set in the display serif (FAQ reference), before the smaller description. */
+.heroLeadSerif {
+  max-width: 460px;
+  margin: 22px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(19px, 1.6vw, 22px);
+  line-height: 1.4;
+}
+
+.heroLeadSerif + .heroLead {
+  margin-top: 12px;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.6vw, 38px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 28px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.label::after {
+  content: "";
+  flex: 0 1 140px;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* Closing banner: grey picture block, centred copy and one action. */
+.closing {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(280px, 26vw, 400px);
+  padding: 64px var(--gutter);
+  text-align: center;
+  color: #fff;
+  background: #8d8880;
+}
+
+.closing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(20 24 22 / 0.35);
+}
+
+.closingLight {
+  color: var(--color-ink);
+}
+
+.closingLight::before {
+  background: radial-gradient(ellipse at center, rgb(251 249 244 / 0.55), rgb(251 249 244 / 0) 70%);
+}
+
+.closingTitle {
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.6vw, 36px);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.closingText {
+  max-width: 520px;
+  margin: 0 auto 28px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Narrow screens: copy covers more of the picture, so the light washes get stronger. */
+@media (max-width: 640px) {
+  .heroLight::before {
+    background: linear-gradient(180deg, rgb(251 249 244 / 0.7), rgb(251 249 244 / 0.45));
+  }
+
+  .closingLight::before {
+    background: rgb(251 249 244 / 0.6);
+  }
+}

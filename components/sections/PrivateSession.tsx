@@ -64,7 +64,16 @@ export function PrivateSession() {
             <h3 id="session-form-title">Tell us a little about your visit.</h3>
             <p>A preferred date or time helps us follow up. It does not reserve an appointment.</p>
           </div>
-          <PreviewForm className={styles.form} aria-labelledby="session-form-title">
+          <PreviewForm
+            kind="session"
+            className={styles.form}
+            aria-labelledby="session-form-title"
+            submit={
+              <div className={styles.actions}>
+                <SubmitButton>{copy.submit}</SubmitButton>
+              </div>
+            }
+          >
             <TextField
               id="session-name"
               name="full_name"
@@ -128,9 +137,6 @@ export function PrivateSession() {
                 />
               </div>
             </details>
-            <div className={styles.actions}>
-              <SubmitButton>{copy.submit}</SubmitButton>
-            </div>
           </PreviewForm>
         </div>
       </details>

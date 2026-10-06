@@ -5,12 +5,18 @@
   --font-display: var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-body: var(--font-inter), "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --header-height: 96px;
-}
-
-@media (max-width: 767px) {
-  :root {
-    --header-height: 64px;
-  }
+  /*
+   * Full-bleed split: two outer tracks (at least a gutter wide) around the content column cut in
+   * half. A picture spans from a half to the screen edge while its text keeps the content line.
+   */
+  --split-columns: minmax(var(--gutter), 1fr) minmax(0, calc(var(--content-max) / 2))
+    minmax(0, calc(var(--content-max) / 2)) minmax(var(--gutter), 1fr);
+  /* Wider column for the rows of small picture cards. */
+  --content-wide: 1440px;
+  /* Space between a section heading and what follows it. */
+  --heading-gap: clamp(32px, 4vw, 64px);
+  --section-heading-size: clamp(34px, 3.6vw, 52px);
+  --editorial-gap: clamp(32px, 5vw, 80px);
 }
 
 /* ---------- base ---------- */
@@ -94,7 +100,8 @@ h2,
 h3 {
   font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: -0.03em;
+  /* Playfair reads heavy and cramped when tracked tight; keep headings near neutral. */
+  letter-spacing: -0.005em;
   overflow-wrap: break-word;
 }
 
@@ -125,11 +132,15 @@ p {
   padding-block: var(--section-gap);
 }
 
+.wrap--wide {
+  max-width: calc(var(--content-wide) + 2 * var(--gutter));
+}
+
 /* ---------- type utilities ---------- */
 
 .eyebrow {
   display: block;
-  margin-bottom: 22px;
+  margin-bottom: var(--space-24);
   font-size: 12px;
   font-weight: 500;
   line-height: 1.4;
@@ -156,6 +167,13 @@ p {
   background: var(--color-canvas);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-field);
+}
+
+/* Text fields never get the outline box; each form styles its own underline or border focus. */
+input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
 }
 
 .skip-link:focus {
@@ -246,9 +264,10 @@ p {
 
 /* ---------- reveal (enhancement only) ---------- */
 
+/* Keep text readable before observation; motion must never gate the story. */
+
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal-ready] [data-reveal]:not([data-revealed]) {
-    opacity: 0;
     transform: translateY(12px);
   }
 

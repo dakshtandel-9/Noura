@@ -43,7 +43,17 @@ export function InvitationRequest() {
             {copy.formTitle}
           </h3>
 
-          <PreviewForm tone="dark" className={styles.form} aria-labelledby="invitation-form-title">
+          <PreviewForm
+            tone="dark"
+            className={styles.form}
+            aria-labelledby="invitation-form-title"
+            submit={
+              <div className={styles.actions}>
+                <SubmitButton>{copy.submit}</SubmitButton>
+                <FormNote>{copy.note}</FormNote>
+              </div>
+            }
+          >
             <TextField
               id="invitation-name"
               name="full_name"
@@ -75,10 +85,6 @@ export function InvitationRequest() {
               rows={2}
               required
             />
-            <div className={styles.actions}>
-              <SubmitButton>{copy.submit}</SubmitButton>
-              <FormNote>{copy.note}</FormNote>
-            </div>
           </PreviewForm>
         </div>
       </div>
