@@ -2,7 +2,7 @@
   /* Same left/right edge as the page's .wrap column, so the wordmark lines up with the hero copy. */
   --edge: max(var(--gutter), calc((100% - var(--content-max)) / 2));
 
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -42,7 +42,7 @@
   text-shadow: 0 1px 12px rgb(14 24 38 / 0.35);
 }
 
-/* Once the page moves: warm ivory, lightly frosted where the browser supports it. */
+/* Warm ivory surface for subpages and the open menu. */
 .solid {
   padding-block: 16px;
   color: var(--color-ink);

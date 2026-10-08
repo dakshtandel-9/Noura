@@ -39,7 +39,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-height) + 10px);
+  scroll-padding-top: 10px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }

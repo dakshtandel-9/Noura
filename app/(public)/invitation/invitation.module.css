@@ -3,7 +3,7 @@
  * the right with tracked capital labels over underlined fields, outlined pills and a dark olive
  * pill button. Stacks picture-first below 1024px.
  */
-/* Top padding clears the fixed site header. */
+/* Top padding clears the overlaid site header. */
 .page {
   display: grid;
   grid-template-columns: minmax(0, 43fr) minmax(0, 57fr);

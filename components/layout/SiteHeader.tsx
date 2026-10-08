@@ -9,24 +9,15 @@ import { headerCta, media, menu, nav } from "@/content/site";
 import styles from "./SiteHeader.module.css";
 
 /**
- * The one header for every page. On the home page it is transparent over the hero and turns
- * frosted warm ivory once the page moves or the menu is open; `solid` keeps it ivory from the
- * start, for pages whose top is too light for white text (/about, /FAQ, /invitation).
+ * The one header for every page. On the home page it is transparent over the hero; `solid` keeps
+ * it ivory from the start on pages whose top is too light for white text (/about, /FAQ, /invitation).
  * Inline links show from 1200px. Below that, the menu button opens the full-story menu
  * (every section link plus the invitation CTA); on wide screens it is hidden.
  */
 export function SiteHeader({ solid: alwaysSolid = false }: { solid?: boolean } = {}) {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -53,7 +44,7 @@ export function SiteHeader({ solid: alwaysSolid = false }: { solid?: boolean } =
   }, [open]);
 
   const close = () => setOpen(false);
-  const solid = alwaysSolid || scrolled || open;
+  const solid = alwaysSolid || open;
 
   return (
     <header

@@ -1,5 +1,5 @@
 /*
- * Full-bleed arrival. The header is fixed and transparent above it, so the hero fills the
+ * Full-bleed arrival. The header is overlaid and transparent above it, so the hero fills the
  * viewport. Copy aligns to the same left edge as the header wordmark (the .wrap column).
  */
 .hero {
