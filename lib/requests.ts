@@ -1,6 +1,7 @@
 export const sessionTypes = ["Yoga", "Meditation", "Music & Sound", "Private Group Sessions", "Not sure yet"] as const;
 export const interestOptions = ["Yoga Kriyas", "Meditation", "Sound Healing", "Soulful Music", "Deep Conversations", "Rediscovering Oneself", "Experiencing Luxury", "All of the above"] as const;
 export type RequestKind = "invitation" | "session";
+export type RequestView = RequestKind | "all";
 export interface RequestData {
   full_name: string;
   email: string;
@@ -22,6 +23,27 @@ export interface RequestRecord extends RequestData {
   private_note: string;
   notice_version: string;
   version: number;
+  contacted: boolean;
+  contacted_at: string | null;
+}
+
+export interface RequestPage {
+  records: RequestRecord[];
+  count: number;
+  totals: Record<RequestKind, number>;
+  contactedTotals: Record<RequestKind, number>;
+  newTotals: Record<RequestKind, number>;
+  next: string | null;
+}
+
+export function formatSubmissionTime(value: string): string {
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return "Time unavailable";
+  const formatted = new Intl.DateTimeFormat("en-IN", {
+    day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit", second: "2-digit",
+    hour12: true, timeZone: "Asia/Kolkata",
+  }).format(date);
+  return `${formatted} IST`;
 }
 
 /** Review states (docs/requirements.md → state models). */
@@ -56,13 +78,13 @@ export const needsReason = (from: RequestStatus, to: RequestStatus) => from === 
 export interface RequestUpdate {
   version: number;
   reason: string;
-  changes: Partial<Pick<RequestRecord, "status" | "private_note" | "full_name" | "email" | "phone" | "organization">>;
+  changes: Partial<Pick<RequestRecord, "status" | "private_note" | "full_name" | "email" | "phone" | "organization" | "contacted">>;
 }
 
 export function parseUpdate(kind: RequestKind, input: unknown): RequestUpdate {
   if (!input || typeof input !== "object" || Array.isArray(input)) throw new RequestError("Invalid request.");
   const raw = input as Record<string, unknown>;
-  const allowed = new Set(["version", "reason", "status", "private_note", "full_name", "email", "phone", ...(kind === "invitation" ? ["organization"] : [])]);
+  const allowed = new Set(["version", "reason", "status", "private_note", "full_name", "email", "phone", "contacted", ...(kind === "invitation" ? ["organization"] : [])]);
   if (Object.keys(raw).some((key) => !allowed.has(key))) throw new RequestError("Unexpected fields.");
   if (!Number.isInteger(raw.version) || (raw.version as number) < 1) throw new RequestError("Refresh the inbox and try again.", 409);
   const fields: Record<string, string> = {};
@@ -85,6 +107,10 @@ export function parseUpdate(kind: RequestKind, input: unknown): RequestUpdate {
   if ("status" in raw) {
     if (typeof raw.status !== "string" || !statusesFor(kind).includes(raw.status as RequestStatus)) fields.status = "Choose a listed status.";
     else changes.status = raw.status as RequestStatus;
+  }
+  if ("contacted" in raw) {
+    if (typeof raw.contacted !== "boolean") fields.contacted = "Choose whether this lead has been contacted.";
+    else changes.contacted = raw.contacted;
   }
   const reason = raw.reason ?? "";
   if (typeof reason !== "string" || reason.length > 300) fields.reason = "Please keep the reason under 300 characters.";

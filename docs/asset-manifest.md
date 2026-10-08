@@ -1,7 +1,9 @@
 # Asset manifest / no invented production footage
 
 ## Included visuals
+- `public/media/brand/noura-logo-transparent-matched.webp`: current footer/loading logo, color-matched with built-in imagegen on 2026-10-08 to the existing header wordmark's muted gold and sage. A 1191 × 1321 WebP with alpha, replacing the brighter `noura-logo-transparent-glow.webp` in those two locations. Prompt: change only the full logo's colors and finish to match the header reference, retain the full composition and lettering, preserve transparency, and avoid bright yellow/orange gold, bevels, halos, or shadows. Visually compared against the header wordmark on ivory; the header code and asset were left untouched.
 - `noura-logo.webp`: presentation extraction of the supplied right-hand golden logo with sage leaves. The original raster source is the user's two-logo image. No left-hand green logo is used.
+- `public/media/brand/noura-logo-transparent-glow.webp`: transparent full-logo derivative generated with the built-in imagegen tool on 2026-10-08 from `noura-logo.webp`, then encoded as a 1191 × 1320 WebP with alpha. It replaces the opaque logo in the loading screen and footer; the original remains available for the admin area. The edit removes the rectangular white ground and adds only a very slight neutral edge lift, with no separate CSS gold effect or shadow.
 - `noura-wordmark.webp`: crop of that right-hand wordmark for a readable header. Final lock-up needs client approval and original vector assets.
 - `hero-poster.jpg` and `stillness.webp`: cropped scene from the earlier supplied SEREN concept artwork, excluding presentation text. The brand name in the artwork is not used on the website.
 - `hero-motion-study.mp4`: 12-second, silent MP4 made from that still to illustrate background video layout and controls. It is an animated still, not filmed video or actual NOURA premises.

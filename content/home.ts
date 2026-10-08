@@ -31,7 +31,6 @@ export const story = {
     "Listen. Breathe. Feel.",
     "And remember what matters.",
   ],
-  closing: "Perhaps it is time.",
   caption: "Our story",
   image: { src: "/media/story-landscape.png", width: 1443, height: 1090 },
   imageAlt: "Misty mountain landscape at dusk",

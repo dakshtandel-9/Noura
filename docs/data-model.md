@@ -5,8 +5,8 @@ This is a schema design, not an executed migration. Review it with the field dic
 | Entity | Required shape | Important rule |
 |---|---|---|
 | admin_authorizations | auth_user_id PK/FK, enabled, provisioned_at, provisioned_by | Only server/owner provisioning can change authorization; do not trust user-editable metadata |
-| invitation_requests | id UUID PK, name, email, optional phone/source, interests, status, created_at, updated_at, notice_version, acknowledged_at, idempotency_key, reviewer_id, private_note, version | Private; no anonymous select; idempotency key unique; bounded text |
-| appointment_requests | id UUID PK, name, email, optional phone, session_type, preferred_date, timezone, message, status, review fields and acknowledgement metadata | Date preference not a booking; session_type constrained to approved values |
+| invitation_requests | id UUID PK, name, email, optional phone/source, interests, status, created_at, updated_at, contacted, contacted_at, notice_version, acknowledged_at, idempotency_key, reviewer_id, private_note, version | Private; no anonymous select; idempotency key unique; bounded text |
+| appointment_requests | id UUID PK, name, email, optional phone, session_type, preferred_date, timezone, message, status, contacted, contacted_at, review fields and acknowledgement metadata | Date preference not a booking; session_type constrained to approved values |
 | members | id UUID PK, member_code UNIQUE, name, email, optional phone, state, source_invitation_id UNIQUE nullable, created_at, updated_at, version | Stable code; never use sequential display code as an access secret |
 | audit_events | id, actor_id, action, entity_type, entity_id, timestamp, minimal metadata | Do not copy full messages, credentials or personal profiles into logs |
 | media_assets (only if needed) | id, object_key, visibility, mime_type, byte_size, alt_text, rights_reference, approved_by, created_at | Public marketing and private objects are separately classified |
@@ -23,6 +23,8 @@ Internal identity: random UUID. Proposed readable code: `NRA-2026-000123`, assig
 Two reviewers can open the same request. Use an expected `version` or transactional lock; the second conflicting edit receives a refresh message. Repeat approval looks up the linked member and returns it rather than generating another. Approve/decline transitions must be validated server-side. Creation and request status update happen in one transaction so partial completion cannot leave a broken relationship.
 
 ## Privacy and retention
+Submission time is recorded server-side as a UTC timestamp and shown to staff in their local time zone, including seconds. `contacted` is a separate admin-set follow-up flag; `contacted_at` records when it was marked. Older requests without these fields display as not yet marked contacted until staff review them.
+
 Collect no health history, identity documents, financial data or date of birth by default. Retention duration, deletion/archival procedure and any lawful recordkeeping exception are client decisions. Do not invent a retention period. A simple restricted deletion workflow can be administrative until an approved self-service flow is scoped. Backup deletion/expiry behaviour must be documented rather than claiming instant deletion from every backup.
 
 ## Permissions matrix

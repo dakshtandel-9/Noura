@@ -31,9 +31,10 @@
 }
 
 .title {
-  font-size: clamp(38px, 4.4vw, 64px);
+  font-size: 48px;
   line-height: 1.15;
   letter-spacing: -0.005em;
+  color: var(--color-ink);
 }
 
 .titleLine {
@@ -42,10 +43,9 @@
 
 .titleLine:last-child {
   margin-top: var(--space-4);
-  font-size: 1.4em;
-  font-style: italic;
+  font-family: inherit;
+  font-size: inherit;
   line-height: 1.12;
-  color: var(--color-bronze);
 }
 
 .reflection {
@@ -157,31 +157,6 @@
   text-transform: uppercase;
 }
 
-.closing {
-  position: absolute;
-  bottom: -1px;
-  left: -1px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: var(--space-24);
-  max-width: 60%;
-  padding: var(--space-24) var(--space-40) var(--space-4) 1px;
-  background: var(--color-background);
-  font-family: var(--font-display);
-  font-size: clamp(24px, 2.4vw, 36px);
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--color-ink);
-}
-
-.closing::before {
-  content: "";
-  flex: 0 0 var(--space-40);
-  height: 1px;
-  background: var(--color-gold);
-}
-
 @media (max-width: 1023px) {
   .introduction {
     grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
@@ -196,12 +171,6 @@
     aspect-ratio: 2 / 1;
     min-height: 0;
   }
-
-  .closing {
-    position: static;
-    max-width: none;
-    padding: var(--space-24) 0 0;
-  }
 }
 
 @media (max-width: 767px) {
@@ -209,10 +178,6 @@
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-32);
     margin-bottom: var(--space-32);
-  }
-
-  .title {
-    font-size: clamp(34px, 6.8vw, 48px);
   }
 
   .eyebrow {
@@ -237,14 +202,5 @@
   .playButton {
     width: 48px;
     height: 48px;
-  }
-
-  .closing {
-    gap: var(--space-16);
-    font-size: clamp(23px, 5vw, 28px);
-  }
-
-  .closing::before {
-    flex-basis: var(--space-24);
   }
 }

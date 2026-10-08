@@ -36,6 +36,9 @@ All cases are proposed release checks. A tick needs a test result, date, browser
 | ADM-02 | Approval | Repeated or concurrent invitation approval creates/links one member. |
 | ADM-03 | Conflicts | Concurrent record edits show a conflict rather than silent overwrite. |
 | ADM-04 | Private notes | Review notes remain private and are not copied to public confirmations. |
+| ADM-05 | Lead dashboard | Total, contacted, to-contact and new counts reflect both request collections; all-leads pagination has no omissions or duplicates. |
+| ADM-06 | Submission time | Staff see the server-recorded submission date, exact time to the second and local time zone. |
+| ADM-07 | Lead actions | An authorized admin can edit approved fields, mark/unmark contacted and delete a request; stale versions fail without overwriting another edit. |
 | MEM-01 | Unique ID | Member code unique and stable after name/contact edits. |
 | MEM-02 | Card | Long names and codes fit; authorized download succeeds; no live QR by default. |
 | MEM-03 | Revocation | Agreed member state and access handling work consistently. |

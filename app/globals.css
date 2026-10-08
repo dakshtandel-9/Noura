@@ -19,6 +19,12 @@
   --editorial-gap: clamp(32px, 5vw, 80px);
 }
 
+@media (min-width: 1280px) {
+  :root {
+    --section-heading-size: 48px;
+  }
+}
+
 /* ---------- base ---------- */
 
 *,
@@ -29,11 +35,6 @@
 
 [hidden] {
   display: none !important;
-}
-
-/* While the intro wordmark glides into the header, the header's own copy waits beneath it. */
-html[data-intro-flight] [data-brand-mark] {
-  opacity: 0;
 }
 
 html {

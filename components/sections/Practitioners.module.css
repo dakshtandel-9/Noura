@@ -104,11 +104,12 @@
 
 .detail {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(32px, 5vw, 80px);
-  margin-top: var(--space-40);
-  padding: clamp(24px, 4vw, 56px);
+  gap: clamp(32px, 5vw, 72px);
+  max-width: 1080px;
+  margin: var(--space-40) auto 0;
+  padding: clamp(24px, 4vw, 48px);
   border-top: 1px solid var(--color-gold);
   background: var(--color-background);
 }
@@ -118,8 +119,9 @@
 }
 
 .portrait {
-  max-width: 400px;
+  max-width: 300px;
   justify-self: center;
+  border-radius: 50% 50% 0 0 / 34% 34% 0 0;
 }
 
 .area {
@@ -198,6 +200,10 @@
     gap: var(--space-32);
     margin-top: var(--space-32);
     padding: var(--space-24);
+  }
+
+  .portrait {
+    max-width: 240px;
   }
 
   .bio {

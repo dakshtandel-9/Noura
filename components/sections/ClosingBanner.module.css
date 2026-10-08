@@ -61,6 +61,12 @@
   color: #fff;
 }
 
+@media (min-width: 1280px) {
+  .title {
+    font-size: 48px;
+  }
+}
+
 .meta {
   display: flex;
   flex-direction: column;

@@ -48,6 +48,8 @@ export const media = {
    */
   wordmarkTransparent: { src: "/media/brand/noura-wordmark-transparent.webp", width: 640, height: 166 },
   logo: { src: "/media/brand/noura-logo.webp", width: 681, height: 754 },
+  /** Transparent full logo matched to the header's muted gold and sage palette for the intro and footer. */
+  logoTransparentGlow: { src: "/media/brand/noura-logo-transparent-matched.webp", width: 1191, height: 1321 },
   hero: {
     /**
      * Static hero still (no background film). Illustrative, AI-generated scene — not NOURA's

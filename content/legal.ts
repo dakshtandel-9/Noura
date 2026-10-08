@@ -1,25 +1,5 @@
-/** Review outlines only. Replace each with owner-approved, versioned policy text before launch. */
+/** Cookies review outline only. Privacy and terms drafts live in legal-documents.ts. */
 export const legalReviews = {
-  terms: {
-    title: "Terms & conditions",
-    introduction: "This page is a review outline. It is not an operative set of terms.",
-    sections: [
-      { title: "Business details", detail: "Confirm the legal business name, public contact and applicable location." },
-      { title: "Using this website", detail: "Approve the rules for website content, acceptable use and intellectual property." },
-      { title: "Requests and experiences", detail: "Describe the manual invitation and session-review process, and approve any cancellation or payment terms that actually apply." },
-      { title: "Legal details", detail: "Have the owner and adviser approve the appropriate disclaimers, dispute process, governing law and effective date." },
-    ],
-  },
-  privacy: {
-    title: "Privacy policy",
-    introduction: "This page is a review outline. It is not an operative privacy notice.",
-    sections: [
-      { title: "Who handles your information", detail: "Confirm the legal operator and a real privacy-contact route." },
-      { title: "What is collected and why", detail: "Approve the exact request fields, newsletter email purpose, lawful notice or consent mechanism and whether optional analytics will be used." },
-      { title: "Where information goes", detail: "Name the actual hosting, database and mailing providers, data locations and any relevant transfers." },
-      { title: "How long it stays", detail: "Approve retention, deletion, backup and privacy-request procedures before accepting live submissions." },
-    ],
-  },
   cookies: {
     title: "Cookies",
     introduction: "This page is a review outline. It is not an operative cookie notice.",

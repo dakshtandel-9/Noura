@@ -127,10 +127,11 @@
   bottom: 14px;
   z-index: 1;
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  opacity: 0.5;
 }
 
 .goa .label {
@@ -195,7 +196,7 @@
     right: auto;
     left: 12px;
     bottom: 10px;
-    font-size: 11px;
+    font-size: 9px;
     letter-spacing: 0.08em;
   }
 }

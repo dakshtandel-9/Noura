@@ -60,23 +60,25 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className={styles.board} aria-labelledby="inv-board">
-          <p className={shared.label}>{board.label}</p>
-          <h2 id="inv-board" className={shared.heading}>
-            {board.heading}
-          </h2>
-          <p className={`${shared.body} ${styles.boardIntro}`}>{board.intro}</p>
-          <ul className={styles.members}>
-            {board.members.map((m) => (
-              <li key={m.n} className={styles.member}>
-                <div className={`${shared.photo} ${styles.memberPhoto}`} role="img" aria-label="Portrait placeholder" />
-                <p className={styles.memberMeta}>Board member {m.n}</p>
-                <p className={styles.memberField}>{m.field}</p>
-                <p className={styles.memberBio}>{board.bio}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
+        {board.visible && (
+          <section className={styles.board} aria-labelledby="inv-board">
+            <p className={shared.label}>{board.label}</p>
+            <h2 id="inv-board" className={shared.heading}>
+              {board.heading}
+            </h2>
+            <p className={`${shared.body} ${styles.boardIntro}`}>{board.intro}</p>
+            <ul className={styles.members}>
+              {board.members.map((m) => (
+                <li key={m.n} className={styles.member}>
+                  <div className={`${shared.photo} ${styles.memberPhoto}`} role="img" aria-label="Portrait placeholder" />
+                  <p className={styles.memberMeta}>Board member {m.n}</p>
+                  <p className={styles.memberField}>{m.field}</p>
+                  <p className={styles.memberBio}>{board.bio}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section className={`${shared.photo} ${styles.philosophy}`} aria-label="Our philosophy">
           <Photo image={images.philosophy} sizes="100vw" position="0% 50%" />

@@ -3,8 +3,7 @@ import { story as copy } from "@/content/home";
 import styles from "./Story.module.css";
 
 /**
- * Editorial question and reflection above a panoramic landscape. The closing line
- * forms an ivory inset on desktop and follows the photograph on smaller screens.
+ * Editorial question and reflection above a panoramic landscape.
  */
 export function Story() {
   return (
@@ -47,7 +46,6 @@ export function Story() {
               <span className={styles.captionText}>{copy.caption}</span>
             </div>
           </div>
-          <p className={styles.closing}>{copy.closing}</p>
         </div>
       </div>
     </section>

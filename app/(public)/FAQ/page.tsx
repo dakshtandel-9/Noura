@@ -48,7 +48,6 @@ export default function FaqPage() {
         <section className={`${shared.hero} ${shared.heroLight}`} aria-labelledby="faq-title">
           <Photo image={copy.images.hero} sizes="100vw" priority position="70% 50%" />
           <div className={shared.heroCopy}>
-            <p className={shared.eyebrow}>{copy.eyebrow}</p>
             <h1 id="faq-title" className={shared.heroTitle}>
               {copy.title}
             </h1>

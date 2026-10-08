@@ -14,14 +14,14 @@
   pointer-events: none;
 }
 
-/* ---------- the two ivory doors ---------- */
+/* ---------- the two white doors ---------- */
 
 .door {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 50.5%; /* a hair of overlap so no seam shows while closed */
-  background: var(--color-background);
+  background: var(--color-canvas);
   transition: transform 1000ms cubic-bezier(.76, 0, .24, 1);
 }
 
@@ -41,21 +41,12 @@
   transform: translateX(100%);
 }
 
-/* ---------- the wordmark ---------- */
+/* ---------- the transparent full logo ---------- */
 
-.flyer {
+.logoFrame {
   position: relative;
-  width: clamp(200px, 64vw, 360px);
-  animation: arrive 700ms var(--ease-out) both;
-}
-
-.beat {
-  position: relative;
-  animation: heartbeat 1100ms ease-in-out infinite;
-}
-
-.open .beat {
-  animation: none;
+  width: clamp(280px, 30vw, 360px);
+  max-width: calc(100vw - 40px);
 }
 
 .mark {
@@ -63,41 +54,8 @@
   height: auto;
 }
 
-/* A soft gold warmth behind the mark that swells with each beat. */
-.halo {
-  position: absolute;
-  inset: -70% -25%;
-  background: radial-gradient(closest-side, rgb(201 169 98 / 0.2), rgb(201 169 98 / 0));
-  animation: glow 1100ms ease-in-out infinite;
-  transition: opacity 400ms ease-out;
-}
-
-.open .halo {
-  animation: none;
-  opacity: 0;
-}
-
-/* Lub-dub, then rest. */
-@keyframes heartbeat {
-  0% { transform: scale(1); }
-  12% { transform: scale(1.07); }
-  24% { transform: scale(1); }
-  36% { transform: scale(1.045); }
-  52%,
-  100% { transform: scale(1); }
-}
-
-@keyframes glow {
-  0%,
-  52%,
-  100% { opacity: 0.55; transform: scale(0.94); }
-  12% { opacity: 1; transform: scale(1.04); }
-  36% { opacity: 0.85; transform: scale(1); }
-}
-
-@keyframes arrive {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.open .logoFrame {
+  visibility: hidden;
 }
 
 @keyframes fallback-clear {

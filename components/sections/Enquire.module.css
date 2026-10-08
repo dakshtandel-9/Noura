@@ -62,6 +62,12 @@
   line-height: 1.12;
 }
 
+@media (min-width: 1280px) {
+  .title {
+    font-size: 48px;
+  }
+}
+
 .intro {
   margin-top: 24px;
   font-size: 17px;

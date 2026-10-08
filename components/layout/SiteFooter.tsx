@@ -4,11 +4,10 @@ import { Icon } from "@/components/ui/Icon";
 import { footer as copy, media, site } from "@/content/site";
 import styles from "./SiteFooter.module.css";
 
-/** Public policy links stay hidden until the owner approves the actual wording. */
+/** Draft policy links stay in review builds until the owner approves final wording. */
 const legalLinks = [
-  { label: "Privacy", href: "/privacy" },
-  { label: "Terms", href: "/terms" },
-  { label: "Cookies", href: "/cookies" },
+  { label: "Privacy policy", href: "/privacy" },
+  { label: "Terms & conditions", href: "/terms" },
 ] as const;
 
 const showReviewPages = process.env.NODE_ENV !== "production";
@@ -18,7 +17,7 @@ function isExternal(href: string) {
 }
 
 /**
- * Footer strip under the closing banner: wordmark, place and month, a short link row and a
+ * Footer strip under the closing banner: the full gold logo, place and month, a short link row and a
  * back-to-top control (2026-10-03 reference). Page anchors resolve from the home page so the
  * strip also works on the legal review pages.
  */
@@ -31,11 +30,11 @@ export function SiteFooter() {
         <Link className={styles.brand} href="/#arrive" aria-label={`${site.name} home`}>
           <Image
             className={styles.logo}
-            src={media.wordmarkTransparent.src}
-            width={media.wordmarkTransparent.width}
-            height={media.wordmarkTransparent.height}
+            src={media.logoTransparentGlow.src}
+            width={media.logoTransparentGlow.width}
+            height={media.logoTransparentGlow.height}
             alt={site.name}
-            sizes="140px"
+            sizes="(max-width: 599px) 140px, (max-width: 1023px) 140px, 170px"
           />
         </Link>
 

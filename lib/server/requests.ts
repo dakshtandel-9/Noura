@@ -3,8 +3,8 @@ import { createHash } from "node:crypto";
 import { FieldPath, type DocumentData, type Firestore } from "firebase-admin/firestore";
 import { firebase, collectionConfig } from "./firebase.ts";
 import {
-  checkTransition, needsReason, parseRequest, parseUpdate, RequestError, statusesFor,
-  type RequestKind, type RequestRecord, type RequestStatus, type RequestUpdate,
+  checkTransition, needsReason, parseRequest, parseUpdate, RequestError,
+  type RequestKind, type RequestPage, type RequestRecord, type RequestStatus, type RequestUpdate, type RequestView,
 } from "../requests.ts";
 import { authorizeSession } from "./auth.ts";
 
@@ -24,7 +24,8 @@ export async function saveRequest(kind: RequestKind, raw: unknown) {
     }
     const now = new Date().toISOString();
     tx.create(ref, { ...data, kind, email_normalized: data.email.toLowerCase(), status: "new", created_at: now, updated_at: now,
-      notice_version: notice, acknowledged_at: now, timezone, fingerprint, version: 1, private_note: "", reviewer_id: null });
+      notice_version: notice, acknowledged_at: now, timezone, fingerprint, version: 1, private_note: "", reviewer_id: null,
+      contacted: false, contacted_at: null });
     return true;
   });
 }
@@ -45,34 +46,66 @@ function toRecord(id: string, kind: RequestKind, d: DocumentData): RequestRecord
     session_type: d.session_type ?? "", preferred_date: d.preferred_date ?? "", time_window: d.time_window ?? "",
     status: d.status, created_at: d.created_at, updated_at: d.updated_at ?? d.created_at,
     private_note: d.private_note ?? "", notice_version: d.notice_version ?? "", version: d.version ?? 1,
+    contacted: d.contacted === true, contacted_at: typeof d.contacted_at === "string" ? d.contacted_at : null,
   };
 }
 
-export async function listRequests(session: string | undefined, kind: RequestKind, cursor?: string) {
+const kinds: RequestKind[] = ["invitation", "session"];
+type AllCursor = Partial<Record<RequestKind, string>>;
+function parseAllCursor(value: string | undefined): AllCursor {
+  if (!value) return {};
+  if (value.length > 512) throw new RequestError("Invalid page.");
+  try {
+    const raw = JSON.parse(Buffer.from(value, "base64url").toString("utf8"));
+    if (!raw || typeof raw !== "object" || Array.isArray(raw) ||
+      Object.keys(raw).some((key) => !kinds.includes(key as RequestKind)) ||
+      Object.values(raw).some((id) => typeof id !== "string" || !/^[0-9a-f-]{36}$/i.test(id))) throw new Error();
+    return raw as AllCursor;
+  } catch { throw new RequestError("Invalid page."); }
+}
+
+export async function listRequests(session: string | undefined, view: RequestView, cursor?: string, database?: Firestore): Promise<RequestPage> {
   authorizeSession(session);
-  if (cursor && !/^[0-9a-f-]{36}$/i.test(cursor)) throw new RequestError("Invalid page.");
-  const { db } = firebase();
-  const collection = db.collection(requestCollection(kind));
-  const other = db.collection(requestCollection(kind === "invitation" ? "session" : "invitation"));
-  let query = collection.orderBy("created_at", "desc").orderBy(FieldPath.documentId(), "desc").limit(21);
-  if (cursor) {
-    const last = await collection.doc(cursor).get();
-    if (!last.exists) throw new RequestError("This page is no longer available. Refresh the inbox.");
-    query = query.startAfter(last);
-  }
-  const statuses = statusesFor(kind);
-  const [snapshot, count, otherCount, ...byStatus] = await Promise.all([
-    query.get(), collection.count().get(), other.count().get(),
-    ...statuses.map((status) => collection.where("status", "==", status).count().get()),
+  if (view !== "all" && cursor && !/^[0-9a-f-]{36}$/i.test(cursor)) throw new RequestError("Invalid page.");
+  const positions = view === "all" ? parseAllCursor(cursor) : { [view]: cursor };
+  const db = database ?? firebase().db;
+  const collection = (kind: RequestKind) => db.collection(requestCollection(kind));
+  const queryPage = async (kind: RequestKind) => {
+    let query = collection(kind).orderBy("created_at", "desc").orderBy(FieldPath.documentId(), "desc").limit(21);
+    const position = positions[kind];
+    if (position) {
+      const last = await collection(kind).doc(position).get();
+      if (!last.exists) throw new RequestError("This page is no longer available. Refresh the inbox.");
+      query = query.startAfter(last);
+    }
+    const snapshot = await query.get();
+    return snapshot.docs.map((doc) => toRecord(doc.id, kind, doc.data()));
+  };
+  const [invitationCount, sessionCount, invitationContacted, sessionContacted, invitationNew, sessionNew, ...pages] = await Promise.all([
+    collection("invitation").count().get(), collection("session").count().get(),
+    collection("invitation").where("contacted", "==", true).count().get(),
+    collection("session").where("contacted", "==", true).count().get(),
+    collection("invitation").where("status", "==", "new").count().get(),
+    collection("session").where("status", "==", "new").count().get(),
+    ...(view === "all" ? kinds : [view]).map(queryPage),
   ]);
-  const records = snapshot.docs.slice(0, 20).map((doc) => toRecord(doc.id, kind, doc.data()));
-  const total = count.data().count;
+  const totals = { invitation: invitationCount.data().count, session: sessionCount.data().count };
+  const contactedTotals = { invitation: invitationContacted.data().count, session: sessionContacted.data().count };
+  const newTotals = { invitation: invitationNew.data().count, session: sessionNew.data().count };
+  const ordered = pages.flat().sort((a, b) => b.created_at.localeCompare(a.created_at) || b.id.localeCompare(a.id) || a.kind.localeCompare(b.kind));
+  const records = ordered.slice(0, 20);
+  let next: string | null = null;
+  if (ordered.length > 20 && records.length) {
+    if (view === "all") {
+      const lastPositions = { ...positions };
+      for (const record of records) lastPositions[record.kind] = record.id;
+      next = Buffer.from(JSON.stringify(lastPositions)).toString("base64url");
+    } else next = records.at(-1)!.id;
+  }
   return {
     records,
-    count: total,
-    totals: kind === "invitation" ? { invitation: total, session: otherCount.data().count } : { invitation: otherCount.data().count, session: total },
-    statusCounts: Object.fromEntries(statuses.map((status, i) => [status, byStatus[i]!.data().count])) as Partial<Record<RequestStatus, number>>,
-    next: snapshot.size > 20 ? records.at(-1)!.id : null,
+    count: view === "all" ? totals.invitation + totals.session : totals[view],
+    totals, contactedTotals, newTotals, next,
   };
 }
 
@@ -102,11 +135,12 @@ export async function applyUpdate(db: Firestore, kind: RequestKind, id: string, 
     const to = update.changes.status ?? from;
     const fields = checkTransition(kind, from, to, update.reason);
     if (Object.keys(fields).length) throw new RequestError("Please check the highlighted fields.", 422, fields);
-    const changed = Object.entries(update.changes).filter(([key, value]) => (current[key] ?? "") !== value).map(([key]) => key);
+    const changed = Object.entries(update.changes).filter(([key, value]) => (current[key] ?? (key === "contacted" ? false : "")) !== value).map(([key]) => key);
     if (!changed.length) return toRecord(id, kind, current);
     const stamp = now.toISOString();
     const patch: DocumentData = { updated_at: stamp, version: update.version + 1, reviewer_id: actor };
     for (const key of changed) patch[key] = update.changes[key as keyof RequestUpdate["changes"]];
+    if (changed.includes("contacted")) patch.contacted_at = update.changes.contacted ? stamp : null;
     if (changed.includes("email")) patch.email_normalized = String(patch.email).toLowerCase();
     tx.update(ref, patch);
     tx.create(audit, {

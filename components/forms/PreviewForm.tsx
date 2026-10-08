@@ -71,7 +71,7 @@ export function PreviewForm({ kind = "invitation", tone = "light", className, ch
     }}>
     <fieldset className={styles.contents} disabled={!enabled || busy || sent}>
       {children}
-      <label className={styles.privacy}><input name="privacy_acknowledged" type="checkbox" required /> <span>I have read the <a href="/privacy" target="_blank" rel="noreferrer">privacy notice</a> and acknowledge how my request will be handled.</span></label>
+      <label className={styles.privacy}><input name="privacy_acknowledged" type="checkbox" required /> <span>I have read the <a href="/privacy" target="_blank" rel="noreferrer">privacy policy</a> and acknowledge how my request will be handled. You can also read our <a href="/terms" target="_blank" rel="noreferrer">terms and conditions</a>.</span></label>
       <div className={styles.honeypot} aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
       {submit}
     </fieldset>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { LegalReviewPage } from "@/components/legal/LegalReviewPage";
+import { LegalDocumentPage } from "@/components/legal/LegalDocumentPage";
 
 export const metadata: Metadata = { title: "Privacy policy — NOURA", robots: { index: false, follow: false } };
 
 export default function PrivacyPage() {
-  return <LegalReviewPage kind="privacy" />;
+  return <LegalDocumentPage kind="privacy" />;
 }

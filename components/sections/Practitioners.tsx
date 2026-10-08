@@ -74,7 +74,7 @@ export function Practitioners() {
                   width={profile.image.width}
                   height={profile.image.height}
                   alt={`${profile.name} — illustrative portrait`}
-                  sizes="(max-width: 767px) calc(100vw - 96px), 400px"
+                  sizes="(max-width: 767px) 240px, 300px"
                 />
               )}
             </div>

@@ -4,7 +4,6 @@
 // Founder and board portraits on /about are grey placeholders until real photographs exist.
 
 export const faqPage = {
-  eyebrow: "NOURA / Essentials",
   title: "Frequently Asked Questions",
   lead: "Everything you need to know before beginning your Noura journey.",
   intro: "A considered guide to the practical details, inclusions and experience that await you.",
@@ -135,7 +134,7 @@ export const aboutPage = {
     closing: { src: "/media/about/closing.webp", width: 2016, height: 864 },
   },
   founder: {
-    label: "01 / Founder",
+    label: "Founder",
     portraitCaption: "Founder — portrait",
     heading: "Founded with purpose.",
     name: "Founder name",
@@ -147,6 +146,8 @@ export const aboutPage = {
     quote: "Wellness is not a destination. It is a way of being.",
   },
   board: {
+    // Temporarily hidden at the owner's request; retain the section for later use.
+    visible: false,
     label: "02 / Board",
     heading: "A collective of accomplished minds.",
     // Placeholder: roles and backgrounds are illustrative, no real person or employer is named.

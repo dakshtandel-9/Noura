@@ -1,5 +1,5 @@
 /*
- * One light strip under the closing banner: wordmark, place and month, a link row and a round
+ * One light strip under the closing banner: full logo, place and month, a link row and a round
  * back-to-top control (2026-10-03 reference). Wraps to a centred stack on small screens.
  */
 .footer {
@@ -20,7 +20,7 @@
 }
 
 .logo {
-  width: clamp(110px, 9vw, 140px);
+  width: clamp(140px, 12vw, 170px);
   height: auto;
   object-fit: contain;
 }
