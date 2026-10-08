@@ -8,7 +8,7 @@ export const hero = {
   /** Italic line under the headline. */
   subtitle: "A private gathering for conscious living.",
   /** Small meta line: location and month, supplied by the owner. */
-  meta: ["Inneredits, Goa - Feb 2027"],
+  meta: ["The Inner Edit - Goa - Feb 2027"],
   /** Bottom-right control that opens the short film; the film never plays on its own. */
   film: { open: "Play film", close: "Close film", label: "NOURA film" },
   primary: "Request an invitation",
