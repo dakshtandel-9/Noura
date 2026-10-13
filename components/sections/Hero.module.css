@@ -12,8 +12,9 @@
   flex-direction: column;
   justify-content: center;
   min-height: 680px;
-  height: 100vh;
-  height: 100svh;
+  /* The page is zoomed (--page-zoom), which shrinks viewport units too; divide it back out so the hero fills the screen. */
+  height: calc(100vh / var(--page-zoom, 1));
+  height: calc(100svh / var(--page-zoom, 1));
   max-height: 1080px;
   overflow: hidden;
   color: #fff;
@@ -196,7 +197,7 @@
   .hero {
     height: auto;
     min-height: 720px;
-    min-height: max(720px, 100svh);
+    min-height: max(720px, calc(100svh / var(--page-zoom, 1)));
     max-height: none;
     justify-content: flex-start;
   }

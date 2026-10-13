@@ -138,11 +138,22 @@ export class RequestError extends Error {
   }
 }
 
+/**
+ * Forms that ask for first and last name separately send them as `first_name` / `last_name`;
+ * the schema stores one `full_name`, so the client joins them before posting.
+ */
+export function joinNameParts(payload: Record<string, unknown>) {
+  if (!("first_name" in payload) && !("last_name" in payload)) return payload;
+  const { first_name, last_name, ...rest } = payload;
+  const parts = [first_name, last_name].map((part) => (typeof part === "string" ? part.trim() : "")).filter(Boolean);
+  return { ...rest, full_name: parts.join(" ") };
+}
+
 export function parseRequest(kind: RequestKind, input: unknown, timezone: string, now = new Date()) {
   if (!input || typeof input !== "object" || Array.isArray(input)) throw new RequestError("Invalid request.");
   const raw = input as Record<string, unknown>;
   const allowed = new Set(["full_name", "email", "phone", "privacy_acknowledged", "idempotency_key", "website", "started_at",
-    ...(kind === "invitation" ? ["interests", "organization", "message"] : ["session_type", "preferred_date", "time_window", "message"])]);
+    ...(kind === "invitation" ? ["interests", "organization", "message", "session_type"] : ["session_type", "preferred_date", "time_window", "message"])]);
   if (Object.keys(raw).some((key) => !allowed.has(key))) throw new RequestError("Unexpected form fields.");
   const fields: Record<string, string> = {};
   function string(key: string, min: number, max: number) {
@@ -175,6 +186,9 @@ export function parseRequest(kind: RequestKind, input: unknown, timezone: string
       if (data.message.length < 10) fields.message = "Tell us a little about your interest (10–1000 characters).";
       data.interests = data.message;
     } else data.interests = string("interests", 10, 1000);
+    // The home enquiry's optional "Preferred experience"; empty when not chosen.
+    data.session_type = string("session_type", 0, 60);
+    if (data.session_type && !sessionTypes.includes(data.session_type as typeof sessionTypes[number])) fields.session_type = "Choose a listed experience.";
   } else {
     data.session_type = string("session_type", 1, 60);
     if (!sessionTypes.includes(data.session_type as typeof sessionTypes[number])) fields.session_type = "Choose a listed session type.";

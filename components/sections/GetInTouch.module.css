@@ -1,0 +1,111 @@
+/*
+ * Contact band on the soft surface: heading and intro left, four white contact cards right
+ * (two by two on wide screens). Stacks text-first below 1024px; cards go single file on phones.
+ */
+.section {
+  padding-block: var(--section-gap);
+  background: var(--color-surface);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(40px, 5vw, 88px);
+  align-items: center;
+  max-width: calc(var(--content-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-bronze);
+}
+
+.title {
+  margin-top: 20px;
+  font-size: clamp(36px, 3.6vw, 48px);
+  line-height: 1.12;
+}
+
+.intro {
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.details > li {
+  display: flex;
+}
+
+.card {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 20px;
+  padding: 24px clamp(20px, 2.2vw, 28px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-field);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.cardLink {
+  transition: border-color var(--duration-micro) ease-out;
+}
+
+.cardLink:hover {
+  border-color: var(--color-gold);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--color-ink);
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.value {
+  display: block;
+  margin-top: 4px;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1023px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card {
+    gap: 16px;
+  }
+}

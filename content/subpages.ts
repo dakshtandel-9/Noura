@@ -1,7 +1,7 @@
 // Copy for the standalone /FAQ, /about and /invitation pages. The FAQ answers are the client's
 // own text. The /about copy is proposed wording that asserts no credential or venue; the
 // client must supply the real names, address and contact details before launch.
-// Founder and board portraits on /about are grey placeholders until real photographs exist.
+// Board portraits on /about remain placeholders until real photographs exist.
 
 export const faqPage = {
   title: "Frequently Asked Questions",
@@ -124,10 +124,11 @@ export const aboutPage = {
   lead: "NOURA brings together exceptional destinations, meaningful wellness and remarkable people to create immersive experiences for body, mind and spirit.",
   cta: "Discover our experiences",
   // Higgsfield recreations of the 2026-10-06 About reference pictures, overlaid text removed
-  // (docs/asset-manifest.md). Illustrative only: not NOURA premises. The founder and board
-  // portraits stay grey until real, approved photographs exist.
+  // (docs/asset-manifest.md). Illustrative only: not NOURA premises. The founder portrait is
+  // supplied by the owner; board portraits remain placeholders.
   images: {
     hero: { src: "/media/about/hero.webp", width: 2016, height: 864 },
+    founder: { src: "/media/about/founder.jpeg", width: 640, height: 640 },
     stillLife: { src: "/media/about/still-life.webp", width: 864, height: 1536 },
     philosophy: { src: "/media/about/philosophy.webp", width: 2016, height: 864 },
     home: { src: "/media/about/home.webp", width: 1728, height: 1344 },
@@ -177,8 +178,8 @@ export const aboutPage = {
     // Placeholders in square brackets until the client supplies real details.
     details: [
       { id: "address", label: "NOURA", value: "[Office / Building Name], [Area], Goa, India — [PIN CODE]" },
-      { id: "phone", label: "Phone", value: "[PHONE NUMBER]" },
-      { id: "email", label: "Email", value: "[EMAIL ADDRESS]" },
+      { id: "phone", label: "Phone", value: "+91 80088 85464" },
+      { id: "email", label: "Email", value: "siddkochhar@gmail.com" },
       { id: "social", label: "Social", value: "[Instagram / LinkedIn]" },
     ],
   },
@@ -225,4 +226,12 @@ export const invitationPage = {
     "All of the above",
   ],
   submit: "Let\u2019s begin your journey",
+};
+
+/** /contact: a short introduction above the enquiry form and the contact cards (the same
+ *  sections as the home page, so details and the form stay in one place). */
+export const contactPage = {
+  eyebrow: "Contact",
+  title: "We’d love to hear from you.",
+  lead: "For retreats, private experiences or any other enquiries, write to us below or reach us directly. Our team replies within 24 hours.",
 };

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SubpagePhoto as Photo } from "@/components/subpages/SubpagePhoto";
@@ -38,7 +39,16 @@ export default function AboutPage() {
 
         <section className={styles.founder} aria-labelledby="inv-founder">
           <div className={styles.founderPortrait}>
-            <div className={`${shared.photo} ${styles.portrait}`} role="img" aria-label="Portrait placeholder" />
+            <div className={`${shared.photo} ${styles.portrait}`}>
+              <Image
+                className={shared.fill}
+                src={images.founder.src}
+                width={images.founder.width}
+                height={images.founder.height}
+                sizes="(max-width: 767px) min(100vw - 40px, 360px), (max-width: 1023px) 40vw, 25vw"
+                alt="A man in a white shirt seated indoors"
+              />
+            </div>
             <p className={styles.caption}>{founder.portraitCaption}</p>
           </div>
           <div className={styles.founderCopy}>

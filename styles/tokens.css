@@ -1,5 +1,7 @@
 /* NOURA — The Quiet Invitation / proposed v1.0 tokens */
 :root {
+  --page-zoom: 0.9;
+  zoom: var(--page-zoom);
   --color-canvas: #FFFFFF;
   --color-background: #FBF9F4;
   --color-surface: #F1EDE4;

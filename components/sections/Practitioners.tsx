@@ -44,7 +44,7 @@ export function Practitioners() {
                         width={profile.image.width}
                         height={profile.image.height}
                         alt=""
-                        sizes="(max-width: 767px) 70vw, (max-width: 1199px) 30vw, 240px"
+                        sizes="(max-width: 767px) 56vw, (max-width: 1199px) 24vw, 192px"
                       />
                     )}
                   </span>
@@ -74,7 +74,7 @@ export function Practitioners() {
                   width={profile.image.width}
                   height={profile.image.height}
                   alt={`${profile.name} — illustrative portrait`}
-                  sizes="(max-width: 767px) 240px, 300px"
+                  sizes="240px"
                 />
               )}
             </div>

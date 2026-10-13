@@ -19,7 +19,7 @@ export const hero = {
 /**
  * 01a — Story (`#story`), straight after the arrival: a short provocation beside a picture.
  * Copy follows the 2026-10-03 reference. The picture is an existing illustrative still, not
- * NOURA's premises; swap it (and add a film behind "Our story") once approved media exists.
+ * NOURA's premises; swap it once approved media exists.
  */
 export const story = {
   eyebrow: "Why we created this",
@@ -31,16 +31,15 @@ export const story = {
     "Listen. Breathe. Feel.",
     "And remember what matters.",
   ],
-  caption: "Our story",
   image: { src: "/media/story-landscape.png", width: 1443, height: 1090 },
   imageAlt: "Misty mountain landscape at dusk",
 };
 
 /**
  * 01a2 — Founder note (`#founder`), after the story: picture left, text right. Placeholder
- * copy from the 2026-10-03 reference: the name stays "Founder" and the picture is an existing
- * illustrative still until the client supplies a real name, portrait and approved wording
- * (docs/client-inputs.md item 5). Never stand in a generated person for the founder.
+ * copy from the 2026-10-03 reference: the founder's name and story remain placeholders until
+ * the client supplies approved details (docs/client-inputs.md item 5). Never stand in a
+ * generated person for the founder.
  */
 export const founderNote = {
   eyebrow: "Why we created this",
@@ -51,7 +50,7 @@ export const founderNote = {
   ],
   question: "What happens when extraordinary people are given permission to pause?",
   closing: "This is our invitation to pause.",
-  signature: "— Founder",
+  signature: "— Team Noura",
   image: { src: "/media/experiences/seated-outdoors-4k.webp", width: 3840, height: 2560 },
   imageAlt: "Person seated outdoors in natural light",
 };
@@ -356,40 +355,49 @@ export const beginExperience = {
  * Closing banner, the last section before the footer: a wide picture (grey until an image is
  * supplied) with the closing line and the invitation action on the right, after the 2026-10-03
  * reference. The reference's own dates and cities are not used: the place and month follow the
- * hero ("Goa - Feb 2027"), so confirm them before launch.
+ * hero ("The Inner Edit - Goa - Feb 2027"), so confirm them before launch.
  */
 export const closingBanner = {
   title: "Perhaps it is time to pause.",
-  meta: ["Goa - Feb 2027", "By invitation"],
+  meta: ["THE INNER EDIT - GOA - FEB 2027", "By invitation"],
   cta: "Request an invitation",
   ctaHref: "/invitation",
   image: { src: "/media/beach-sunset-gathering.png", width: 2243, height: 701 } as MediaImage | null,
 };
 
 /**
- * 02e — Enquire (`#enquire`), after the practitioners: a short enquiry form on the left and contact
- * details on the right, after the "MVP - Enquire - page 10" reference (2026-10-03). The
- * contact details, location and response time were supplied with that reference; confirm
- * them with the client before launch (docs/client-inputs.md item 17, docs/content.md). The
- * form is a preview until the backend slice connects it: nothing is sent.
+ * 02e — Enquire (`#enquire`), after the practitioners: a centred heading over a two-column
+ * enquiry form, after the "A personal note to NOURA" reference (2026-10-12). The form is a
+ * preview until the backend slice connects it: nothing is sent.
  */
 export const enquire = {
-  formTitle: "Tell us what you want to know.",
+  title: "Let's Begin Your Journey",
+  intro: "Share a little about what you\u2019re looking for. Our team will be in touch.",
   fields: {
-    fullName: { label: "Full name", placeholder: "Your name" },
-    message: { label: "Message", placeholder: "What would you like to know?" },
-    email: { label: "Email", placeholder: "you@example.com" },
-    phone: { label: "Phone", placeholder: "Optional" },
+    firstName: { label: "First Name", placeholder: "Your first name" },
+    lastName: { label: "Last Name", placeholder: "Your last name" },
+    email: { label: "Email Address", placeholder: "you@domain.com" },
+    phone: { label: "Phone Number", hint: "(optional)", placeholder: "+91" },
+    experience: { label: "Preferred Experience", placeholder: "Select an option" },
+    message: { label: "Your Message", placeholder: "Tell us a little about what you have in mind\u2026" },
   },
-  submit: "Send enquiry",
+  submit: "Submit enquiry",
+};
+
+/**
+ * 02f — Get in touch (`#contact`), straight after the enquiry form: the heading, a short intro
+ * and four contact cards, moved out of the enquiry section into their own band. The displayed
+ * email, phone and location were supplied by the client.
+ */
+export const getInTouch = {
   eyebrow: "Get in touch",
-  titleLines: ["Tell us what you\u2019re", "looking for."],
+  titleLines: ["Let's Begin", "Your Journey"],
   intro:
     "Whether you\u2019re drawn to 1:1 coaching, a retreat, or bringing this work to your team \u2014 start by saying hello. Every journey begins with one honest conversation.",
   details: [
-    { id: "email", icon: "mail", label: "Email", value: "care@healwithshashank.com", href: "mailto:care@healwithshashank.com" },
-    { id: "phone", icon: "phone", label: "Phone / WhatsApp", value: "+91 91096 94003", href: "tel:+919109694003" },
-    { id: "based", icon: "map-pin", label: "Based in", value: "Pune, India \u00b7 Working Globally" },
+    { id: "email", icon: "mail", label: "Email", value: "siddkochhar@gmail.com", href: "mailto:siddkochhar@gmail.com" },
+    { id: "phone", icon: "phone", label: "Phone / WhatsApp", value: "+91 80088 85464", href: "tel:+918008885464" },
+    { id: "based", icon: "map-pin", label: "Based in", value: "Goa, India" },
     { id: "response", icon: "clock", label: "Response time", value: "Within 24 hours" },
   ] satisfies { id: string; icon: IconName; label: string; value: string; href?: string }[],
 };

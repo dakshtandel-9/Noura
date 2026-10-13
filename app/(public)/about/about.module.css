@@ -11,6 +11,11 @@
   aspect-ratio: 4 / 5;
 }
 
+.portrait img {
+  transform: scale(1.2);
+  transform-origin: center top;
+}
+
 .caption {
   margin: 14px 0 0;
   font-size: 11px;

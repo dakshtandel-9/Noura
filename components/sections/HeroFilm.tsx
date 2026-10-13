@@ -34,11 +34,10 @@ export function HeroFilm({ src, poster, labels }: HeroFilmProps) {
 
   return (
     <>
-      <button type="button" className={styles.trigger} onClick={open}>
+      <button type="button" className={styles.trigger} aria-label={labels.open} onClick={open}>
         <span className={styles.ring} aria-hidden="true">
           <Icon name="play" size={16} />
         </span>
-        <span>{labels.open}</span>
       </button>
 
       <dialog

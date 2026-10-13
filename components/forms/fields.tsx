@@ -5,17 +5,20 @@ import styles from "./forms.module.css";
 interface FieldShellProps {
   id: string;
   label: string;
+  /** Muted note after the label, e.g. "(optional)". */
+  hint?: string;
   required?: boolean;
   className?: string;
   children: ReactNode;
 }
 
 /** Visible label above an underlined control; the asterisk is visual, `required` is announced. */
-function FieldShell({ id, label, required, className, children }: FieldShellProps) {
+function FieldShell({ id, label, hint, required, className, children }: FieldShellProps) {
   return (
     <div className={[styles.field, className].filter(Boolean).join(" ")}>
       <label className={styles.label} htmlFor={id}>
         {label}
+        {hint && <span className={styles.hint}> {hint}</span>}
         {required && (
           <span className={styles.required} aria-hidden="true">
             {" "}
@@ -28,14 +31,14 @@ function FieldShell({ id, label, required, className, children }: FieldShellProp
   );
 }
 
-type TextFieldProps = { id: string; label: string; className?: string } & Omit<
+type TextFieldProps = { id: string; label: string; hint?: string; className?: string } & Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "id" | "className"
 >;
 
-export function TextField({ id, label, className, required, ...rest }: TextFieldProps) {
+export function TextField({ id, label, hint, className, required, ...rest }: TextFieldProps) {
   return (
-    <FieldShell id={id} label={label} required={required} className={className}>
+    <FieldShell id={id} label={label} hint={hint} required={required} className={className}>
       <input id={id} className={styles.control} required={required} {...rest} />
     </FieldShell>
   );

@@ -6,18 +6,13 @@
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  width: 48px;
   min-height: 48px;
   padding: 0;
   border: 0;
   background: none;
   color: #fff;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  text-shadow: 0 1px 8px rgb(14 24 38 / 0.75);
   cursor: pointer;
 }
 

@@ -3,7 +3,7 @@ import { story as copy } from "@/content/home";
 import styles from "./Story.module.css";
 
 /**
- * Editorial question and reflection above a panoramic landscape.
+ * Editorial question above a landscape and a reflection alongside it.
  */
 export function Story() {
   return (
@@ -20,6 +20,22 @@ export function Story() {
               ))}
             </h2>
           </div>
+        </div>
+
+        <div className={styles.storyRow}>
+          <div className={styles.media}>
+            <div className={styles.frame}>
+              <Image
+                className={styles.image}
+                src={copy.image.src}
+                width={copy.image.width}
+                height={copy.image.height}
+                alt={copy.imageAlt}
+                sizes="(max-width: 899px) calc(100vw - 48px), (max-width: 1384px) 58vw, 760px"
+              />
+              <span className={styles.playMark} aria-hidden="true" />
+            </div>
+          </div>
           <div className={styles.reflection} data-reveal>
             <p className={styles.body}>
               {copy.lines.map((line) => (
@@ -28,23 +44,6 @@ export function Story() {
                 </span>
               ))}
             </p>
-          </div>
-        </div>
-
-        <div className={styles.media}>
-          <div className={styles.frame}>
-            <Image
-              className={styles.image}
-              src={copy.image.src}
-              width={copy.image.width}
-              height={copy.image.height}
-              alt={copy.imageAlt}
-              sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1384px) 90vw, 1240px"
-            />
-            <div className={styles.caption}>
-              <button className={styles.playButton} aria-label="Play our story" />
-              <span className={styles.captionText}>{copy.caption}</span>
-            </div>
           </div>
         </div>
       </div>

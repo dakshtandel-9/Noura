@@ -21,7 +21,7 @@ export const nav = [
   { label: "Journey", href: "/#experiences" },
   { label: "Place", href: "/#place" },
   { label: "Experts", href: "/#experts" },
-  { label: "Enquire", href: "/#enquire" },
+  { label: "Enquire", href: "/contact" },
 ] as const;
 
 /** The header's outlined button, on every page: the invitation request page. */
@@ -36,7 +36,7 @@ export const menu = [
   { label: "The experiences", href: "/#experiences" },
   { label: "The place", href: "/#place" },
   { label: "The practitioners", href: "/#experts" },
-  { label: "Enquire", href: "/#enquire" },
+  { label: "Enquire", href: "/contact" },
 ] as const;
 
 export const media = {
@@ -72,11 +72,11 @@ export const media = {
  * a short link row and a back-to-top control. Page anchors only, so no link dead-ends.
  */
 export const footer = {
-  place: "Goa - Feb 2027",
+  place: "THE INNER EDIT - GOA - FEB 2027",
   backToTop: "Back to top",
   /** Always shown: the enquiry section and the FAQ page (FAQ is linked only from here). */
   nav: [
-    { label: "Contact", href: "#enquire" },
+    { label: "Contact", href: "/contact" },
     { label: "FAQ", href: "/FAQ" },
   ],
   /**

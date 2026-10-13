@@ -72,6 +72,11 @@
   color: var(--field-required);
 }
 
+.hint {
+  font-weight: 400;
+  color: var(--field-note);
+}
+
 .control {
   width: 100%;
   min-height: var(--control-height);

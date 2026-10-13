@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormHTMLAttributes, type ReactNode } from "react";
-import type { RequestKind } from "@/lib/requests";
+import { joinNameParts, type RequestKind } from "@/lib/requests";
 import styles from "./forms.module.css";
 
 interface PreviewFormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, "onSubmit"> {
@@ -49,8 +49,9 @@ export function PreviewForm({ kind = "invitation", tone = "light", className, ch
       if (!enabled || sending.current || sent) return;
       const form = event.currentTarget;
       const values = new FormData(form);
-      const payload: Record<string, unknown> = Object.fromEntries(values);
+      let payload: Record<string, unknown> = Object.fromEntries(values);
       if (form.querySelector('input[type="checkbox"][name="interests"]')) payload.interests = values.getAll("interests");
+      payload = joinNameParts(payload);
       payload.privacy_acknowledged = values.get("privacy_acknowledged") === "on";
       payload.idempotency_key = token.current;
       payload.started_at = started.current;
@@ -61,7 +62,8 @@ export function PreviewForm({ kind = "invitation", tone = "light", className, ch
         if (!response.ok) {
           setErrors(result.fields ?? {});
           const first = Object.keys(result.fields ?? {})[0];
-          const field = first ? form.elements.namedItem(first) : null;
+          // A split name reports as full_name; send focus to the first-name box instead.
+          const field = first ? form.elements.namedItem(first) ?? (first === "full_name" ? form.elements.namedItem("first_name") : null) : null;
           if (field instanceof HTMLElement) { field.closest("details")?.setAttribute("open", ""); field.focus(); }
           throw new Error(result.message || "Unable to send. Please retry.");
         }

@@ -10,7 +10,6 @@ export function LegalDocumentPage({ kind }: { kind: LegalDocumentKey }) {
   if (process.env.NODE_ENV === "production") notFound();
 
   const document = legalDocuments[kind];
-  const isPrivacy = kind === "privacy";
 
   return (
     <>
@@ -39,8 +38,8 @@ export function LegalDocumentPage({ kind }: { kind: LegalDocumentKey }) {
                     <address className={styles.address}>
                       <span>[Noura Legal Entity Name]</span>
                       <span>[Goa, India – Full Address]</span>
-                      <span>Email: [{isPrivacy ? "privacy@noura-domain.com" : "hello@noura-domain.com"}]</span>
-                      <span>Phone: [Phone Number]</span>
+                      <span>Email: siddkochhar@gmail.com</span>
+                      <span>Phone: +91 80088 85464</span>
                     </address>
                   )}
                   {"relatedLink" in section && section.relatedLink && (

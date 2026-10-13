@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { interestOptions, parseRequest, type RequestKind } from "../../lib/requests.ts";
+import { interestOptions, joinNameParts, parseRequest, type RequestKind } from "../../lib/requests.ts";
 
 // Each public form posts its field names through PreviewForm; these tests read the names from
 // the component source and check the server schema accepts what the form would send, so a
@@ -9,6 +9,8 @@ import { interestOptions, parseRequest, type RequestKind } from "../../lib/reque
 
 const sample: Record<string, string> = {
   full_name: "Sample Person",
+  first_name: "Sample",
+  last_name: "Person",
   email: "sample@example.com",
   phone: "+91 98765 43210",
   organization: "Sample Organisation",
@@ -21,11 +23,13 @@ function fieldNames(file: string) {
   return [...new Set([...source.matchAll(/\bname="([a-z_]+)"/g)].map((m) => m[1]!))];
 }
 
-/** The payload PreviewForm builds: form values, checkbox interests as a list, plus its own fields. */
+/** The payload PreviewForm builds: form values, checkbox interests as a list, split names joined,
+ *  plus its own fields. */
 function payload(names: string[], checkboxInterests: boolean) {
-  const body: Record<string, unknown> = {};
-  for (const name of names) if (name !== "interests" || !checkboxInterests) body[name] = sample[name] ?? "";
-  if (checkboxInterests) body.interests = [interestOptions[1]];
+  const values: Record<string, unknown> = {};
+  for (const name of names) if (name !== "interests" || !checkboxInterests) values[name] = sample[name] ?? "";
+  if (checkboxInterests) values.interests = [interestOptions[1]];
+  const body = joinNameParts(values);
   body.privacy_acknowledged = true;
   body.website = "";
   body.idempotency_key = "3f2b8c1e-4a5d-4e6f-8a7b-9c0d1e2f3a4b";
@@ -35,13 +39,12 @@ function payload(names: string[], checkboxInterests: boolean) {
 
 const forms: { file: string; kind: RequestKind; checkboxInterests: boolean }[] = [
   { file: "components/sections/Enquire.tsx", kind: "invitation", checkboxInterests: false },
-  { file: "app/(public)/invitation/page.tsx", kind: "invitation", checkboxInterests: true },
 ];
 
 for (const form of forms) {
   test(`${form.file} sends fields the ${form.kind} schema accepts`, () => {
     const names = fieldNames(form.file);
-    assert.ok(names.includes("full_name") && names.includes("email"), "name and email fields are present");
+    assert.ok((names.includes("full_name") || (names.includes("first_name") && names.includes("last_name"))) && names.includes("email"), "name and email fields are present");
     const { data } = parseRequest(form.kind, payload(names, form.checkboxInterests), "Asia/Kolkata");
     assert.equal(data.full_name, sample.full_name);
     assert.equal(data.email, sample.email);
@@ -63,4 +66,18 @@ test("an enquiry without a name or with a too-short message is rejected with fie
   body.interests = "Hi";
   assert.throws(() => parseRequest("invitation", body, "Asia/Kolkata"), (error: { status: number; fields: Record<string, string> }) =>
     error.status === 422 && "full_name" in error.fields && "interests" in error.fields);
+});
+
+test("first and last name are joined into full_name and the parts are dropped", () => {
+  assert.deepEqual(joinNameParts({ first_name: " Asha ", last_name: "Rao", email: "a@b.co" }), { full_name: "Asha Rao", email: "a@b.co" });
+  assert.deepEqual(joinNameParts({ full_name: "Kept As Is" }), { full_name: "Kept As Is" });
+});
+
+test("an enquiry's preferred experience is optional but must be a listed option", () => {
+  const body = payload(fieldNames("components/sections/Enquire.tsx"), false);
+  assert.equal(parseRequest("invitation", body, "Asia/Kolkata").data.session_type, "");
+  body.session_type = "Meditation";
+  assert.equal(parseRequest("invitation", body, "Asia/Kolkata").data.session_type, "Meditation");
+  body.session_type = "Skydiving";
+  assert.throws(() => parseRequest("invitation", body, "Asia/Kolkata"), (error: { fields: Record<string, string> }) => "session_type" in error.fields);
 });

@@ -52,13 +52,16 @@
 .body {
   flex: 1;
   padding: var(--space-32);
+  container-type: inline-size;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(20px, 2.5vw, 40px);
+  /* Sized from the card's text width so "02. RECONNECT" always stays on one line. */
+  font-size: clamp(18px, 8.5cqw, 40px);
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .number {

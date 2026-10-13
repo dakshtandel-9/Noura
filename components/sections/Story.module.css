@@ -1,15 +1,18 @@
-/* A spacious editorial opening followed by one uninterrupted landscape. */
+/* A spacious editorial heading followed by a landscape and its reflection. */
 .section {
   padding-block: var(--section-gap);
   background: var(--color-background);
 }
 
 .introduction {
+  margin-bottom: var(--space-48);
+}
+
+.storyRow {
   display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   align-items: end;
   gap: var(--editorial-gap);
-  margin-bottom: var(--space-48);
 }
 
 .heading {
@@ -49,6 +52,7 @@
 }
 
 .reflection {
+  align-self: end;
   padding: var(--space-8) 0 var(--space-8) var(--space-32);
   border-left: 1px solid var(--color-border);
 }
@@ -75,15 +79,14 @@
   color: var(--color-ink);
 }
 
-/* The original photograph, now given the width of the content column. */
+/* The original photograph occupies the left side of the editorial row. */
 .media {
   position: relative;
 }
 
 .frame {
   position: relative;
-  aspect-ratio: 2.8 / 1;
-  min-height: 320px;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--color-forest);
 }
@@ -97,86 +100,54 @@
   object-position: center 55%;
 }
 
-/* Local contrast for the existing media label; leave the sky and landscape clear. */
-.frame::after {
-  content: "";
+/* Visual film cue only; no focusable control until a film is available. */
+.playMark {
   position: absolute;
-  inset: 40% 0 0;
-  background: linear-gradient(180deg, transparent, rgb(20 30 24 / 0.72));
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  aspect-ratio: 1;
+  border: 1px solid rgb(255 255 255 / 0.9);
+  border-radius: 50%;
+  background: rgb(20 30 24 / 0.42);
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-.caption {
-  position: absolute;
-  z-index: 1;
-  right: var(--space-32);
-  bottom: var(--space-32);
-  display: flex;
-  align-items: center;
-  gap: var(--space-16);
-  color: var(--color-canvas);
-}
-
-.playButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  padding: 0;
-  border: 1px solid rgb(255 255 255 / 0.85);
-  border-radius: 50%;
-  background: rgb(20 30 24 / 0.35);
-  cursor: pointer;
-  transition: background var(--duration-micro) ease-out, border-color var(--duration-micro) ease-out;
-}
-
-.playButton:hover {
-  background: var(--color-forest);
-  border-color: var(--color-gold);
-}
-
-.playButton:focus-visible {
-  outline-color: var(--color-canvas);
-}
-
-.playButton::before {
+.playMark::before {
   content: "";
   width: 0;
   height: 0;
-  margin-left: 3px;
-  border-left: 9px solid var(--color-canvas);
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-}
-
-.captionText {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  margin-left: 4px;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 12px solid #fff;
 }
 
 @media (max-width: 1023px) {
-  .introduction {
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  .storyRow {
     gap: var(--space-32);
   }
 
   .reflection {
     padding-left: var(--space-24);
   }
+}
+
+@media (max-width: 899px) {
+  .storyRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
 
   .frame {
-    aspect-ratio: 2 / 1;
-    min-height: 0;
+    aspect-ratio: 16 / 9;
   }
 }
 
 @media (max-width: 767px) {
   .introduction {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-32);
     margin-bottom: var(--space-32);
   }
 
@@ -189,18 +160,15 @@
     padding-block: 0;
   }
 
+  .title {
+    font-size: clamp(34px, 8vw, 44px);
+  }
+
   .frame {
     aspect-ratio: 4 / 3;
   }
 
-  .caption {
-    right: var(--space-16);
-    bottom: var(--space-16);
-    gap: var(--space-12);
-  }
-
-  .playButton {
-    width: 48px;
-    height: 48px;
+  .playMark {
+    width: 60px;
   }
 }
