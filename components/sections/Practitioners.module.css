@@ -111,7 +111,7 @@
 
 .detail {
   display: grid;
-  grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 168px) minmax(0, 1fr);
   align-items: center;
   gap: clamp(32px, 5vw, 72px);
   max-width: none;
@@ -125,8 +125,8 @@
   display: none;
 }
 
-.portrait {
-  max-width: 240px;
+.detail .portrait {
+  max-width: 168px;
   justify-self: center;
 }
 
@@ -210,6 +210,10 @@
 
   .portrait {
     max-width: 192px;
+  }
+
+  .detail .portrait {
+    max-width: 134px;
   }
 
   .bio {

@@ -5,7 +5,6 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ClosingBanner } from "@/components/sections/ClosingBanner";
 import { FounderNote } from "@/components/sections/FounderNote";
 import { Enquire } from "@/components/sections/Enquire";
-import { GetInTouch } from "@/components/sections/GetInTouch";
 import { ExperienceTiles } from "@/components/sections/ExperienceTiles";
 import { Hero } from "@/components/sections/Hero";
 import { MeetYourGuide } from "@/components/sections/MeetYourGuide";
@@ -16,7 +15,8 @@ import { Story } from "@/components/sections/Story";
 
 /**
  * Current landing narrative: arrival → story → founder note → stages → experiences →
- * place → expandable practitioners → enquire → get in touch → approved guide → close.
+ * place → expandable practitioners → enquire → approved guide → close.
+ * The contact cards live on /contact.
  */
 export default function HomePage() {
   return (
@@ -32,7 +32,6 @@ export default function HomePage() {
         <Place />
         <Practitioners />
         <Enquire />
-        <GetInTouch />
         <MeetYourGuide />
         <ClosingBanner />
       </main>

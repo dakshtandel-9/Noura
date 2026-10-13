@@ -9,7 +9,7 @@ import styles from "./Enquire.module.css";
  * invitation request endpoint: PreviewForm joins the two name boxes into `full_name`, the
  * message travels as the free-text `interests` field (10–1000 characters) and the experience
  * as the optional `session_type`. The contact cards live in the next section, Get in touch.
- * `headingLevel="h1"` is for the /invitation page, where this form is the whole page.
+ * `headingLevel="h1"` is for pages where this form is the whole page.
  */
 export function Enquire({ headingLevel: Heading = "h2" }: { headingLevel?: "h1" | "h2" } = {}) {
   const f = copy.fields;
@@ -30,7 +30,7 @@ export function Enquire({ headingLevel: Heading = "h2" }: { headingLevel?: "h1" 
   );
 }
 
-/** The enquiry fields and button on their own, for pages that supply their own heading (/contact). */
+/** The enquiry fields and button on their own, for pages that supply their own heading. */
 export function EnquireForm({ labelledBy, className }: { labelledBy: string; className?: string }) {
   const f = copy.fields;
 

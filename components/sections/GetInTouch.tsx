@@ -4,19 +4,19 @@ import { getInTouch as copy } from "@/content/home";
 import styles from "./GetInTouch.module.css";
 
 /**
- * 02f — Get in touch: its own band after the enquiry form. The eyebrow, heading and intro sit on
+ * 02f — Get in touch: its own band, now the whole /contact page. The eyebrow, heading and intro sit on
  * the left and the four contact cards (email, phone, base, response time) on the right; email
  * and phone are links.
  */
-export function GetInTouch() {
+export function GetInTouch({ headingLevel: Heading = "h2" }: { headingLevel?: "h1" | "h2" } = {}) {
   return (
     <section className={styles.section} id="contact" aria-labelledby="contact-title">
       <div className={styles.inner}>
         <div className={styles.text} data-reveal>
           <span className={styles.eyebrow}>{copy.eyebrow}</span>
-          <h2 id="contact-title" className={styles.title}>
+          <Heading id="contact-title" className={styles.title}>
             <Lines lines={copy.titleLines} />
-          </h2>
+          </Heading>
           <p className={styles.intro}>{copy.intro}</p>
         </div>
 

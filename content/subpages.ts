@@ -197,7 +197,7 @@ export const aboutPage = {
 export const invitationPage = {
   /** Higgsfield recreation of the reference photograph (docs/asset-manifest.md). Illustrative. */
   image: { src: "/media/invitation/hero.webp", width: 1296, height: 1728 },
-  imageCaption: ["Wellness", "Nature", "Connection"],
+  imageCaption: ["Reset", "Reconnect", "Reimagine"],
   eyebrow: "Exclusive wellness experiences",
   title: "Begin Your Journey",
   /** The intro, split around the emphasised phrase. */
@@ -226,12 +226,4 @@ export const invitationPage = {
     "All of the above",
   ],
   submit: "Let\u2019s begin your journey",
-};
-
-/** /contact: a short introduction above the enquiry form and the contact cards (the same
- *  sections as the home page, so details and the form stay in one place). */
-export const contactPage = {
-  eyebrow: "Contact",
-  title: "We’d love to hear from you.",
-  lead: "For retreats, private experiences or any other enquiries, write to us below or reach us directly. Our team replies within 24 hours.",
 };

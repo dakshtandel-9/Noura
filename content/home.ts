@@ -385,15 +385,14 @@ export const enquire = {
 };
 
 /**
- * 02f — Get in touch (`#contact`), straight after the enquiry form: the heading, a short intro
+ * 02f — Get in touch (`#contact`), on the /contact page: the heading, a short intro
  * and four contact cards, moved out of the enquiry section into their own band. The displayed
  * email, phone and location were supplied by the client.
  */
 export const getInTouch = {
   eyebrow: "Get in touch",
   titleLines: ["Let's Begin", "Your Journey"],
-  intro:
-    "Whether you\u2019re drawn to 1:1 coaching, a retreat, or bringing this work to your team \u2014 start by saying hello. Every journey begins with one honest conversation.",
+  intro: "",
   details: [
     { id: "email", icon: "mail", label: "Email", value: "siddkochhar@gmail.com", href: "mailto:siddkochhar@gmail.com" },
     { id: "phone", icon: "phone", label: "Phone / WhatsApp", value: "+91 80088 85464", href: "tel:+918008885464" },

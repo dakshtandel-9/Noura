@@ -3,12 +3,16 @@
  * (two by two on wide screens). Stacks text-first below 1024px; cards go single file on phones.
  */
 .section {
+  display: flex;
+  align-items: center;
+  min-height: 80vh;
   padding-block: var(--section-gap);
   background: var(--color-surface);
 }
 
 .inner {
   display: grid;
+  width: 100%;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: clamp(40px, 5vw, 88px);
   align-items: center;

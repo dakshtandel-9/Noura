@@ -21,7 +21,7 @@ export const nav = [
   { label: "Journey", href: "/#experiences" },
   { label: "Place", href: "/#place" },
   { label: "Experts", href: "/#experts" },
-  { label: "Enquire", href: "/contact" },
+  { label: "Enquire", href: "/#enquire" },
 ] as const;
 
 /** The header's outlined button, on every page: the invitation request page. */
@@ -36,7 +36,7 @@ export const menu = [
   { label: "The experiences", href: "/#experiences" },
   { label: "The place", href: "/#place" },
   { label: "The practitioners", href: "/#experts" },
-  { label: "Enquire", href: "/contact" },
+  { label: "Enquire", href: "/#enquire" },
 ] as const;
 
 export const media = {
