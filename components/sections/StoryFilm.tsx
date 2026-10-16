@@ -8,8 +8,8 @@ import styles from "./Story.module.css";
 interface StoryFilmProps {
   src: string;
   poster: string;
-  posterWidth?: number;
-  posterHeight?: number;
+  /** Picture shown in the frame; the film's own poster is only used inside the pop-up. */
+  image: { src: string; width: number; height: number };
   labels: { play: string; label: string };
 }
 
@@ -18,7 +18,7 @@ interface StoryFilmProps {
  * circle opens a modal dialog that plays the film with sound and native controls. Nothing
  * downloads until the visitor clicks Play.
  */
-export function StoryFilm({ src, poster, posterWidth = 1280, posterHeight = 720, labels }: StoryFilmProps) {
+export function StoryFilm({ src, poster, image, labels }: StoryFilmProps) {
   const dialog = useRef<HTMLDialogElement>(null);
   const video = useRef<HTMLVideoElement>(null);
 
@@ -38,10 +38,10 @@ export function StoryFilm({ src, poster, posterWidth = 1280, posterHeight = 720,
   return (
     <>
       <Image
-        src={poster}
+        src={image.src}
         alt=""
-        width={posterWidth}
-        height={posterHeight}
+        width={image.width}
+        height={image.height}
         sizes="(max-width: 899px) 100vw, 60vw"
         className={styles.image}
       />

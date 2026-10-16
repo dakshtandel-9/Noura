@@ -31,7 +31,9 @@ export const story = {
     "Listen. Breathe. Feel.",
     "And remember what matters.",
   ],
-  /** Plays with sound only when the visitor presses Play. Source: app/(public)/videos/story.mp4. */
+  image: { src: "/media/story-landscape.png", width: 1443, height: 1090 },
+  imageAlt: "Misty mountain landscape at dusk",
+  /** Opens in a pop-up with sound only when the visitor presses Play. Source: app/(public)/videos/story.mp4. */
   film: {
     src: "/media/story/noura-story.mp4",
     poster: "/media/story/noura-story-poster.jpg",

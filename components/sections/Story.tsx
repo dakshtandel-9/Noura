@@ -28,6 +28,7 @@ export function Story() {
               <StoryFilm
                 src={copy.film.src}
                 poster={copy.film.poster}
+                image={copy.image}
                 labels={{ play: copy.film.play, label: copy.film.label }}
               />
             </div>
