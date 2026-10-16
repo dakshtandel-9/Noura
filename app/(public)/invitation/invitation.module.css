@@ -30,17 +30,18 @@
 
 .caption {
   position: absolute;
-  top: 30%;
+  top: 23%;
   left: 0;
   right: 0;
+  max-width: none;
   margin: 0;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 15.6px;
+  font-weight: 700;
   letter-spacing: 0.3em;
   text-align: center;
   text-transform: uppercase;
   color: var(--color-ink);
-  text-shadow: 0 0 18px rgb(251 238 214 / 0.8);
+  opacity: 0.5;
 }
 
 .panel {
@@ -198,7 +199,7 @@
   align-items: center;
   justify-content: center;
   min-width: 160px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 8px 22px;
   border: 1px solid #a69d8d;
   border-radius: var(--radius-pill);
@@ -274,10 +275,18 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  /* A 4:5 picture capped at 80% of the screen height. Set as a height, not an aspect ratio, so
+     the cap never narrows the picture (landscape phones, upright tablets). */
   .media {
     min-height: 0;
-    aspect-ratio: 4 / 5;
-    max-height: 80vh;
+    height: min(125vw, 80vh);
+    height: min(125vw, 80svh);
+  }
+
+  /* Full width now, so the caption scales with the screen and stays on one line. */
+  .caption {
+    padding-inline: 12px;
+    font-size: clamp(11px, 3.4vw, 15.6px);
   }
 
   .panel::after {
@@ -285,9 +294,16 @@
   }
 }
 
+/* The phone header is shorter (logo and menu button only). */
+@media (max-width: 767px) {
+  .page {
+    --header-offset: 65px;
+  }
+}
+
 @media (max-width: 640px) {
   .panel {
-    padding: 36px 16px 48px;
+    padding: 36px var(--gutter) 48px;
   }
 
   .grid {

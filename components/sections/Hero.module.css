@@ -15,7 +15,7 @@
   /* The page is zoomed (--page-zoom), which shrinks viewport units too; divide it back out so the hero fills the screen. */
   height: calc(100vh / var(--page-zoom, 1));
   height: calc(100svh / var(--page-zoom, 1));
-  max-height: 1080px;
+  max-height: calc(1080px / var(--page-zoom, 1));
   overflow: hidden;
   color: #fff;
   /* Shown only until the poster paints. */
@@ -123,47 +123,6 @@
   background: var(--color-gold);
 }
 
-/*
- * Arrival: once the intro doors start to part, the copy rises in line by line — opacity, a
- * 12px lift and a soft focus, once (docs/design.md §9). Only the intro sets the cue, so without
- * it (no script, reduced motion, a late load) the copy is simply there.
- */
-:global(html[data-intro-reveal]) .titleLine,
-:global(html[data-intro-reveal]) .subtitle,
-:global(html[data-intro-reveal]) .meta {
-  animation: hero-rise 650ms var(--ease-out) both;
-}
-
-:global(html[data-intro-reveal]) .titleLine:first-child {
-  animation-delay: 350ms;
-}
-
-:global(html[data-intro-reveal]) .titleLine:last-child {
-  animation-delay: 500ms;
-}
-
-:global(html[data-intro-reveal]) .subtitle {
-  animation-delay: 700ms;
-}
-
-:global(html[data-intro-reveal]) .meta {
-  animation-delay: 850ms;
-}
-
-@keyframes hero-rise {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-    filter: blur(6px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
-}
-
 .hero :focus-visible {
   outline-color: #fff;
 }
@@ -260,5 +219,43 @@
 
   .metaDot {
     display: none;
+  }
+}
+
+/* ---------- short landscape screens: phones on their side ---------- */
+
+/*
+ * The arrival copy fits the screen instead of a 680px-tall frame: smaller type scaled to the
+ * height, the place line back on one row, and less room under it.
+ */
+@media (orientation: landscape) and (max-height: 540px) {
+  .hero {
+    min-height: 360px;
+  }
+
+  .copy {
+    padding-top: calc(var(--header-height) + 8px);
+    padding-bottom: 32px;
+  }
+
+  .title {
+    font-size: clamp(30px, 11vh, 52px);
+  }
+
+  .subtitle {
+    margin-top: 12px;
+    font-size: clamp(18px, 5vh, 24px);
+  }
+
+  .meta {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 12px;
+  }
+
+  .metaDot {
+    display: block;
+    margin-inline: 12px;
   }
 }

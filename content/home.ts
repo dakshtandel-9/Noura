@@ -7,8 +7,8 @@ export const hero = {
   titleLines: ["Three days.", "One pause"],
   /** Italic line under the headline. */
   subtitle: "A private gathering for conscious living.",
-  /** Small meta line: location and month, supplied by the owner. */
-  meta: ["The Inner Edit - Goa - Feb 2027"],
+  /** Small meta line: location and month, supplied by the owner. No-break spaces keep each dash at a line end. */
+  meta: ["The Inner Edit\u00a0- Goa\u00a0- Feb 2027"],
   /** Bottom-right control that opens the short film; the film never plays on its own. */
   film: { open: "Play film", close: "Close film", label: "NOURA film" },
   primary: "Request an invitation",
@@ -31,8 +31,13 @@ export const story = {
     "Listen. Breathe. Feel.",
     "And remember what matters.",
   ],
-  image: { src: "/media/story-landscape.png", width: 1443, height: 1090 },
-  imageAlt: "Misty mountain landscape at dusk",
+  /** Plays with sound only when the visitor presses Play. Source: app/(public)/videos/story.mp4. */
+  film: {
+    src: "/media/story/noura-story.mp4",
+    poster: "/media/story/noura-story-poster.jpg",
+    play: "Play the NOURA story film",
+    label: "NOURA story film",
+  },
 };
 
 /**
@@ -105,8 +110,6 @@ export const place = {
     "Where a conversation can continue long after sunset.",
   ],
   note: ["The destination will be revealed", "to invited guests."],
-  cta: "Explore Destinations",
-  ctaHref: "#enquire",
   tiles: [
     { id: "goa", label: "Goa, India", image: { src: "/media/destinations/goa.webp", width: 1254, height: 1254 } as MediaImage | null },
     { id: "bali", label: "Bali, Indonesia", image: { src: "/media/destinations/bali.webp", width: 1024, height: 1536 } as MediaImage | null },
@@ -359,7 +362,7 @@ export const beginExperience = {
  */
 export const closingBanner = {
   title: "Perhaps it is time to pause.",
-  meta: ["THE INNER EDIT - GOA - FEB 2027", "By invitation"],
+  meta: ["THE INNER EDIT\u00a0- GOA\u00a0- FEB 2027", "By invitation"],
   cta: "Request an invitation",
   ctaHref: "/invitation",
   image: { src: "/media/beach-sunset-gathering.png", width: 2243, height: 701 } as MediaImage | null,

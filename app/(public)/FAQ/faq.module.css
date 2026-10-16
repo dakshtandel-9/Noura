@@ -161,9 +161,11 @@
     order: -1;
   }
 
+  /* About 16:10 on phones; never taller than most of a landscape screen. */
   .sidePhoto {
     min-height: 0;
-    aspect-ratio: 16 / 10;
+    height: clamp(200px, min(56vw, 75vh), 440px);
+    height: clamp(200px, min(56vw, 75svh), 440px);
   }
 
   .band {

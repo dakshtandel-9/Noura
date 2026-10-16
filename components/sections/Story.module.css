@@ -98,9 +98,10 @@
   height: 100%;
   object-fit: cover;
   object-position: center 55%;
+  background: var(--color-forest);
 }
 
-/* Visual film cue only; no focusable control until a film is available. */
+/* Play control over the poster; removed once the film starts and native controls take over. */
 .playMark {
   position: absolute;
   top: 50%;
@@ -112,8 +113,22 @@
   border: 1px solid rgb(255 255 255 / 0.9);
   border-radius: 50%;
   background: rgb(20 30 24 / 0.42);
+  padding: 0;
   transform: translate(-50%, -50%);
-  pointer-events: none;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-micro) ease-out,
+    background var(--duration-micro) ease-out;
+}
+
+.playMark:hover {
+  border-color: var(--color-gold);
+  background: rgb(20 30 24 / 0.6);
+}
+
+.playMark:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
 }
 
 .playMark::before {
@@ -124,6 +139,61 @@
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
   border-left: 12px solid #fff;
+}
+
+/* ---------- story film dialog ---------- */
+
+.dialog {
+  width: min(1100px, 92vw);
+  max-width: none;
+  max-height: 92vh;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: #000;
+  color: #fff;
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background: rgb(10 16 24 / 0.86);
+}
+
+.dialogFrame {
+  position: relative;
+}
+
+.dialogVideo {
+  display: block;
+  width: 100%;
+  max-height: 86vh;
+  background: #000;
+}
+
+.dialogClose {
+  position: absolute;
+  top: -52px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.dialogClose:hover {
+  border-color: var(--color-gold);
+}
+
+.dialogClose:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 @media (max-width: 1023px) {
@@ -170,5 +240,20 @@
 
   .playMark {
     width: 60px;
+  }
+
+  .dialog {
+    width: 100vw;
+  }
+
+  /* Sits inside the frame on a phone, where there is no room above the video. */
+  .dialogClose {
+    top: 8px;
+    right: 8px;
+    background: rgb(14 24 38 / 0.6);
+  }
+
+  .dialogFrame:has(.dialogVideo) .dialogClose {
+    z-index: 1;
   }
 }

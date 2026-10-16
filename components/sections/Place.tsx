@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { ButtonLink } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
 import { place as copy } from "@/content/home";
 import styles from "./Place.module.css";
 
@@ -32,12 +30,6 @@ export function Place() {
             <span className={styles.line}>{copy.note[0]}</span>
             <span className={styles.line}>{copy.note[1]}</span>
           </p>
-          <ButtonLink href={copy.ctaHref} variant="secondary" icon={null} className={styles.cta}>
-            <span className={styles.ctaLabel}>
-              {copy.cta}
-              <Icon name="arrow-right" size={20} />
-            </span>
-          </ButtonLink>
         </div>
 
         <ul className={styles.mosaic} role="list">

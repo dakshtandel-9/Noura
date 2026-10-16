@@ -86,8 +86,10 @@
 .brand {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
   flex-shrink: 0;
+  min-height: 44px;
   text-decoration: none;
 }
 
@@ -210,6 +212,10 @@
   border-top: 0;
   border-radius: 0 0 var(--radius-card) var(--radius-card);
   box-shadow: 0 24px 40px rgb(23 45 30 / 0.08);
+  /* Short landscape screens: the panel scrolls rather than running off the bottom. */
+  max-height: calc(100dvh - 100%);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .menu[hidden] {

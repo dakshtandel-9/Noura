@@ -161,7 +161,8 @@
 
 .label::after {
   content: "";
-  flex: 0 1 140px;
+  /* The rule gives way first, so the label stays on one line on narrow phones. */
+  flex: 0 999 140px;
   height: 1px;
   background: var(--color-border);
 }
@@ -211,8 +212,8 @@
   line-height: 1.6;
 }
 
-/* Narrow screens: copy covers more of the picture, so the light washes get stronger. */
-@media (max-width: 640px) {
+/* Phones (upright or on their side): copy covers more of the picture, so the light washes get stronger. */
+@media (max-width: 767px) {
   .heroLight::before {
     background: linear-gradient(180deg, rgb(251 249 244 / 0.7), rgb(251 249 244 / 0.45));
   }

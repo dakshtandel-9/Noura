@@ -1,6 +1,8 @@
 /* NOURA — The Quiet Invitation / proposed v1.0 tokens */
 :root {
-  --page-zoom: 0.9;
+  /* Phones and tablets render at full size (readable text, 44px touch targets); the denser
+     0.9 desktop scale starts at 1024px, below. */
+  --page-zoom: 1;
   zoom: var(--page-zoom);
   --color-canvas: #FFFFFF;
   --color-background: #FBF9F4;
@@ -46,6 +48,9 @@
   --space-96: 96px;
   --space-128: 128px;
   --space-160: 160px;
+}
+@media (min-width: 1024px) {
+  :root { --page-zoom: 0.9; }
 }
 :focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {

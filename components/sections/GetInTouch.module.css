@@ -6,7 +6,8 @@
   display: flex;
   align-items: center;
   min-height: 80vh;
-  padding-block: var(--section-gap);
+  /* The site header overlays the top of the page, so the copy starts below it. */
+  padding-block: max(var(--section-gap), calc(var(--header-height) + 32px)) var(--section-gap);
   background: var(--color-surface);
 }
 

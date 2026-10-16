@@ -136,9 +136,8 @@ export const aboutPage = {
   },
   founder: {
     label: "Founder",
-    portraitCaption: "Founder — portrait",
     heading: "Founded with purpose.",
-    name: "Founder name",
+    name: "Siddharth Kochhar",
     role: "Founder & wellness practitioner",
     // Placeholder: the founder's real story, experience and credentials are the client's to supply.
     paragraphs: [
@@ -175,12 +174,11 @@ export const aboutPage = {
     heading: "Our home, in Goa.",
     text: "NOURA is based in Goa, India — a place where nature, culture and a long tradition of wellbeing meet.",
     connectLabel: "Visit / Connect",
-    // Placeholders in square brackets until the client supplies real details.
+    // Social links stay out until the client supplies real profiles.
     details: [
-      { id: "address", label: "NOURA", value: "[Office / Building Name], [Area], Goa, India — [PIN CODE]" },
+      { id: "address", label: "NOURA", value: "Porvorim, North Goa, Goa - 403501" },
       { id: "phone", label: "Phone", value: "+91 80088 85464" },
       { id: "email", label: "Email", value: "siddkochhar@gmail.com" },
-      { id: "social", label: "Social", value: "[Instagram / LinkedIn]" },
     ],
   },
   closing: {

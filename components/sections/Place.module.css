@@ -52,18 +52,6 @@
   color: var(--color-muted);
 }
 
-.cta {
-  margin-top: 44px;
-  border-color: var(--color-ink);
-  color: var(--color-ink);
-}
-
-.ctaLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-}
-
 /* ---------- mosaic ---------- */
 
 .mosaic {
@@ -193,10 +181,10 @@
 
   .label,
   .goa .label {
-    right: auto;
+    right: 10px;
     left: 12px;
     bottom: 10px;
-    font-size: 9px;
-    letter-spacing: 0.08em;
+    font-size: 10px;
+    letter-spacing: 0.06em;
   }
 }

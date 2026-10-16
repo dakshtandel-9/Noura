@@ -49,7 +49,6 @@ export default function AboutPage() {
                 alt="A man in a white shirt seated indoors"
               />
             </div>
-            <p className={styles.caption}>{founder.portraitCaption}</p>
           </div>
           <div className={styles.founderCopy}>
             <p className={shared.label}>{founder.label}</p>

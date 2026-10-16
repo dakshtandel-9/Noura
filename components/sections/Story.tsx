@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { story as copy } from "@/content/home";
+import { StoryFilm } from "./StoryFilm";
 import styles from "./Story.module.css";
 
 /**
- * Editorial question above a landscape and a reflection alongside it.
+ * Editorial question above the story film and a reflection alongside it.
  */
 export function Story() {
   return (
@@ -25,15 +25,11 @@ export function Story() {
         <div className={styles.storyRow}>
           <div className={styles.media}>
             <div className={styles.frame}>
-              <Image
-                className={styles.image}
-                src={copy.image.src}
-                width={copy.image.width}
-                height={copy.image.height}
-                alt={copy.imageAlt}
-                sizes="(max-width: 899px) calc(100vw - 48px), (max-width: 1384px) 58vw, 760px"
+              <StoryFilm
+                src={copy.film.src}
+                poster={copy.film.poster}
+                labels={{ play: copy.film.play, label: copy.film.label }}
               />
-              <span className={styles.playMark} aria-hidden="true" />
             </div>
           </div>
           <div className={styles.reflection} data-reveal>

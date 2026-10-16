@@ -58,6 +58,7 @@
   line-height: 1.2;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  text-wrap: balance;
   color: #fff;
 }
 
@@ -134,7 +135,7 @@
   .banner {
     display: block;
     min-height: 0;
-    padding: calc(clamp(180px, 40vw, 320px) + 32px) 24px 40px;
+    padding: calc(clamp(180px, 40vw, 320px) + 32px) var(--gutter) 40px;
     background: var(--color-forest);
   }
 
@@ -164,7 +165,17 @@
   }
 
   .cta {
-    width: 100%;
+    min-width: 280px;
     margin-top: 28px;
+  }
+}
+
+/* Phones: one full-width action. */
+@media (max-width: 599px) {
+  .cta {
+    width: 100%;
+    min-width: 0;
+    padding-inline: 16px;
+    text-align: center;
   }
 }

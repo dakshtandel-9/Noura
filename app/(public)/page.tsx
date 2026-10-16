@@ -1,4 +1,3 @@
-import { IntroLoader } from "@/components/layout/IntroLoader";
 import { RevealObserver } from "@/components/layout/RevealObserver";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -21,7 +20,6 @@ import { Story } from "@/components/sections/Story";
 export default function HomePage() {
   return (
     <>
-      <IntroLoader />
       <SiteHeader />
       <main id="main" tabIndex={-1}>
         <Hero />

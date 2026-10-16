@@ -1,7 +1,8 @@
 /*
  * A full-width soft band holding a centred editorial heading, a row of portrait cards with their
  * text underneath, and one outlined action (2026-10-03 reference). Seven across from 1280px, four
- * on tablets and two on phones; an unfinished last row sits centred. Never a horizontal scroll.
+ * on tablets, three on wide phones and two on phones; an unfinished last row sits centred. Never a
+ * horizontal scroll.
  */
 .section {
   --cols: 7;
@@ -167,9 +168,26 @@
 
   .cta {
     width: 100%;
-    padding-inline: 20px;
+    max-width: 420px;
+    padding-inline: 16px;
     font-size: 13px;
     letter-spacing: 0.18em;
+    text-align: center;
+  }
+}
+
+/* The narrowest phones (folded screens): a long word such as "Conversations" still fits its card. */
+@media (max-width: 359px) {
+  .title {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Wide phones and phones on their side: three across, so a card never outgrows the screen. */
+@media (min-width: 560px) and (max-width: 767px) {
+  .section {
+    --cols: 3;
   }
 }
 

@@ -16,14 +16,6 @@
   transform-origin: center top;
 }
 
-.caption {
-  margin: 14px 0 0;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
 .founderCopy {
   display: flex;
   flex-direction: column;
@@ -218,6 +210,19 @@
   .members {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  /* Without the wide left inset the leaves reach under the copy; a light wash keeps it readable. */
+  .philosophy {
+    padding-left: var(--gutter);
+  }
+
+  .philosophy::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgb(251 249 244 / 0.6);
+  }
 }
 
 @media (max-width: 767px) {
@@ -232,19 +237,6 @@
 
   .members {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  /* The leaves reach under the copy on phones; a light wash keeps it readable. */
-  .philosophy {
-    padding-left: var(--gutter);
-  }
-
-  .philosophy::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: rgb(251 249 244 / 0.6);
   }
 
   .pillars {

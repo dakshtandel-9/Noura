@@ -100,7 +100,9 @@
 
 .relatedLink {
   display: inline-flex;
+  align-items: center;
   gap: 8px;
+  min-height: 44px;
   margin-top: 16px;
   color: var(--color-bronze);
   font-size: 14px;

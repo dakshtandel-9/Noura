@@ -59,11 +59,12 @@ export const media = {
     poster: { src: "/media/hero/herosectionbg.png", width: 1672, height: 941 },
     posterMobile: { src: "/media/hero/herosection-mobile.png", width: 941, height: 1672 },
     /**
-     * Short film behind the hero's "Play film" button. PLACEHOLDER: an 8-second silent push-in
-     * on the hero still, not filmed footage. Replace with the approved film under a new file name;
-     * a film with speech or meaningful audio also needs captions (docs/media-motion.md).
+     * Film behind the hero's "Play film" button, opened in a pop-up with sound and native
+     * controls (18s, 1280×720, H.264 fast-start, ≈5.6MB). Source: app/(public)/videos/hero.mp4.
+     * The poster is the film's opening frame. A film with speech or meaningful audio also
+     * needs captions (docs/media-motion.md).
      */
-    film: { src: "/media/hero/film-placeholder.mp4", poster: "/media/hero/herosectionbg.png" },
+    film: { src: "/media/hero/noura-hero-film.mp4", poster: "/media/hero/noura-hero-poster.jpg" },
   },
 } as const;
 
@@ -72,7 +73,8 @@ export const media = {
  * a short link row and a back-to-top control. Page anchors only, so no link dead-ends.
  */
 export const footer = {
-  place: "THE INNER EDIT - GOA - FEB 2027",
+  /** No-break spaces before the dashes, so a wrapped line ends on a dash rather than starting with one. */
+  place: "THE INNER EDIT\u00a0- GOA\u00a0- FEB 2027",
   backToTop: "Back to top",
   /** Always shown: the enquiry section and the FAQ page (FAQ is linked only from here). */
   nav: [

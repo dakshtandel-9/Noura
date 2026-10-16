@@ -11,7 +11,7 @@
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   align-items: center;
-  gap: clamp(24px, 4vw, 72px);
+  gap: clamp(24px, 4vw, 56px);
   padding-block: clamp(28px, 3vw, 44px);
 }
 
@@ -30,15 +30,17 @@
   max-width: none;
   justify-self: center;
   font-family: var(--font-display);
-  font-size: clamp(16px, 1.2vw, 19px);
+  font-size: clamp(16px, 1.2vw, 17px);
   letter-spacing: 0.04em;
+  text-align: center;
+  text-wrap: balance;
   color: var(--color-ink);
 }
 
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px clamp(24px, 3vw, 48px);
+  gap: 8px clamp(24px, 3vw, 40px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -50,7 +52,7 @@
   min-height: 44px;
   color: var(--color-ink);
   font-family: var(--font-display);
-  font-size: clamp(15px, 1.1vw, 18px);
+  font-size: clamp(15px, 1.1vw, 17px);
   text-decoration: none;
   transition: color var(--duration-micro) ease-out;
 }
@@ -85,7 +87,9 @@
   transform: rotate(180deg);
 }
 
-@media (max-width: 1023px) {
+/* Logo, place and the top control in a row, with the links underneath, until the single row has
+   room for the place line beside the links. */
+@media (max-width: 1199px) {
   .inner {
     grid-template-columns: 1fr auto auto;
     row-gap: 12px;
@@ -110,6 +114,7 @@
 
   .place {
     justify-self: center;
+    letter-spacing: 0.02em;
   }
 
   .links {

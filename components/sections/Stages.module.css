@@ -83,7 +83,7 @@
 .lead {
   margin-top: 18px;
   font-size: 16px;
-  line-height: 1.65;
+  line-height: 26px;
   color: var(--color-ink);
 }
 
@@ -94,7 +94,7 @@
 .themes {
   margin-top: 10px;
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 26px;
   color: var(--color-muted);
 }
 
@@ -131,7 +131,9 @@
     min-height: 0;
   }
 
+  /* Full card width again: the tablet rule centres it, which collapses the text to one word a line. */
   .body {
+    align-self: stretch;
     padding: 24px 22px 28px;
   }
 }
