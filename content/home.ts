@@ -401,7 +401,7 @@ export const getInTouch = {
   details: [
     { id: "email", icon: "mail", label: "Email", value: "siddkochhar@gmail.com", href: "mailto:siddkochhar@gmail.com" },
     { id: "phone", icon: "phone", label: "Phone / WhatsApp", value: "+91 80088 85464", href: "tel:+918008885464" },
-    { id: "based", icon: "map-pin", label: "Based in", value: "Goa, India" },
+    { id: "based", icon: "map-pin", label: "Based in", value: "Porvorim, North Goa, Goa - 403501" },
     { id: "response", icon: "clock", label: "Response time", value: "Within 24 hours" },
   ] satisfies { id: string; icon: IconName; label: string; value: string; href?: string }[],
 };
