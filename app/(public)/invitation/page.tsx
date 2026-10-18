@@ -62,7 +62,7 @@ export default function InvitationPage() {
             </h1>
             <p className={styles.intro}>
               {copy.intro.before}
-              <strong>{copy.intro.strong}</strong>
+              {copy.intro.strong}
               {copy.intro.after}
             </p>
 
