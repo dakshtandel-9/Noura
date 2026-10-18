@@ -162,7 +162,7 @@ export const aboutPage = {
     bio: "Board member introduction to be supplied.",
   },
   philosophy: {
-    label: "03 / Our philosophy",
+    label: "Our philosophy",
     items: [
       { title: "Wellness", text: "Thoughtfully curated experiences that restore balance and vitality." },
       { title: "Perspective", text: "Diverse expertise and fresh thinking to inspire new ways of seeing." },
@@ -170,7 +170,7 @@ export const aboutPage = {
     ],
   },
   home: {
-    label: "04 / Our home",
+    label: "Our home",
     heading: "Our home, in Goa.",
     text: "NOURA is based in Goa, India — a place where nature, culture and a long tradition of wellbeing meet.",
     connectLabel: "Visit / Connect",
