@@ -5,13 +5,12 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Icon } from "@/components/ui/Icon";
 import { FIELD_LIMITS } from "@/content/home";
+import { seoPages } from "@/content/seo";
 import { invitationPage as copy } from "@/content/subpages";
+import { pageMetadata } from "@/lib/seo";
 import styles from "./invitation.module.css";
 
-export const metadata: Metadata = {
-  title: "Begin your journey \u2014 NOURA",
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = pageMetadata(seoPages.invitation);
 
 /** Required marker; screen readers get the native `required` state instead. */
 function Req() {

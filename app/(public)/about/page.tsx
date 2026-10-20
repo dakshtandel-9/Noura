@@ -6,13 +6,12 @@ import { SubpagePhoto as Photo } from "@/components/subpages/SubpagePhoto";
 import shared from "@/components/subpages/subpage.module.css";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { seoPages } from "@/content/seo";
 import { aboutPage as copy } from "@/content/subpages";
+import { pageMetadata } from "@/lib/seo";
 import styles from "./about.module.css";
 
-export const metadata: Metadata = {
-  title: "About Noura",
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = pageMetadata(seoPages.about);
 
 export default function AboutPage() {
   const { founder, board, philosophy, home, closing, images } = copy;

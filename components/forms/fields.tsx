@@ -1,35 +1,7 @@
-import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
+import type { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
 import { Icon } from "@/components/ui/Icon";
+import { FieldShell } from "./FieldShell";
 import styles from "./forms.module.css";
-
-interface FieldShellProps {
-  id: string;
-  label: string;
-  /** Muted note after the label, e.g. "(optional)". */
-  hint?: string;
-  required?: boolean;
-  className?: string;
-  children: ReactNode;
-}
-
-/** Visible label above an underlined control; the asterisk is visual, `required` is announced. */
-function FieldShell({ id, label, hint, required, className, children }: FieldShellProps) {
-  return (
-    <div className={[styles.field, className].filter(Boolean).join(" ")}>
-      <label className={styles.label} htmlFor={id}>
-        {label}
-        {hint && <span className={styles.hint}> {hint}</span>}
-        {required && (
-          <span className={styles.required} aria-hidden="true">
-            {" "}
-            *
-          </span>
-        )}
-      </label>
-      {children}
-    </div>
-  );
-}
 
 type TextFieldProps = { id: string; label: string; hint?: string; className?: string } & Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -44,33 +16,7 @@ export function TextField({ id, label, hint, className, required, ...rest }: Tex
   );
 }
 
-type SelectFieldProps = {
-  id: string;
-  label: string;
-  placeholder: string;
-  options: readonly string[];
-  className?: string;
-} & Omit<SelectHTMLAttributes<HTMLSelectElement>, "id" | "className" | "children">;
-
-export function SelectField({ id, label, placeholder, options, className, required, ...rest }: SelectFieldProps) {
-  return (
-    <FieldShell id={id} label={label} required={required} className={className}>
-      <span className={styles.selectWrap}>
-        <select id={id} className={`${styles.control} ${styles.select}`} required={required} defaultValue="" {...rest}>
-          <option value="" disabled={required}>
-            {placeholder}
-          </option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <Icon name="chevron-down" size={20} className={styles.chevron} />
-      </span>
-    </FieldShell>
-  );
-}
+export { SelectField } from "./SelectField";
 
 type TextareaFieldProps = { id: string; label: string; className?: string } & Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,

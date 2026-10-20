@@ -245,15 +245,17 @@
   .dialog {
     width: 100vw;
   }
+}
 
-  /* Sits inside the frame on a phone, where there is no room above the video. */
+/*
+ * Sits inside the frame on a phone, and on short screens (phones on their side), where there is
+ * no room above the video and the button would otherwise sit off the top of the screen.
+ */
+@media (max-width: 767px), (max-height: 640px) {
   .dialogClose {
     top: 8px;
     right: 8px;
-    background: rgb(14 24 38 / 0.6);
-  }
-
-  .dialogFrame:has(.dialogVideo) .dialogClose {
     z-index: 1;
+    background: rgb(14 24 38 / 0.6);
   }
 }

@@ -3,11 +3,10 @@ import { RevealObserver } from "@/components/layout/RevealObserver";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { GetInTouch } from "@/components/sections/GetInTouch";
+import { seoPages } from "@/content/seo";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Noura",
-  description: "Send an enquiry to NOURA or reach the team by email or phone.",
-};
+export const metadata: Metadata = pageMetadata(seoPages.contact);
 
 /** The contact details band on its own page; the enquiry form lives on the home page. */
 export default function ContactPage() {

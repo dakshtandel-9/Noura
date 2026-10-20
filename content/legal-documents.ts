@@ -1,6 +1,4 @@
-/** Website-ready draft supplied in Noura_Privacy_and_Terms_Conditions.docx.
- * Keep the source wording intact until the owner supplies final approved legal details.
- */
+/** Final text supplied in Noura_Privacy_and_Terms_Conditions.docx, verified by the owner. */
 export interface LegalSection {
   title: string;
   paragraphs: readonly string[];
@@ -14,7 +12,7 @@ export interface LegalDocument {
   introduction: string;
   sections: readonly LegalSection[];
   dateLabel: string;
-  datePlaceholder: string;
+  date: string;
   question: string;
 }
 
@@ -91,7 +89,7 @@ export const legalDocuments = {
       },
     ],
     dateLabel: "Effective date",
-    datePlaceholder: "[DD Month YYYY]",
+    date: "21 October 2026",
     question: "Questions about your privacy?",
   },
   terms: {
@@ -180,7 +178,6 @@ export const legalDocuments = {
         title: "Governing Law",
         paragraphs: [
           "These Terms are governed by the laws of India, unless otherwise required by applicable law. Any dispute arising in connection with these Terms or a Noura experience shall be subject to the jurisdiction of the courts specified by Noura in the final version of these Terms.",
-          "Recommended final placeholder: [Courts of Goa, India / other agreed jurisdiction].",
         ],
       },
       {
@@ -190,7 +187,7 @@ export const legalDocuments = {
       },
     ],
     dateLabel: "Last updated",
-    datePlaceholder: "[DD Month YYYY]",
+    date: "21 October 2026",
     question: "Have a question?",
   },
 } as const satisfies Record<"privacy" | "terms", LegalDocument>;

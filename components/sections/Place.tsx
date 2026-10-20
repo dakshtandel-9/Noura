@@ -26,10 +26,7 @@ export function Place() {
               </span>
             ))}
           </p>
-          <p className={styles.note}>
-            <span className={styles.line}>{copy.note[0]}</span>
-            <span className={styles.line}>{copy.note[1]}</span>
-          </p>
+          <p className={styles.note}>{copy.note.join(" ")}</p>
         </div>
 
         <ul className={styles.mosaic} role="list">

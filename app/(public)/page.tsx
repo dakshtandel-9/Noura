@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { RevealObserver } from "@/components/layout/RevealObserver";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -11,6 +12,11 @@ import { Place } from "@/components/sections/Place";
 import { Practitioners } from "@/components/sections/Practitioners";
 import { Stages } from "@/components/sections/Stages";
 import { Story } from "@/components/sections/Story";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { seoPages } from "@/content/seo";
+import { organizationJsonLd, pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata(seoPages.home);
 
 /**
  * Current landing narrative: arrival → story → founder note → stages → experiences →
@@ -35,6 +41,7 @@ export default function HomePage() {
       </main>
       <SiteFooter />
       <RevealObserver />
+      <JsonLd data={organizationJsonLd()} />
     </>
   );
 }

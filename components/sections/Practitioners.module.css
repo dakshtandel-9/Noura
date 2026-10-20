@@ -47,10 +47,17 @@
   transition: border-color var(--duration-micro) ease-out, background var(--duration-micro) ease-out;
 }
 
-.toggle:hover,
 .toggle[aria-expanded="true"] {
   border-color: var(--color-gold);
   background: var(--color-background);
+}
+
+/* Mouse and trackpad only: a phone keeps :hover after a tap, so a closed card would still look open. */
+@media (hover: hover) {
+  .toggle:hover {
+    border-color: var(--color-gold);
+    background: var(--color-background);
+  }
 }
 
 .toggle:focus-visible {

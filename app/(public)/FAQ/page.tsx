@@ -4,13 +4,13 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SubpagePhoto as Photo } from "@/components/subpages/SubpagePhoto";
 import shared from "@/components/subpages/subpage.module.css";
 import { ButtonLink } from "@/components/ui/Button";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { seoPages } from "@/content/seo";
 import { faqPage as copy } from "@/content/subpages";
+import { faqJsonLd, pageMetadata } from "@/lib/seo";
 import styles from "./faq.module.css";
 
-export const metadata: Metadata = {
-  title: "Frequently asked questions — NOURA",
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = pageMetadata(seoPages.faq);
 
 type Item = { readonly q: string; readonly a: readonly string[] };
 
@@ -110,6 +110,7 @@ export default function FaqPage() {
         </section>
       </main>
       <SiteFooter />
+      <JsonLd data={faqJsonLd(copy.groups)} />
     </div>
   );
 }

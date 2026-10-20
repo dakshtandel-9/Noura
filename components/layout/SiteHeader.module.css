@@ -212,8 +212,9 @@
   border-top: 0;
   border-radius: 0 0 var(--radius-card) var(--radius-card);
   box-shadow: 0 24px 40px rgb(23 45 30 / 0.08);
-  /* Short landscape screens: the panel scrolls rather than running off the bottom. */
-  max-height: calc(100dvh - 100%);
+  /* Short landscape screens: the panel scrolls rather than running off the bottom. It starts 1px
+     under the header, hence the extra 1px. */
+  max-height: calc(100dvh - 100% - 1px);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -308,7 +309,7 @@
     left: 0;
     right: 0;
     width: auto;
-    height: calc(100dvh - 100%);
+    height: calc(100dvh - 100% - 1px);
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: 12px var(--edge) 32px;

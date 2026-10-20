@@ -161,8 +161,9 @@
 
 .label::after {
   content: "";
-  /* The rule gives way first, so the label stays on one line on narrow phones. */
-  flex: 0 999 140px;
+  /* Only the room the words leave (up to 140px), so the label stays on one line on narrow phones. */
+  flex: 1 1 0;
+  max-width: 140px;
   height: 1px;
   background: var(--color-border);
 }

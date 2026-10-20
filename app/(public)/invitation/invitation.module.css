@@ -219,9 +219,12 @@
   cursor: pointer;
 }
 
-.pill:hover {
-  border-color: var(--color-ink);
-  color: var(--color-ink);
+/* Mouse and trackpad only, so a pill tapped off on a phone doesn't keep the darker outline. */
+@media (hover: hover) {
+  .pill:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
 }
 
 .pill:has(.pillInput:checked) {
@@ -233,6 +236,38 @@
 .pill:has(.pillInput:focus-visible) {
   outline: 2px solid var(--color-focus);
   outline-offset: 3px;
+}
+
+/*
+ * Browsers without :has() (Firefox before 121): the checked fill and the focus ring are drawn
+ * around the label text instead, so a choice still shows once the hidden checkbox is ticked.
+ */
+@supports not selector(:has(*)) {
+  .pill {
+    isolation: isolate;
+  }
+
+  .pillInput:checked + span {
+    color: #fff;
+  }
+
+  .pillInput:checked + span::before,
+  .pillInput:focus-visible + span::after {
+    content: "";
+    position: absolute;
+    border-radius: var(--radius-pill);
+  }
+
+  .pillInput:checked + span::before {
+    inset: -1px;
+    z-index: -1;
+    background: #3b3a26;
+  }
+
+  .pillInput:focus-visible + span::after {
+    inset: -6px;
+    border: 2px solid var(--color-focus);
+  }
 }
 
 .submit {

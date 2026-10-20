@@ -1,14 +1,10 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { legalDocuments, type LegalDocumentKey } from "@/content/legal-documents";
 import styles from "./LegalDocumentPage.module.css";
 
-/** The supplied document is still a draft with unresolved identity, contact and date fields. */
 export function LegalDocumentPage({ kind }: { kind: LegalDocumentKey }) {
-  if (process.env.NODE_ENV === "production") notFound();
-
   const document = legalDocuments[kind];
 
   return (
@@ -24,9 +20,6 @@ export function LegalDocumentPage({ kind }: { kind: LegalDocumentKey }) {
         </section>
 
         <div className={styles.body}>
-          <div className={styles.reviewNote} role="note">
-            Website-ready draft for review. The business details, dates and final legal wording are still to be confirmed.
-          </div>
           <div className={styles.sections}>
             {document.sections.map((section, index) => (
               <section className={styles.section} key={section.title} aria-labelledby={`${kind}-section-${index + 1}`}>
@@ -36,8 +29,8 @@ export function LegalDocumentPage({ kind }: { kind: LegalDocumentKey }) {
                   {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                   {"contact" in section && section.contact && (
                     <address className={styles.address}>
-                      <span>[Noura Legal Entity Name]</span>
-                      <span>[Goa, India – Full Address]</span>
+                      <span>Noura</span>
+                      <span>Porvorim, North Goa, Goa - 403501</span>
                       <span>Email: siddkochhar@gmail.com</span>
                       <span>Phone: +91 80088 85464</span>
                     </address>
@@ -49,7 +42,7 @@ export function LegalDocumentPage({ kind }: { kind: LegalDocumentKey }) {
               </section>
             ))}
           </div>
-          <p className={styles.date}>{document.dateLabel}: {document.datePlaceholder}</p>
+          <p className={styles.date}>{document.dateLabel}: {document.date}</p>
         </div>
 
         <aside className={styles.contact} aria-label="Contact Noura">
