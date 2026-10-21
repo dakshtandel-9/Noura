@@ -4,7 +4,7 @@ import styles from "./ClosingBanner.module.css";
 
 /**
  * Closing banner: a wide picture with the closing line, the place and month, and the invitation
- * action over its right side. Grey block until an image is set in content/home.ts; a scrim keeps
+ * action over its left side. Grey block until an image is set in content/home.ts; a scrim keeps
  * the white text readable over any picture.
  */
 export function ClosingBanner() {

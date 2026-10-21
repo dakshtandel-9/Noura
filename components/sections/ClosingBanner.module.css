@@ -1,6 +1,6 @@
 /*
- * Wide picture with the closing copy on its right (2026-10-03 reference). The grey ground shows
- * until an image is set; the scrim darkens the right side so white text holds ≥4.5:1 over any
+ * Wide picture with the closing copy on its left (2026-10-03 reference). The grey ground shows
+ * until an image is set; the scrim darkens the left side so white text holds ≥4.5:1 over any
  * picture. On phones the copy moves to the lower part of a taller frame.
  */
 .section {
@@ -12,9 +12,9 @@
   isolation: isolate;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   min-height: clamp(420px, 36vw, 600px);
-  /* Full bleed; the copy's right edge keeps the page's content line. */
+  /* Full bleed; the copy's left edge keeps the page's content line. */
   padding: clamp(48px, 5vw, 80px) max(var(--gutter), calc((100% - var(--content-max)) / 2));
   overflow: hidden;
   /* Placeholder grey, shown until an image is set in content/home.ts. */
@@ -37,7 +37,7 @@
   inset: 0;
   z-index: -1;
   background: linear-gradient(
-    270deg,
+    90deg,
     rgb(20 26 22 / 0.6) 0%,
     rgb(20 26 22 / 0.5) 34%,
     rgb(20 26 22 / 0.24) 52%,
@@ -47,8 +47,8 @@
 
 .copy {
   width: min(100%, 440px);
-  /* The block starts a little past the middle, as in the reference. */
-  margin-right: clamp(0px, 4vw, 80px);
+  /* The block sits on the left, inset a little from the content line. */
+  margin-left: clamp(0px, 4vw, 80px);
 }
 
 .title {
@@ -119,11 +119,11 @@
   }
 
   .scrim {
-    background: linear-gradient(270deg, rgb(20 26 22 / 0.62) 0%, rgb(20 26 22 / 0.5) 45%, rgb(20 26 22 / 0.2) 75%, rgb(20 26 22 / 0) 100%);
+    background: linear-gradient(90deg, rgb(20 26 22 / 0.62) 0%, rgb(20 26 22 / 0.5) 45%, rgb(20 26 22 / 0.2) 75%, rgb(20 26 22 / 0) 100%);
   }
 
   .copy {
-    margin-right: 0;
+    margin-left: 0;
   }
 }
 
@@ -151,7 +151,7 @@
 
   .copy {
     width: 100%;
-    margin-right: 0;
+    margin-left: 0;
   }
 
   .title {

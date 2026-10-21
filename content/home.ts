@@ -109,7 +109,7 @@ export const place = {
     "Where nature is never far away.",
     "Where the air feels different.",
     "Where dinner can move outdoors.",
-    "Where a conversation can continue long after sunset.",
+    "Where conversations continue long after sunset.",
   ],
   note: ["The destination will be revealed", "to invited guests."],
   tiles: [
@@ -148,9 +148,9 @@ export const experienceTiles: ExperienceTile[] = [
   { id: "meditation", title: "Meditation & Breathwork", lines: ["Calm your mind.", "Open your breath."], image: { src: "/media/seven-panel-scenes/02-meditation-bowl.webp", width: 1086, height: 1448 } },
   { id: "music", title: "Music", lines: ["Surrender to", "the sound within."], image: { src: "/media/seven-panel-scenes/03-handpan-sunset.webp", width: 1086, height: 1448 } },
   { id: "nutrition", title: "Nutrition", lines: ["Nourish your body.", "Fuel your journey."], image: { src: "/media/seven-panel-scenes/04-coastal-salad.webp", width: 1086, height: 1448 } },
-  { id: "stays", title: "Luxury Stays", lines: ["Extraordinary places.", "Deeper rest."], image: { src: "/media/seven-panel-scenes/05-pool-terrace.webp", width: 1086, height: 1448 } },
-  { id: "longevity", title: "Longevity & Conversations", lines: ["Live well. Share deeper."], image: { src: "/media/seven-panel-scenes/06-coastal-conversation.webp", width: 1086, height: 1448 } },
-  { id: "destinations", title: "Destinations", lines: ["New places.", "Deeper perspectives."], image: { src: "/media/seven-panel-scenes/07-cliffside-retreat.webp", width: 1086, height: 1448 } },
+  { id: "stays", title: "Luxury Stays", lines: ["Exceptional places.", "Restful moments."], image: { src: "/media/seven-panel-scenes/05-pool-terrace.webp", width: 1086, height: 1448 } },
+  { id: "longevity", title: "Longevity & Conversations", lines: ["Live well.", "Connect meaningfully."], image: { src: "/media/seven-panel-scenes/06-coastal-conversation.webp", width: 1086, height: 1448 } },
+  { id: "destinations", title: "Destinations", lines: ["Beautiful places.", "Unforgettable moments."], image: { src: "/media/seven-panel-scenes/07-cliffside-retreat.webp", width: 1086, height: 1448 } },
 ];
 
 /** Visible heading over the cards and the single action under them (2026-10-03 reference). */
@@ -367,7 +367,7 @@ export const closingBanner = {
   meta: ["THE INNER EDIT\u00a0- GOA\u00a0- FEB 2027", "By invitation"],
   cta: "Request an invitation",
   ctaHref: "/invitation",
-  image: { src: "/media/beach-sunset-gathering.png", width: 2243, height: 701 } as MediaImage | null,
+  image: { src: "/media/closing-banner.jpg", width: 1600, height: 533 } as MediaImage | null,
 };
 
 /**
@@ -399,7 +399,7 @@ export const getInTouch = {
   titleLines: ["Let's Begin", "Your Journey"],
   intro: "",
   details: [
-    { id: "email", icon: "mail", label: "Email", value: "siddkochhar@gmail.com", href: "mailto:siddkochhar@gmail.com" },
+    { id: "email", icon: "mail", label: "Email", value: "hello@nourawellbing.com", href: "mailto:hello@nourawellbing.com" },
     { id: "phone", icon: "phone", label: "Phone / WhatsApp", value: "+91 80088 85464", href: "tel:+918008885464" },
     { id: "based", icon: "map-pin", label: "Based in", value: "Porvorim, North Goa, Goa - 403501" },
     { id: "response", icon: "clock", label: "Response time", value: "Within 24 hours" },

@@ -10,7 +10,7 @@
 
 .inner {
   display: grid;
-  grid-template-columns: minmax(360px, 1.3fr) minmax(0, 2.7fr);
+  grid-template-columns: minmax(400px, 1.3fr) minmax(0, 2.7fr);
   gap: clamp(48px, 5.5vw, 104px);
   align-items: center;
   max-width: calc(var(--content-max) + 2 * var(--gutter));
@@ -43,6 +43,13 @@
 
 .line {
   display: block;
+}
+
+/* Side by side with the mosaic, each supporting line stays on one row. */
+@media (min-width: 1200px) {
+  .lines .line {
+    white-space: nowrap;
+  }
 }
 
 .note {

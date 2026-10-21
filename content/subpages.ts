@@ -178,7 +178,7 @@ export const aboutPage = {
     details: [
       { id: "address", label: "NOURA", value: "Porvorim, North Goa, Goa - 403501" },
       { id: "phone", label: "Phone", value: "+91 80088 85464" },
-      { id: "email", label: "Email", value: "siddkochhar@gmail.com" },
+      { id: "email", label: "Email", value: "hello@nourawellbing.com" },
     ],
   },
   closing: {

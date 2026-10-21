@@ -31,7 +31,7 @@ export function LegalDocumentPage({ kind }: { kind: LegalDocumentKey }) {
                     <address className={styles.address}>
                       <span>Noura</span>
                       <span>Porvorim, North Goa, Goa - 403501</span>
-                      <span>Email: siddkochhar@gmail.com</span>
+                      <span>Email: hello@nourawellbing.com</span>
                       <span>Phone: +91 80088 85464</span>
                     </address>
                   )}
