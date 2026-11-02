@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -16,8 +17,25 @@ import styles from "./SiteHeader.module.css";
  */
 export function SiteHeader({ solid: alwaysSolid = false }: { solid?: boolean } = {}) {
   const [open, setOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+  const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const checkSession = () => {
+      fetch("/api/user/session", { cache: "no-store", signal: controller.signal })
+        .then(async (response) => {
+          const result = response.ok ? await response.json() : null;
+          if (!controller.signal.aborted) setSignedIn(result?.authenticated === true);
+        })
+        .catch(() => { if (!controller.signal.aborted) setSignedIn(false); });
+    };
+    checkSession();
+    window.addEventListener("focus", checkSession);
+    return () => { controller.abort(); window.removeEventListener("focus", checkSession); };
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -72,6 +90,7 @@ export function SiteHeader({ solid: alwaysSolid = false }: { solid?: boolean } =
               {item.label}
             </Link>
           ))}
+          {signedIn && <Link href="/members" className={styles.navLink}>Members</Link>}
         </nav>
 
         <ButtonLink href={headerCta.href} variant="secondary" icon={null} className={styles.cta}>
@@ -100,6 +119,7 @@ export function SiteHeader({ solid: alwaysSolid = false }: { solid?: boolean } =
               </Link>
             </li>
           ))}
+          {signedIn && <li><Link href="/members" className={styles.menuLink} onClick={close}>Members</Link></li>}
         </ul>
         <ButtonLink
           href={headerCta.href}

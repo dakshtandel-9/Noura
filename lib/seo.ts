@@ -10,7 +10,7 @@ export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:30
 export const indexable = process.env.NEXT_PUBLIC_SITE_INDEXABLE === "true";
 
 /** Paths crawlers never need: the private admin and the request API. */
-const privatePaths = ["/admin", "/api/"];
+const privatePaths = ["/admin", "/api/", "/login", "/members"];
 
 /** Open Graph fields every page shares; pages add their own title, description and URL. */
 const openGraphBase = { type: "website" as const, siteName: site.name, locale: "en_IN", images: [shareImage] };

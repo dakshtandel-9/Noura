@@ -1,0 +1,40 @@
+.button {
+  position: fixed;
+  z-index: 40;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 5px 18px rgb(20 28 22 / 0.24);
+  transition: transform var(--duration-micro) ease-out, box-shadow var(--duration-micro) ease-out;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgb(20 28 22 / 0.3);
+}
+
+.button:focus-visible {
+  outline-color: var(--color-focus);
+}
+
+.button svg {
+  display: block;
+  width: 31px;
+  height: 31px;
+  fill: currentColor;
+}
+
+@media (max-width: 640px) {
+  .button {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    width: 54px;
+    height: 54px;
+  }
+}

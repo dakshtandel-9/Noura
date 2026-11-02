@@ -112,7 +112,7 @@ export function AdminInbox() {
   const newCount = page ? page.newTotals.invitation + page.newTotals.session : null;
 
   return <section className={styles.dashboard}>
-    <aside className={styles.sidebar} aria-label="Admin navigation"><p className={styles.sidebarLabel}>WORKSPACE</p><a href="#overview" className={styles.sidebarLink}>Overview</a><a href="#leads" className={styles.sidebarLink}>Leads</a><p className={styles.sidebarFoot}>Private records · NOURA</p></aside>
+    <aside className={styles.sidebar} aria-label="Admin navigation"><p className={styles.sidebarLabel}>WORKSPACE</p><a href="#overview" className={styles.sidebarLink}>Overview</a><a href="#leads" className={styles.sidebarLink}>Leads</a><a href="/admin/users" className={styles.sidebarLink}>Users</a><p className={styles.sidebarFoot}>Private records · NOURA</p></aside>
     <div className={styles.dashboardMain}>
       <div className={styles.titleRow}><div><p className={styles.eyebrow}>NOURA / PRIVATE WORKSPACE</p><h1>Lead dashboard</h1><p className={styles.subtitle}>Review each enquiry and record your follow-up.</p></div>
         <button className={styles.secondary} disabled={signingOut} onClick={async () => {

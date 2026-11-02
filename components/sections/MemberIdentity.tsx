@@ -5,8 +5,8 @@ import { media } from "@/content/site";
 import styles from "./MemberIdentity.module.css";
 
 /**
- * 12 — Member identity: a single illustrative card on a dark botanical ground. The card shows
- * the demonstration code only — no real member, no working QR and no download (docs/design.md §8).
+ * 12 — Member identity: illustrative invitation details on a dark botanical ground. The sample
+ * shows the demonstration code only — no real member, working QR or download (docs/design.md §8).
  */
 export function MemberIdentity() {
   const { card } = copy;
@@ -38,24 +38,9 @@ export function MemberIdentity() {
           <p className={styles.text}>{copy.intro}</p>
         </div>
 
-        {/* An illustration, not a real card: the sample is announced, then read as plain text. */}
+        {/* An illustration, not a real record: the sample is announced, then read as plain text. */}
         <figure className={styles.cardFigure} data-reveal>
           <div className={styles.card}>
-            <div className={styles.cardMedia} aria-hidden="true">
-              {card.image && (
-                <>
-                  <Image
-                    className={styles.cardImage}
-                    src={card.image.src}
-                    width={card.image.width}
-                    height={card.image.height}
-                    alt=""
-                    sizes="(max-width: 1023px) 100vw, 34vw"
-                  />
-                  <span className={styles.cardScrim} />
-                </>
-              )}
-            </div>
             <Image
               className={styles.wordmark}
               src={media.wordmarkTransparent.src}
@@ -83,7 +68,7 @@ export function MemberIdentity() {
 
             <p className={styles.cardFootnote}>{card.footnote}</p>
           </div>
-          <figcaption className="visually-hidden">Sample card. Not a real member record.</figcaption>
+          <figcaption className="visually-hidden">Sample invitation identity. Not a real member record.</figcaption>
         </figure>
       </div>
     </section>

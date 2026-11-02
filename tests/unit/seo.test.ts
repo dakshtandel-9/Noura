@@ -13,7 +13,7 @@ test("robots.txt blocks every crawler until indexing is switched on", () => {
 
 test("robots.txt at launch allows the site, keeps admin and the API out, and lists the sitemap", () => {
   const open = robotsConfig(true);
-  assert.deepEqual(open.rules, { userAgent: "*", allow: "/", disallow: ["/admin", "/api/"] });
+  assert.deepEqual(open.rules, { userAgent: "*", allow: "/", disallow: ["/admin", "/api/", "/login", "/members"] });
   assert.equal(open.sitemap, `${siteUrl}/sitemap.xml`);
 });
 

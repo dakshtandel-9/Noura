@@ -1,0 +1,35 @@
+{
+  "generator": "Built-in image_gen; no Higgsfield account used",
+  "created": "2026-10-30",
+  "purpose": "Original conceptual member page photography; fictional people and settings, not verified venue or guest imagery",
+  "prompts": [
+    {
+      "name": "arrival",
+      "prompt": "Use case: photorealistic-natural. Create an original editorial photograph for NOURA's private member retreat concept page. Quiet understated luxury, authentic tactile detail, warm ivory highlights, muted olive greens, natural honey sunlight, soft filmic contrast, realistic photography, never glossy CGI. Landscape 3:2 composition, no typography, no logos, no watermark, no collage, no borders. This is an imagined setting, not a depiction of any real resort.\nScene: An unhurried tropical shoreline at sunrise, gently curving empty beach, still sea on the left, coconut palms and understated sandy stone terraces at right, soft peach horizon, atmospheric distant coastline. Wide human-eye perspective with rich foreground texture, peaceful and believable."
+    },
+    {
+      "name": "garden",
+      "prompt": "Use case: photorealistic-natural. Create an original editorial photograph for NOURA's private member retreat concept page. Quiet understated luxury, authentic tactile detail, warm ivory highlights, muted olive greens, natural honey sunlight, soft filmic contrast, realistic photography, never glossy CGI. Landscape 3:2 composition, no typography, no logos, no watermark, no collage, no borders. This is an imagined setting, not a depiction of any real resort.\nScene: A quiet curving stone path through a lush tropical retreat garden at early morning. Tall palms, low white flowering plants, native greenery, a subtle still reflecting pool alongside the path. Intimate human-eye viewpoint, sunlight filtering between leaves, no people or ornate temples."
+    },
+    {
+      "name": "pavilion",
+      "prompt": "Use case: photorealistic-natural. Create an original editorial photograph for NOURA's private member retreat concept page. Quiet understated luxury, authentic tactile detail, warm ivory highlights, muted olive greens, natural honey sunlight, soft filmic contrast, realistic photography, never glossy CGI. Landscape 3:2 composition, no typography, no logos, no watermark, no collage, no borders. This is an imagined setting, not a depiction of any real resort.\nScene: A beautiful open-sided timber pavilion beside a tropical garden and quiet sea, linen-covered chairs and a simple long wooden table, palms framing a soft coastal horizon, a warm peaceful morning. Organic thatch roof, subtle handcrafted details, no people, no grand hotel, believable restrained architecture."
+    },
+    {
+      "name": "nourish",
+      "prompt": "Use case: photorealistic-natural. Create an original editorial photograph for NOURA's private member retreat concept page. Quiet understated luxury, authentic tactile detail, warm ivory highlights, muted olive greens, natural honey sunlight, soft filmic contrast, realistic photography, never glossy CGI. Landscape 3:2 composition, no typography, no logos, no watermark, no collage, no borders. This is an imagined setting, not a depiction of any real resort.\nScene: Close editorial food photograph of a chef's hands gently finishing a seasonal vegetable plate with tender green herbs. Handmade charcoal ceramic plate, roasted carrots and beets, vibrant greens, subtle creamy dressing, rustic wooden kitchen worktop. Side window light, narrow depth of field, natural hands, appetizing and refined, crop excludes faces."
+    },
+    {
+      "name": "salons",
+      "prompt": "Use case: photorealistic-natural. Create an original editorial photograph for NOURA's private member retreat concept page. Quiet understated luxury, authentic tactile detail, warm ivory highlights, muted olive greens, natural honey sunlight, soft filmic contrast, realistic photography, never glossy CGI. Landscape 3:2 composition, no typography, no logos, no watermark, no collage, no borders. This is an imagined setting, not a depiction of any real resort.\nScene: Four fictional adults in their thirties to fifties having a relaxed thoughtful small-group conversation on a shaded tropical veranda, seated in simple woven chairs around a low table with ceramic cups. Candid unstaged natural gestures, diverse South Asian and international guests wearing elegant plain linen, warm filtered afternoon sunlight, lush garden beyond. No microphones, no event signage, no celebrity resemblance."
+    },
+    {
+      "name": "evening",
+      "prompt": "Use case: photorealistic-natural. Create an original editorial photograph for NOURA's private member retreat concept page. Quiet understated luxury, authentic tactile detail, warm ivory highlights, muted olive greens, natural honey sunlight, soft filmic contrast, realistic photography, never glossy CGI. Landscape 3:2 composition, no typography, no logos, no watermark, no collage, no borders. This is an imagined setting, not a depiction of any real resort.\nScene: An intimate tropical coastal evening, four fictional adults seen candidly in profile and from behind around a small safe stone fire bowl on a terrace above a beach. Low wooden chairs, distant peach sunset on the sea, graceful tree canopy framing upper edge, warm amber firelight, enough light to see natural faces. Quiet conversation, sophisticated restrained travel editorial photography, no party, no dramatic oversized flames."
+    },
+    {
+      "name": "concierge",
+      "prompt": "Use case: photorealistic-natural. Create an original editorial photograph for NOURA's private member retreat concept page. Quiet understated luxury, authentic tactile detail, warm ivory highlights, muted olive greens, natural honey sunlight, soft filmic contrast, realistic photography, never glossy CGI. Landscape 3:2 composition, no typography, no logos, no watermark, no collage, no borders. This is an imagined setting, not a depiction of any real resort.\nScene: Still life of a blank ivory folded invitation, closed linen-bound journal, simple gold pen and small ceramic cup on a pale oak writing desk, with a leafy branch casting delicate shadows from the side. Soft daylight through an open tropical garden window. Tactile paper, subtly rumpled linen, close editorial composition, no legible writing anywhere, no logo."
+    }
+  ]
+}
