@@ -69,6 +69,32 @@ test("user checks request live revocation verification and reject expired, disab
   }
 });
 
+test("the signed-in card uses only its provisioned account name and stable unique code", async () => {
+  const uid = "dummy-card-user";
+  const data: Record<string, unknown> = { provisioned_by: "admin", full_name: "Example Card User" };
+  const claims: string[] = [];
+  const auth = { verifySessionCookie: async (_session: string, checkRevoked: boolean) => {
+    assert.equal(checkRevoked, true);
+    return { uid };
+  } } as unknown as Auth;
+  const ref = { id: uid, get: async () => ({ exists: true, ref, data: () => ({ ...data }) }) };
+  const db = {
+    collection: (name: string) => name === "user_accounts"
+      ? { doc: (requestedUid: string) => { assert.equal(requestedUid, uid); return ref; } }
+      : { doc: (code: string) => ({ create: async () => { claims.push(code); } }) },
+    runTransaction: async (operation: (tx: unknown) => Promise<string>) => operation({
+      get: async () => ({ data: () => ({ ...data }) }),
+      update: (_ref: unknown, change: Record<string, unknown>) => Object.assign(data, change),
+    }),
+  } as unknown as Firestore;
+  const first = await authorizeUser("dummy-session", { auth, db });
+  const second = await authorizeUser("dummy-session", { auth, db });
+  assert.deepEqual(first, { id: uid, full_name: "Example Card User", account_code: claims[0] });
+  assert.deepEqual(second, first);
+  assert.equal(claims.length, 1);
+  assert.match(claims[0]!, accountCodePattern);
+});
+
 test("provider rate-limit responses remain a generic sign-in failure", async () => {
   const oldApiKey = process.env.FIREBASE_WEB_API_KEY;
   process.env.FIREBASE_WEB_API_KEY = "dummy-key";

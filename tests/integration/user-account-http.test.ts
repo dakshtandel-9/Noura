@@ -61,6 +61,12 @@ test("HTTP account boundaries, cookies, redirects, login and logout", async () =
     response = await fetch(base + "/members", { headers: { Cookie: userCookie }, redirect: "manual" });
     assert.equal(response.status, 200);
     assert.match(response.headers.get("cache-control")!, /no-store/);
+    const cardMarkup = await response.text();
+    const accountCode = (await (await firebase()).db.collection("user_accounts").doc(createdId).get()).data()?.account_code;
+    assert.match(cardMarkup, /NOURA Privé/);
+    assert.ok(cardMarkup.includes(dummy.full_name));
+    assert.ok(typeof accountCode === "string" && cardMarkup.includes(accountCode));
+    assert.doesNotMatch(cardMarkup, /NRA-DEMO-001|Sample member/);
     response = await fetch(base + "/api/admin/requests", { headers: { Cookie: userCookie } });
     assert.equal(response.status, 401);
     response = await post("/api/admin/users", dummy, userCookie);
@@ -94,7 +100,7 @@ test("HTTP account boundaries, cookies, redirects, login and logout", async () =
     createdId = undefined;
   } finally {
     if (createdId) {
-      const { auth, db } = firebase();
+      const { auth, db } = await firebase();
       await db.collection("user_accounts").doc(createdId).delete();
       await auth.deleteUser(createdId);
     }

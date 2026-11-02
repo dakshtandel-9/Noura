@@ -13,6 +13,7 @@ export type UserAccountRecord = {
   version: number;
 };
 export type UserAccountPage = { records: UserAccountRecord[]; next: string | null };
+export type MemberCardAccount = Pick<UserAccountRecord, "full_name" | "account_code">;
 export type UserAccountUpdate = Pick<NewUserAccount, "full_name" | "email" | "phone"> & { version: number };
 
 function object(input: unknown): Record<string, unknown> {

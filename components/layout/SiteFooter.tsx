@@ -18,8 +18,8 @@ function isExternal(href: string) {
 
 /**
  * Footer strip under the closing banner: the full gold logo, place and month, a short link row and a
- * back-to-top control (2026-10-03 reference). Page anchors resolve from the home page so the
- * strip also works on the legal review pages.
+ * back-to-top control (2026-10-03 reference). Navigation anchors resolve from the home page;
+ * the top control returns to the current page's main content.
  */
 export function SiteFooter() {
   const links = [...copy.nav, ...copy.social, ...(showReviewPages ? legalLinks : [])];
@@ -62,9 +62,9 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        <Link className={styles.top} href="/#arrive" aria-label={copy.backToTop}>
+        <a className={styles.top} href="#main" aria-label={copy.backToTop}>
           <Icon name="arrow-down" size={18} className={styles.topIcon} />
-        </Link>
+        </a>
       </div>
     </footer>
   );

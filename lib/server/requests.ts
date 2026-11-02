@@ -14,7 +14,7 @@ export async function saveRequest(kind: RequestKind, raw: unknown) {
   const { notice, timezone } = collectionConfig();
   const { data, key } = parseRequest(kind, raw, timezone);
   const fingerprint = createHash("sha256").update(JSON.stringify(data)).digest("hex");
-  const { db } = firebase();
+  const { db } = await firebase();
   const ref = db.collection(requestCollection(kind)).doc(key);
   return db.runTransaction(async (tx) => {
     const prior = await tx.get(ref);
@@ -68,7 +68,7 @@ export async function listRequests(session: string | undefined, view: RequestVie
   authorizeSession(session);
   if (view !== "all" && cursor && !/^[0-9a-f-]{36}$/i.test(cursor)) throw new RequestError("Invalid page.");
   const positions = view === "all" ? parseAllCursor(cursor) : { [view]: cursor };
-  const db = database ?? firebase().db;
+  const db = database ?? (await firebase()).db;
   const collection = (kind: RequestKind) => db.collection(requestCollection(kind));
   const queryPage = async (kind: RequestKind) => {
     let query = collection(kind).orderBy("created_at", "desc").orderBy(FieldPath.documentId(), "desc").limit(21);
@@ -112,7 +112,7 @@ export async function listRequests(session: string | undefined, view: RequestVie
 export async function updateRequest(session: string | undefined, kind: RequestKind, id: string, input: unknown) {
   authorizeSession(session);
   const update = parseUpdate(kind, input);
-  return applyUpdate(firebase().db, kind, requestId(id), update, new Date());
+  return applyUpdate((await firebase()).db, kind, requestId(id), update, new Date());
 }
 
 /**
@@ -155,7 +155,7 @@ export async function deleteRequest(session: string | undefined, kind: RequestKi
   authorizeSession(session);
   const raw = input && typeof input === "object" && !Array.isArray(input) ? input as Record<string, unknown> : null;
   if (!raw || Object.keys(raw).some((key) => key !== "version") || !Number.isInteger(raw.version)) throw new RequestError("Invalid request.");
-  return applyDelete(firebase().db, kind, requestId(id), raw.version as number, new Date());
+  return applyDelete((await firebase()).db, kind, requestId(id), raw.version as number, new Date());
 }
 
 /** Permanently removes one request (an administrative deletion, docs/data-model.md → privacy). */

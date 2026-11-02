@@ -2,7 +2,7 @@ import "server-only";
 import type { Auth } from "firebase-admin/auth";
 import { FieldPath, FieldValue, type Firestore } from "firebase-admin/firestore";
 import { RequestError } from "../requests.ts";
-import { accountCodePattern, generateAccountCode, parseNewUserAccount, parseUserAccountId, parseUserAccountUpdate, parseUserCredentials, type UserAccountPage, type UserAccountRecord } from "../user-accounts.ts";
+import { accountCodePattern, generateAccountCode, parseNewUserAccount, parseUserAccountId, parseUserAccountUpdate, parseUserCredentials, type MemberCardAccount, type UserAccountPage, type UserAccountRecord } from "../user-accounts.ts";
 import { authorizeSession } from "./auth.ts";
 import { firebase } from "./firebase.ts";
 
@@ -46,8 +46,8 @@ async function claimAccountCode(db: Firestore, uid: string): Promise<string> {
 }
 
 // Accounts created before codes existed receive one the first time an admin lists them.
-async function ensureAccountCode(db: Firestore, doc: FirebaseFirestore.QueryDocumentSnapshot): Promise<string> {
-  const existing = doc.data().account_code;
+async function ensureAccountCode(db: Firestore, doc: FirebaseFirestore.DocumentSnapshot): Promise<string> {
+  const existing = doc.data()?.account_code;
   if (typeof existing === "string" && accountCodePattern.test(existing)) return existing;
   const claimed = await claimAccountCode(db, doc.id);
   const final = await db.runTransaction(async (tx) => {
@@ -65,7 +65,7 @@ async function ensureAccountCode(db: Firestore, doc: FirebaseFirestore.QueryDocu
 export async function createUserAccount(adminSession: string | undefined, input: unknown, services?: Services) {
   authorizeSession(adminSession);
   const account = parseNewUserAccount(input);
-  const { auth, db } = services ?? firebase();
+  const { auth, db } = services ?? await firebase();
   let uid: string | undefined;
   let code: string | undefined;
   try {
@@ -96,7 +96,7 @@ export async function createUserAccount(adminSession: string | undefined, input:
 export async function listUserAccounts(adminSession: string | undefined, cursor?: string | null, services?: Services): Promise<UserAccountPage> {
   authorizeSession(adminSession);
   if (cursor) parseUserAccountId(cursor);
-  const { db } = services ?? firebase();
+  const { db } = services ?? await firebase();
   let query = db.collection(accountCollection).orderBy(FieldPath.documentId()).limit(accountLimit + 1);
   if (cursor) query = query.startAfter(cursor);
   const snapshot = await query.get();
@@ -109,7 +109,7 @@ export async function updateUserAccount(adminSession: string | undefined, id: st
   authorizeSession(adminSession);
   const uid = parseUserAccountId(id);
   const update = parseUserAccountUpdate(input);
-  const { auth, db } = services ?? firebase();
+  const { auth, db } = services ?? await firebase();
   const ref = db.collection(accountCollection).doc(uid);
   const operation = `edit:${crypto.randomUUID()}`;
   const before = await db.runTransaction(async (tx) => {
@@ -149,7 +149,7 @@ export async function deleteUserAccount(adminSession: string | undefined, id: st
   const uid = parseUserAccountId(id);
   const value = input && typeof input === "object" && !Array.isArray(input) ? input as Record<string, unknown> : {};
   if (Object.keys(value).some((key) => key !== "version") || !Number.isSafeInteger(value.version) || (value.version as number) < 1) throw new RequestError("Refresh the users page and try again.", 409);
-  const { auth, db } = services ?? firebase();
+  const { auth, db } = services ?? await firebase();
   const ref = db.collection(accountCollection).doc(uid);
   const operation = `delete:${crypto.randomUUID()}`;
   await db.runTransaction(async (tx) => {
@@ -174,15 +174,19 @@ export async function deleteUserAccount(adminSession: string | undefined, id: st
 async function requireProvisionedUser(db: Firestore, uid: string) {
   const account = await db.collection(accountCollection).doc(uid).get();
   if (!account.exists || account.data()?.provisioned_by !== "admin" || account.data()?.pending_operation?.startsWith("delete:")) throw new RequestError("Please sign in with an account created by the NOURA team.", 401);
+  return account;
 }
 
-export async function authorizeUser(session: string | undefined, services?: Services) {
+export async function authorizeUser(session: string | undefined, services?: Services): Promise<{ id: string } & MemberCardAccount> {
   if (!session || session.length > 8192) throw new RequestError("Please sign in to continue.", 401);
-  const { auth, db } = services ?? firebase();
+  const { auth, db } = services ?? await firebase();
   try {
     const token = await auth.verifySessionCookie(session, true);
-    await requireProvisionedUser(db, token.uid);
-    return { id: token.uid };
+    const account = await requireProvisionedUser(db, token.uid);
+    const fullName = account.data()?.full_name;
+    if (typeof fullName !== "string" || !fullName.trim()) throw new RequestError("Account details are temporarily unavailable.", 503);
+    const accountCode = await ensureAccountCode(db, account);
+    return { id: token.uid, full_name: fullName.trim(), account_code: accountCode };
   } catch (error) {
     if (error instanceof RequestError) throw error;
     if (/^auth\/(session-cookie|id-token|argument-error|invalid-argument|user-disabled|user-not-found)/.test(codeOf(error))) throw new RequestError("Please sign in to continue.", 401);
@@ -192,7 +196,7 @@ export async function authorizeUser(session: string | undefined, services?: Serv
 
 export async function signInUser(input: unknown, services?: Services, fetcher: typeof fetch = fetch) {
   const account = parseUserCredentials(input);
-  const { auth, db } = services ?? firebase();
+  const { auth, db } = services ?? await firebase();
   const key = process.env.FIREBASE_WEB_API_KEY;
   if (!key) throw new RequestError("User sign-in is not configured yet.", 503);
   const host = process.env.FIREBASE_AUTH_EMULATOR_HOST;

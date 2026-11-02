@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { RevealObserver } from "@/components/layout/RevealObserver";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { GetInTouch } from "@/components/sections/GetInTouch";
 import { seoPages } from "@/content/seo";
@@ -16,7 +15,6 @@ export default function ContactPage() {
       <main id="main" tabIndex={-1}>
         <GetInTouch headingLevel="h1" />
       </main>
-      <SiteFooter />
       <RevealObserver />
     </>
   );

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { RevealObserver } from "@/components/layout/RevealObserver";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ClosingBanner } from "@/components/sections/ClosingBanner";
 import { FounderNote } from "@/components/sections/FounderNote";
@@ -39,7 +38,6 @@ export default function HomePage() {
         <MeetYourGuide />
         <ClosingBanner />
       </main>
-      <SiteFooter />
       <RevealObserver />
       <JsonLd data={organizationJsonLd()} />
     </>

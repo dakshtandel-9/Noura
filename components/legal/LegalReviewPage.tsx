@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { legalReviews, type LegalReviewKey } from "@/content/legal";
 import { media } from "@/content/site";
 import styles from "./LegalReviewPage.module.css";
@@ -43,7 +42,6 @@ export function LegalReviewPage({ kind }: { kind: LegalReviewKey }) {
           </div>
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }

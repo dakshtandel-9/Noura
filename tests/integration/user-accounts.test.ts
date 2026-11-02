@@ -14,7 +14,7 @@ process.env.ADMIN_SESSION_SECRET = "dummy-secret-for-tests-only-at-least-32-char
 const rejected = (status: number) => (error: unknown) => error instanceof RequestError && error.status === status;
 
 test("real emulator provisioning, login, account restrictions, session revocation and database rules", async () => {
-  const { auth, db } = firebase();
+  const { auth, db } = await firebase();
   const suffix = crypto.randomUUID();
   const account = { full_name: "Example User", email: `user-${suffix}@example.com`, phone: "+91 90000 00000", password: "example-password-123" };
   const created: string[] = [];
@@ -28,7 +28,7 @@ test("real emulator provisioning, login, account restrictions, session revocatio
     assert.equal((await auth.getUser(result.id)).disabled, false);
     await assert.rejects(() => createUserAccount(createSession(), { ...account, password: "different-password-123" }), rejected(409));
     const session = await signInUser({ email: account.email, password: account.password });
-    assert.deepEqual(await authorizeUser(session), { id: result.id });
+    assert.deepEqual(await authorizeUser(session), { id: result.id, full_name: account.full_name, account_code: result.account_code });
     assert.throws(() => authorizeSession(session), rejected(401));
     await assert.rejects(() => createUserAccount(session, account), rejected(401));
     await assert.rejects(() => signInUser({ email: account.email, password: "incorrect-password" }), rejected(401));
@@ -75,7 +75,7 @@ test("real emulator provisioning, login, account restrictions, session revocatio
 });
 
 test("admin user directory lists, edits and deletes accounts without changing their unique IDs", async () => {
-  const { auth, db } = firebase();
+  const { auth, db } = await firebase();
   const uidSuffix = crypto.randomUUID();
   const account = { full_name: "Directory Example", email: `directory-${uidSuffix}@example.com`, phone: "", password: "example-password-123" };
   const session = createSession();

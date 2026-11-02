@@ -443,16 +443,10 @@ export const memberIdentity = {
   titleLines: ["Something personal", "to carry forward."],
   intro: "Following approval, invited guests receive a personal invitation identity created for their experience.",
   card: {
-    label: "Private invitation",
-    nameLabel: "Guest name",
-    /** Placeholder wording, never a real member. */
-    name: "Sample member",
-    numberLabel: "Invitation number",
-    /** Demonstration code only (docs/data-model.md → ID format); never a real member code. */
-    number: "NRA-DEMO-001",
-    footnote: "Issued after approval",
-    /** Generated olive paper with subtle botanical embossing; no baked-in branding or text. */
-    image: { src: "/media/experiences/member-card-surface-v1.png", width: 1536, height: 1024 } satisfies MediaImage,
+    name: "NOURA Privé",
+    personLabel: "Personal to",
+    numberLabel: "Unique user ID",
+    footnote: "Private account preview",
   },
   image: { src: "/media/experiences/member-identity-background-v1.png", width: 2172, height: 724 } satisfies MediaImage,
 };

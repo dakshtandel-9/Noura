@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { legalDocuments, type LegalDocumentKey } from "@/content/legal-documents";
 import styles from "./LegalDocumentPage.module.css";
@@ -53,7 +52,6 @@ export function LegalDocumentPage({ kind }: { kind: LegalDocumentKey }) {
           </div>
         </aside>
       </main>
-      <SiteFooter />
     </>
   );
 }

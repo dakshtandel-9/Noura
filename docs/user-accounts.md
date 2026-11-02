@@ -33,7 +33,14 @@ stays the document key and internal identifier. Codes are claimed through a seco
 server-only collection, `user_account_codes/{code}`, using a create-if-absent write with
 retry on collision, so two accounts cannot share one. Codes are never reissued, even
 after an account is deleted. Accounts created before this change receive a code the
-first time an admin opens the Users list. Same deny-all rules; no migration script.
+first time an admin opens the Users list or the user opens `/members`. Same deny-all
+rules; no migration script.
+
+The authenticated `/members` page shows the signed-in account's name and
+`account_code` on an ivory-and-gold **NOURA Privé** card preview. The server reads only
+the session owner's provisioning record; legacy accounts without a code receive one
+through the same collision-checked claim. This is an account number, not the separate
+approved `members.member_code`, and the preview is not proof of membership approval.
 
 The creation operation checks the current admin cookie, validates an allowlist,
 creates a disabled Firebase Auth user, saves the provisioning record, then enables

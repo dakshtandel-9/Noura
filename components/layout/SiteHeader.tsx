@@ -90,7 +90,7 @@ export function SiteHeader({ solid: alwaysSolid = false }: { solid?: boolean } =
               {item.label}
             </Link>
           ))}
-          {signedIn && <Link href="/members" className={styles.navLink}>Members</Link>}
+          {signedIn && <Link href="/members" className={styles.navLink}>Membership</Link>}
         </nav>
 
         <ButtonLink href={headerCta.href} variant="secondary" icon={null} className={styles.cta}>
@@ -119,7 +119,7 @@ export function SiteHeader({ solid: alwaysSolid = false }: { solid?: boolean } =
               </Link>
             </li>
           ))}
-          {signedIn && <li><Link href="/members" className={styles.menuLink} onClick={close}>Members</Link></li>}
+          {signedIn && <li><Link href="/members" className={styles.menuLink} onClick={close}>Membership</Link></li>}
         </ul>
         <ButtonLink
           href={headerCta.href}

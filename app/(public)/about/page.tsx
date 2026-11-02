@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SubpagePhoto as Photo } from "@/components/subpages/SubpagePhoto";
 import shared from "@/components/subpages/subpage.module.css";
@@ -144,7 +143,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
     </div>
   );
 }

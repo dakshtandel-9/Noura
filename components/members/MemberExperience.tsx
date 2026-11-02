@@ -5,6 +5,7 @@ import { MemberIdentity } from "@/components/sections/MemberIdentity";
 import { Icon } from "@/components/ui/Icon";
 import { memberChapters, memberPhotos, preparationSteps, retreatDays, salonThemes, type MemberPhoto } from "@/content/members";
 import { media } from "@/content/site";
+import type { MemberCardAccount } from "@/lib/user-accounts";
 import styles from "./MemberExperience.module.css";
 
 function Photo({ photo, className = "", sizes = "(max-width: 767px) 100vw, 50vw", eager = false }: {
@@ -21,7 +22,7 @@ function ChapterLabel({ number, children }: { number: string; children: React.Re
 }
 
 /** Server-rendered editorial content. The owning route authorizes access before rendering it. */
-export function MemberExperience() {
+export function MemberExperience({ account }: { account: MemberCardAccount }) {
   return (
     <main id="main" className={styles.page}>
       <div className={styles.container}>
@@ -155,17 +156,9 @@ export function MemberExperience() {
       </div>
 
       <div className={`${styles.section} ${styles.identity}`}>
-        <MemberIdentity />
-        <p className={styles.sectionNote}>The invitation identity shown is illustrative. Your login does not constitute membership approval.</p>
+        <MemberIdentity account={account} />
       </div>
 
-      <div className={styles.container}>
-        <footer className={styles.footer}>
-          <Link href="/" aria-label="NOURA home"><Image src={media.wordmarkTransparent.src} width={media.wordmarkTransparent.width} height={media.wordmarkTransparent.height} alt="NOURA" sizes="132px" /></Link>
-          <p>A private gathering for conscious living.</p>
-          <a className={styles.backTop} href="#main">Back to the beginning <Icon name="arrow-down" size={16} /></a>
-        </footer>
-      </div>
     </main>
   );
 }

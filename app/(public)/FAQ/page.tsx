@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SubpagePhoto as Photo } from "@/components/subpages/SubpagePhoto";
 import shared from "@/components/subpages/subpage.module.css";
@@ -109,7 +108,6 @@ export default function FaqPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
       <JsonLd data={faqJsonLd(copy.groups)} />
     </div>
   );

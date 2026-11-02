@@ -12,7 +12,7 @@ export async function rateLimit(scope: string, request: Request, max: number) {
   const header = process.env.NOURA_TRUSTED_IP_HEADER;
   const identity = (header ? request.headers.get(header) : null)?.slice(0, 256) || "shared";
   const id = createHmac("sha256", secret).update(`${scope}:${identity}`).digest("hex");
-  const { db } = firebase();
+  const { db } = await firebase();
   const ref = db.collection("rate_limits").doc(id);
   const now = Date.now();
   await db.runTransaction(async (tx) => {

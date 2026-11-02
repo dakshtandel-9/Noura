@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PreviewForm } from "@/components/forms/PreviewForm";
-import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Icon } from "@/components/ui/Icon";
 import { FIELD_LIMITS } from "@/content/home";
@@ -171,7 +170,6 @@ export default function InvitationPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }
