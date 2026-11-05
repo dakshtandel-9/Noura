@@ -10,9 +10,44 @@ approve invitations, create membership records/codes, or grant staff access.
 
 Use the existing server-only Firebase project/service account and Firestore setup.
 Enable Firebase Authentication's Email/Password provider and set
-`FIREBASE_WEB_API_KEY` on the server. Existing `NOURA_APP_ORIGIN` and
+`FIREBASE_WEB_API_KEY` on the server. A configured website origin and
 `NOURA_RATE_LIMIT_SECRET` are required for sign-in. Admin authentication continues
 to use the current `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` setup.
+
+### Deployment address and "Request not allowed"
+
+Both login endpoints use the same origin guard, before checking credentials. Set
+these non-secret values in the hosting project's **Production** environment:
+
+```dotenv
+NOURA_APP_ORIGIN=https://www.nourawellbeing.com
+NEXT_PUBLIC_SITE_URL=https://www.nourawellbeing.com
+```
+
+The apex domain redirects to `www`, so the allowed browser origin must include
+`www`. `.env.local` is ignored by Git and does not configure a Vercel deployment.
+An environment change applies to a new deployment, not an already running one.
+Preview deployments need their own explicit origin and isolated test services.
+
+The guard normalizes surrounding whitespace, trailing slashes, hostname case and
+default ports. `NOURA_APP_ORIGIN` may contain comma-separated exact origins when
+multiple domains actually serve the app. It takes precedence over
+`NEXT_PUBLIC_SITE_URL`, which is used only when `NOURA_APP_ORIGIN` is unset/blank.
+No implicit `www` alias, wildcard subdomain or request/forwarded-host fallback is
+allowed in production. Missing/invalid configuration returns 503; an unlisted or
+missing request Origin still returns 403. Keep the existing credentials, secure
+cookies, authorization and rate limits in place.
+
+For a credential-free origin check, POST an empty `text/plain` body to either
+`/api/admin/session` or `/api/user/session` with the real browser Origin. Expect
+415 (the origin passed; JSON is required), while an untrusted Origin must return
+403. This stops before credentials, Firebase or rate-limit writes.
+
+Before an owner-approved production release, record the current Vercel deployment
+ID and prior non-secret origin values for rollback. This fix requires no data
+migration; retain the existing database backup policy. After release, check both
+login flows and protected pages with approved accounts. If necessary, restore the
+prior origin configuration and promote the recorded prior deployment.
 
 No signup endpoint, browser Firebase SDK, notification service, or automatic email
 is added. The admin shares credentials privately. Firebase stores the password;
@@ -86,6 +121,38 @@ with the same emulator environment and `NOURA_TEST_APP_ORIGIN=http://localhost:3
 `node --conditions=react-server --experimental-strip-types --test tests/integration/user-account-http.test.ts`.
 The suite creates and removes only its own dummy user. Use fresh emulators if the
 shared 10-attempt login limiter has already been exhausted by other tests.
+
+## Deployment login regression verification — 6 November 2026
+
+- Live diagnostic: the apex redirected to `https://www.nourawellbeing.com`.
+  Empty `text/plain` POSTs to both login endpoints with that browser Origin returned
+  403 before credential validation. No credentials or applicant data were sent.
+  Vercel's Production and Preview value for `NOURA_APP_ORIGIN` was
+  `https://www.nourawellbeing.com/`; the trailing slash caused the mismatch.
+  The in-code normalization fixes this without broadening the trusted domain or
+  changing Vercel secrets/configuration.
+- `npm run check`: TypeScript passed; all 43 unit tests passed, including 10 new
+  origin cases. ESLint had no errors and retained the existing unused `f` warning
+  in `components/sections/Enquire.tsx`.
+- `npm run build`: passed with dummy configuration and a reserved test domain.
+- `tests/integration/user-accounts.test.ts`: both tests passed against isolated
+  Auth/Firestore emulators using `demo-noura-login-fix` on ports 9199/8180.
+- `tests/integration/user-account-http.test.ts`: passed against `next start` on
+  localhost:3100 with `NOURA_TEST_REQUEST_ORIGIN=https://www.noura.example` and
+  a comma-separated origin configuration containing whitespace/trailing slashes.
+  Verified admin and user sign-in, wrong credentials, protected pages, secure
+  cookies, authorization separation, sign-out and cross-origin rejection. The
+  first HTTP attempt raced server startup (connection refused); rerunning after
+  the server reported ready passed. The final run including admin sign-out passed.
+- Credential-free HTTP checks accepted each explicitly listed test domain through
+  the origin guard (415 for non-JSON), and rejected the unlisted domain (403), on
+  both login endpoints.
+- Final TypeScript, targeted ESLint and `git diff --check` passed.
+- Files: `lib/server/http.ts`, `.env.example`, `tests/unit/http-origin.test.ts`,
+  `tests/integration/user-account-http.test.ts`, and this document. The HTTP test's
+  response assertion now includes the already-existing `account_code` field.
+- Production publication and real-account login verification remain pending.
+  No live database/schema, accounts, environment variables or credentials changed.
 
 ## Verification record — 30 October 2026
 

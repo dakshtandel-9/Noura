@@ -7,15 +7,29 @@ if (!origin || !/^http:\/\/localhost:\d+$/.test(origin) || !process.env.FIREBASE
   throw new Error("HTTP tests require a local server configured for the demo Firebase emulators, plus NOURA_TEST_APP_ORIGIN.");
 }
 const base = origin;
+// Exercise a public HTTPS Origin through a local production server, as on a proxy host.
+const browserOrigin = process.env.NOURA_TEST_REQUEST_ORIGIN || base;
+if (browserOrigin !== base && !/^https:\/\/(www\.)?noura\.example$/.test(browserOrigin)) {
+  throw new Error("The test browser origin must be localhost or the reserved noura.example domain.");
+}
 
 test("HTTP account boundaries, cookies, redirects, login and logout", async () => {
   const post = (path: string, body: unknown, cookie = "", headers: Record<string, string> = {}) => fetch(base + path, {
-    method: "POST", headers: { "Content-Type": "application/json", Origin: base, Cookie: cookie, ...headers },
+    method: "POST", headers: { "Content-Type": "application/json", Origin: browserOrigin, Cookie: cookie, ...headers },
     body: JSON.stringify(body), redirect: "manual",
   });
   const dummy = { full_name: "Example HTTP User", email: `http-${crypto.randomUUID()}@example.com`, phone: "", password: "example-password-123" };
   let createdId: string | undefined;
   try {
+    for (const path of ["/api/admin/session", "/api/user/session"]) {
+      const blocked = await post(path, {}, "", { Origin: "https://untrusted.example" });
+      assert.equal(blocked.status, 403);
+      assert.equal(blocked.headers.get("set-cookie"), null);
+      const missingOrigin = await fetch(base + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+      assert.equal(missingOrigin.status, 403);
+      const wrongType = await post(path, {}, "", { "Content-Type": "text/plain" });
+      assert.equal(wrongType.status, 415);
+    }
     let response = await post("/api/admin/users", dummy);
     assert.equal(response.status, 401);
     response = await fetch(base + "/api/admin/users");
@@ -23,9 +37,17 @@ test("HTTP account boundaries, cookies, redirects, login and logout", async () =
     response = await fetch(base + "/members", { redirect: "manual" });
     assert.equal(response.status, 307);
     assert.equal(response.headers.get("location"), "/login");
+    response = await post("/api/admin/session", { password: "incorrect-admin-password" });
+    assert.equal(response.status, 401);
+    assert.equal(response.headers.get("set-cookie"), null);
     response = await post("/api/admin/session", { password: "dummy-admin-password" });
     assert.equal(response.status, 200);
+    assert.match(response.headers.get("set-cookie")!, /HttpOnly/);
+    assert.match(response.headers.get("set-cookie")!, /SameSite=strict/i);
+    assert.match(response.headers.get("set-cookie")!, /Secure/);
     const adminCookie = response.headers.get("set-cookie")!.split(";")[0]!;
+    response = await fetch(base + "/admin", { headers: { Cookie: adminCookie }, redirect: "manual" });
+    assert.equal(response.status, 200);
     response = await post("/api/admin/users", dummy, adminCookie, { Origin: "http://untrusted.example" });
     assert.equal(response.status, 403);
     response = await post("/api/admin/users", dummy, adminCookie, { "Content-Type": "text/plain" });
@@ -37,9 +59,10 @@ test("HTTP account boundaries, cookies, redirects, login and logout", async () =
     response = await post("/api/admin/users", dummy, adminCookie);
     assert.equal(response.status, 201);
     assert.match(response.headers.get("cache-control")!, /no-store/);
-    const result = await response.json() as { id: string };
+    const result = await response.json() as { id: string; account_code: string };
     createdId = result.id;
-    assert.deepEqual(Object.keys(result), ["id"]);
+    assert.deepEqual(Object.keys(result).sort(), ["account_code", "id"]);
+    assert.match(result.account_code, /^NOURA-[A-Z]{2}\d{3}$/);
     response = await fetch(base + "/api/admin/users", { headers: { Cookie: adminCookie } });
     assert.equal(response.status, 200);
     assert.match(response.headers.get("cache-control")!, /no-store/);
@@ -73,11 +96,11 @@ test("HTTP account boundaries, cookies, redirects, login and logout", async () =
     assert.equal(response.status, 401);
     response = await fetch(base + "/api/admin/users", { headers: { Cookie: userCookie } });
     assert.equal(response.status, 401);
-    response = await fetch(base + `/api/admin/users/${createdId}`, { method: "PATCH", headers: { Cookie: userCookie, Origin: base, "Content-Type": "application/json" }, body: JSON.stringify({ full_name: "Changed", email: dummy.email, phone: "", version: 1 }) });
+    response = await fetch(base + `/api/admin/users/${createdId}`, { method: "PATCH", headers: { Cookie: userCookie, Origin: browserOrigin, "Content-Type": "application/json" }, body: JSON.stringify({ full_name: "Changed", email: dummy.email, phone: "", version: 1 }) });
     assert.equal(response.status, 401);
     response = await fetch(base + "/api/user/session", { method: "DELETE", headers: { Cookie: userCookie, Origin: "http://untrusted.example" } });
     assert.equal(response.status, 403);
-    response = await fetch(base + "/api/user/session", { method: "DELETE", headers: { Cookie: userCookie, Origin: base } });
+    response = await fetch(base + "/api/user/session", { method: "DELETE", headers: { Cookie: userCookie, Origin: browserOrigin } });
     assert.equal(response.status, 200);
     const deletedCookie = response.headers.get("set-cookie")!;
     assert.match(deletedCookie, /^noura_user=;/);
@@ -90,14 +113,23 @@ test("HTTP account boundaries, cookies, redirects, login and logout", async () =
     const change = { full_name: "Edited HTTP User", email: dummy.email, phone: "+91 90000 00000", version: 1 };
     response = await fetch(base + `/api/admin/users/${createdId}`, { method: "PATCH", headers: { Cookie: adminCookie, Origin: "http://untrusted.example", "Content-Type": "application/json" }, body: JSON.stringify(change) });
     assert.equal(response.status, 403);
-    response = await fetch(base + `/api/admin/users/${createdId}`, { method: "PATCH", headers: { Cookie: adminCookie, Origin: base, "Content-Type": "application/json" }, body: JSON.stringify(change) });
+    response = await fetch(base + `/api/admin/users/${createdId}`, { method: "PATCH", headers: { Cookie: adminCookie, Origin: browserOrigin, "Content-Type": "application/json" }, body: JSON.stringify(change) });
     assert.equal(response.status, 200);
     assert.equal(((await response.json()) as { record: { id: string; version: number } }).record.id, createdId);
-    response = await fetch(base + `/api/admin/users/${createdId}`, { method: "DELETE", headers: { Cookie: adminCookie, Origin: base, "Content-Type": "application/json" }, body: JSON.stringify({ version: 1 }) });
+    response = await fetch(base + `/api/admin/users/${createdId}`, { method: "DELETE", headers: { Cookie: adminCookie, Origin: browserOrigin, "Content-Type": "application/json" }, body: JSON.stringify({ version: 1 }) });
     assert.equal(response.status, 409);
-    response = await fetch(base + `/api/admin/users/${createdId}`, { method: "DELETE", headers: { Cookie: adminCookie, Origin: base, "Content-Type": "application/json" }, body: JSON.stringify({ version: 2 }) });
+    response = await fetch(base + `/api/admin/users/${createdId}`, { method: "DELETE", headers: { Cookie: adminCookie, Origin: browserOrigin, "Content-Type": "application/json" }, body: JSON.stringify({ version: 2 }) });
     assert.equal(response.status, 200);
     createdId = undefined;
+    response = await fetch(base + "/api/admin/session", { method: "DELETE", headers: { Cookie: adminCookie, Origin: "https://untrusted.example" } });
+    assert.equal(response.status, 403);
+    assert.equal(response.headers.get("set-cookie"), null);
+    response = await fetch(base + "/api/admin/session", { method: "DELETE", headers: { Cookie: adminCookie, Origin: browserOrigin } });
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get("set-cookie")!, /^noura_admin=;/);
+    response = await fetch(base + "/admin", { redirect: "manual" });
+    assert.equal(response.status, 307);
+    assert.equal(response.headers.get("location"), "/admin/login");
   } finally {
     if (createdId) {
       const { auth, db } = await firebase();

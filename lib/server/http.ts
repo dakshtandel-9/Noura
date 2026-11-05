@@ -9,10 +9,31 @@ export function failure(error: unknown) {
     ? json({ message: error.message, fields: error.fields }, error.status)
     : json({ message: "The service is temporarily unavailable. Please try again." }, 503);
 }
+function configuredOrigin(value: string): string {
+  const address = value.trim();
+  try {
+    // Accept an origin with optional trailing slashes, never a path, credentials,
+    // wildcard, query or fragment. Normalize case/default ports using URL.
+    if (!/^https?:\/\/[^/?#\\\s]+\/*$/i.test(address)) throw new Error();
+    const url = new URL(address);
+    if (url.username || url.password || url.hostname.includes("*")) throw new Error();
+    return url.origin;
+  } catch {
+    throw new RequestError("The website address is not configured correctly. Please contact the site owner.", 503);
+  }
+}
 export function checkOrigin(request: Request) {
-  const configured = process.env.NOURA_APP_ORIGIN;
-  const origin = configured || (process.env.NODE_ENV !== "production" ? new URL(request.url).origin : "");
-  if (!origin || request.headers.get("origin") !== origin) throw new RequestError("Request not allowed.", 403);
+  const configured = process.env.NOURA_APP_ORIGIN?.trim();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  // Trust deployment configuration, not Host/X-Forwarded-Host from the request.
+  // An explicit allowlist takes precedence over the canonical metadata URL.
+  const origins = configured ? configured.split(",").map(configuredOrigin)
+    : siteUrl ? [configuredOrigin(siteUrl)]
+    : process.env.NODE_ENV !== "production" ? [new URL(request.url).origin]
+    : [];
+  if (!origins.length) throw new RequestError("The website address is not configured yet. Please contact the site owner.", 503);
+  const origin = request.headers.get("origin");
+  if (!origin || !origins.includes(origin)) throw new RequestError("Request not allowed.", 403);
 }
 export async function readJson(request: Request, max = 16_384): Promise<unknown> {
   checkOrigin(request);
