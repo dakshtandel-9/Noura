@@ -151,8 +151,12 @@ shared 10-attempt login limiter has already been exhausted by other tests.
 - Files: `lib/server/http.ts`, `.env.example`, `tests/unit/http-origin.test.ts`,
   `tests/integration/user-account-http.test.ts`, and this document. The HTTP test's
   response assertion now includes the already-existing `account_code` field.
-- Production publication and real-account login verification remain pending.
-  No live database/schema, accounts, environment variables or credentials changed.
+- Production deployment `AA6UUyQvAyRNMGBSjEaVSYJJqR8R` (commit `28250dc`) reported
+  Ready on Vercel, with `www.nourawellbeing.com` assigned. Post-deploy smoke checks
+  returned 415 for the configured origin and 403 for an untrusted origin on both
+  login endpoints. Real-account credential entry/sign-in remains for the owner to
+  verify. No live database/schema, accounts, environment variables or credentials
+  changed.
 
 ## Verification record — 30 October 2026
 
